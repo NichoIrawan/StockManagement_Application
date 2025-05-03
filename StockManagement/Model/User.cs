@@ -13,6 +13,9 @@ namespace StockManagement.Model
         public string Name { get; set; }
         public Roles Role { get; set; }
         public string Password { get; set; }
+
+        public User() {}
+
         public User(string username, string name, Roles role, string password)
         {
             this.Username = username;

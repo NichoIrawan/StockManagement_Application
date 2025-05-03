@@ -12,12 +12,16 @@ namespace StockManagement.Model
         public Gudang tempatPenyimpanan { get; set; }
         public List<Barang> daftarBarang { get; set; }
 
+        public Laporan()
+        {
+            daftarBarang = new List<Barang>();
+        }
+
         public Laporan(DateTime tanggal, Gudang penyimpanan, List<Barang> daftar) 
         {
             this.tanggalPembuatan = tanggal;
             this.tempatPenyimpanan = penyimpanan;
             this.daftarBarang = daftar;
         }
-        
     }
 }
