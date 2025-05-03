@@ -8,10 +8,5 @@ namespace StockManagement.Model
 {
     class Gudang
     {
-        
-        public String namaGudang { get; set; }
-        public String lokasi { get; set; }
-
-        public List<Barang> listItemGudang { get; set; }
     }
 }
