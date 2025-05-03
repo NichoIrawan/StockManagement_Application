@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35818.85 d17.13
+VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagement", "StockManagement\StockManagement.csproj", "{88C56C0A-29CA-4C30-82E0-CA03EC63D6E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStockManagement", "ApiStockManagement\ApiStockManagement.csproj", "{FE6D95A2-3EEC-4E58-9D76-736F329803F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{88C56C0A-29CA-4C30-82E0-CA03EC63D6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88C56C0A-29CA-4C30-82E0-CA03EC63D6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88C56C0A-29CA-4C30-82E0-CA03EC63D6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE6D95A2-3EEC-4E58-9D76-736F329803F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE6D95A2-3EEC-4E58-9D76-736F329803F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE6D95A2-3EEC-4E58-9D76-736F329803F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE6D95A2-3EEC-4E58-9D76-736F329803F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
