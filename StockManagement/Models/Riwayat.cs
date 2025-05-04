@@ -5,9 +5,9 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement.Model
+namespace StockManagement.Models
 {
-    class Riwayat
+    public class Riwayat
     {
         public DateTime tanggal { get; set; }
         public String jenis_transaksi { get; set; }

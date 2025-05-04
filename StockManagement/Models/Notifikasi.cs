@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement.Model
+namespace StockManagement.Models
 {
-    class Notifikasi
+    public class Notifikasi
     {
         public enum notifApp { keluar, masuk, notif_habis, notif_expired };
 

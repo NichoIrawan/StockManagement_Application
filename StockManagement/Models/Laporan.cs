@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement.Model
+namespace StockManagement.Models
 {
-    class Laporan
+    public class Laporan
     {
         public DateTime tanggalPembuatan { get; set; }
         public Gudang tempatPenyimpanan { get; set; }

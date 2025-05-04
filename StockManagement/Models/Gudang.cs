@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement.Model
+namespace StockManagement.Models
 {
-    class Gudang
+    public class Gudang
     {
         private string NamaGudang { get; set; }
         private string Lokasi { get; set; }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement.Model
+namespace StockManagement.Models
 {
-     class User
+    public class User
     {
         public enum Roles { Manager, Admin, Staff }
         public string Username { get; set; }
