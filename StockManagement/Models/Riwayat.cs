@@ -22,7 +22,7 @@ namespace StockManagement.Models
             this.jenis_transaksi = jenis_transaksi;
             this.barang = barang;
             this.jumlah_barang = jumlah_barang;
-            this.lokasi_penyimpanan = lokasi_penyimpanan;
+            this.lokasi_penyimpanan = lokasi;
             this.pic = pic;
         }
     }
