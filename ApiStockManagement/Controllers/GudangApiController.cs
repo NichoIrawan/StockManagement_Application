@@ -11,6 +11,7 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class GudangApiController : ControllerBase
     {
+        //Placeholder for database context -> Will be changed
         private List<Gudang> ListGudang = new List<Gudang>()
         {
             new Gudang("Gudang A", "Lokasi A", new List<Barang>()),

@@ -11,7 +11,7 @@ namespace ApiStockManagement.Controllers
     {
 
         //Placeholder for database context -> Will be changed
-        new List<Riwayat> listRiwayat = new List<Riwayat>()
+        private static List<Riwayat> listRiwayat = new List<Riwayat>()
         {
             new Riwayat(DateTime.Now, "Masuk", new Barang(), 10, new Gudang(), new User()),
             new Riwayat(DateTime.Now, "Keluar", new Barang(), 5, new Gudang(), new User()),

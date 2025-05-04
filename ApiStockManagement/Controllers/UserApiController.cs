@@ -11,7 +11,8 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class UserAPIControll : ControllerBase
     {
-        private List<User> ListUser = new List<User>()
+        //Placeholder for database context -> Will be changed
+        private static List<User> listUser = new List<User>()
         {
             new User("admin", "admin", Roles.Admin, "admin"),
             new User("staff", "staff", Roles.Staff, "staff"),
@@ -24,28 +25,28 @@ namespace ApiStockManagement.Controllers
         public IEnumerable<User> Get()
             
         {
-            return ListUser;
+            return listUser;
         }
 
         // GET api/<User>/5
         [HttpGet("{id}")]
         public User Get(int id)
         {
-            return ListUser.ElementAt(id);
+            return listUser.ElementAt(id);
         }
 
         // POST api/<User>
         [HttpPost]
         public void Post([FromBody]User userBaru)
         {
-            ListUser.Add(userBaru);
+            listUser.Add(userBaru);
         }
 
         // PUT api/<User>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]User userBaru)
         {
-          User user = ListUser.ElementAt(id);
+          User user = listUser.ElementAt(id);
             if (user != null) {
                 return;
             }
@@ -61,7 +62,7 @@ namespace ApiStockManagement.Controllers
         {
             try
             {
-                ListUser.RemoveAt(id);
+                listUser.RemoveAt(id);
             } catch(Exception e)
             {
                 Console.WriteLine("Id tidak ditemukan");
