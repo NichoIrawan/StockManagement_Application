@@ -10,7 +10,7 @@ namespace StockManagement.Models
     {
         public  string? NamaGudang { get; set; }
         public string? Lokasi { get; set; }
-        public List<Barang>? DaftarBarang { get; set; }
+        public List<Barang> DaftarBarang { get; set; }
 
         public Gudang()
         {
