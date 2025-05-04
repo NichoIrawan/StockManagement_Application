@@ -8,9 +8,11 @@ namespace StockManagement.Models
 {
     public class Barang
     {
+        public enum Kategori { Makanan, Minuman, Keperluan_rumahtangga, Lain_lain}
+        
         public String? kodeBarang { get; set; }
         public String? namaBarang { get; set; }
-        public String? kategori { get; set; }
+        public  Kategori? kategori { get; set; }
         public int stok { get; set; }
         public double harga { get; set; }
         public DateOnly? tanggalKadaluarsa { get; set; }
@@ -21,7 +23,7 @@ namespace StockManagement.Models
             this.harga = 0;
         }
 
-        public Barang(string kodeBarang, string namaBarang, string kategori, int stok, double harga, DateOnly tanggalKadaluarsa)
+        public Barang(string kodeBarang, string namaBarang, Kategori kategori, int stok, double harga, DateOnly tanggalKadaluarsa)
         {
             this.kodeBarang = kodeBarang;
             this.namaBarang = namaBarang;

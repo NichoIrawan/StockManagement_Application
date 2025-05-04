@@ -8,9 +8,9 @@ namespace StockManagement.Models
 {
     public class Gudang
     {
-        private string NamaGudang { get; set; }
-        private string Lokasi { get; set; }
-        private List<Barang> DaftarBarang { get; set; }
+        public  string? NamaGudang { get; set; }
+        public string? Lokasi { get; set; }
+        public List<Barang>? DaftarBarang { get; set; }
 
         public Gudang()
         {
