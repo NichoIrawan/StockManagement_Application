@@ -44,6 +44,18 @@ namespace ApiStockManagement.Controllers
         [HttpGet]
         public IEnumerable<Laporan> Get()
         {
+            Console.WriteLine("Laporan Stock Barang: ")
+            foreach (var laporan in listLaporan)
+            {
+                Console.WriteLine($"Tanggal Pembuatan:{laporan.tanggalPembuatan} ");
+                Console.WriteLine($"Gudang:  - {laporan.tempatPenyimpanan.kota}");
+                Console.WriteLine("Daftar barang: ");
+                foreach (var barang in laporan.daftarBarang)
+                {
+                    Console.WriteLine($"ID: {barang.id}, Nama: {barang.nama}, Kategori: {barang.kategori}, Harga: {barang.harga}");
+                }
+                Console.WriteLine("---------------------------------");
+            }
             return listLaporan;
         }
 
@@ -51,7 +63,16 @@ namespace ApiStockManagement.Controllers
         [HttpGet("{id}")]
         public Laporan Get(int id)
         {
-            return listLaporan.ElementAt(id);
+            var laporan = listLaporan.ElementAt(id);
+            Console.WriteLine($"Laporan ID {id}:");
+            Console.WriteLine($"Tanggal Pembuatan: {laporan.tanggalPembuatan}");
+            Console.WriteLine($"Gudang: {laporan.tempatPenyimpanan.nama} - {laporan.tempatPenyimpanan.kota}");
+            Console.WriteLine("Daftar Barang:");
+            foreach (var barang in laporan.daftarBarang)
+            {
+                Console.WriteLine($"ID: {barang.id}, Nama: {barang.nama}, Kategori: {barang.kategori}, Harga: {barang.harga}");
+            }
+            return laporan;
         }
 
         // POST api/<LaporanApiController>
@@ -59,6 +80,15 @@ namespace ApiStockManagement.Controllers
         public void Post([FromBody] Laporan newLaporan)
         {
             listLaporan.Add(newLaporan);
+            Console.WriteLine("Laporan Baru ditambahkan: ");
+            Console.WriteLine($"Tanggal Pembuatan: {newLaporan.tanggalPembuatan}");
+            Console.WriteLine($"Gudang: {newLaporan.tempatPenyimpanan.nama} - {newLaporan.tempatPenyimpanan.kota}");
+            Console.WriteLine("Daftar Barang:");
+            foreach (var barang in newLaporan.daftarBarang)
+            {
+                Console.WriteLine($"ID: {barang.id}, Nama: {barang.nama}, Kategori: {barang.kategori}, Harga: {barang.harga}");
+            }
+            Console.WriteLine("---------------------------------");
         }
 
         // PUT api/<LaporanApiController>/5
@@ -66,15 +96,25 @@ namespace ApiStockManagement.Controllers
         public void Put(int id, [FromBody] Laporan newLaporan)
         {
             Laporan laporan = listLaporan.ElementAt(id);
-
             if (laporan == null)
             {
+                Console.WriteLine("Laporan tidak ditemukan");
                 return;
             }
 
             laporan.tanggalPembuatan = newLaporan.tanggalPembuatan;
             laporan.tempatPenyimpanan = newLaporan.tempatPenyimpanan;
             laporan.daftarBarang = newLaporan.daftarBarang;
+
+            Console.WriteLine($"Laporan ID {id} diperbarui:");
+            Console.WriteLine($"Tanggal Pembuatan: {laporan.tanggalPembuatan}");
+            Console.WriteLine($"Gudang: {laporan.tempatPenyimpanan.nama} - {laporan.tempatPenyimpanan.kota}");
+            Console.WriteLine("Daftar Barang:");
+            foreach (var barang in laporan.daftarBarang)
+            {
+                Console.WriteLine($"ID: {barang.id}, Nama: {barang.nama}, Kategori: {barang.kategori}, Harga: {barang.harga}");
+            }
+            Console.WriteLine("---------------------------------");
         }
 
         // DELETE api/<LaporanApiController>/5
@@ -83,7 +123,9 @@ namespace ApiStockManagement.Controllers
         {
             try
             {
+                var laporan = listLaporan.ElementAt(id);
                 listLaporan.RemoveAt(id);
+                Console.WriteLine($"Laporan ID {id} telah dihapus");
             }
             catch (Exception e)
             {
