@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement.Model
+namespace StockManagement.Controller.UserController
 {
-    class Gudang
+    class AdminController
     {
+
     }
 }

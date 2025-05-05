@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagement", "StockMan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStockManagement", "ApiStockManagement\ApiStockManagement.csproj", "{FE6D95A2-3EEC-4E58-9D76-736F329803F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagementLibrary", "StockManagementLibrary\StockManagementLibrary.csproj", "{8DAFFE28-CC3D-4249-8257-49B6A667CF1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FE6D95A2-3EEC-4E58-9D76-736F329803F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE6D95A2-3EEC-4E58-9D76-736F329803F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE6D95A2-3EEC-4E58-9D76-736F329803F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DAFFE28-CC3D-4249-8257-49B6A667CF1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DAFFE28-CC3D-4249-8257-49B6A667CF1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DAFFE28-CC3D-4249-8257-49B6A667CF1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DAFFE28-CC3D-4249-8257-49B6A667CF1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
