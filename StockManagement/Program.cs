@@ -1,9 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-using StockManagement.Controllers.UserController;
-using StockManagement.View;
-class TestRun() {
-    static void Main() {
-        StartupView view = new StartupView();
-        view.callMenu();
+﻿using StockManagementLibrary;
+
+class main
+{
+    public static void Main(string[] args)
+    {
+        BahasaConfig bahasaConfig = new BahasaConfig();
+        Console.WriteLine(Path.GetFullPath(BahasaConfig.filePath));
     }
 }
