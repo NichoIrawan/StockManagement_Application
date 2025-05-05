@@ -27,9 +27,9 @@ namespace StockManagement.Controllers.UserController
             currentState = state;
         }
 
-        public void ChangeState()
+        public void ChangeState(int userType)
         {
-            int userType = Convert.ToInt32(Console.ReadLine());
+           
             currentState.transitionState(this, userType);
         }
 

@@ -24,7 +24,7 @@ namespace StockManagement.View
             Console.WriteLine("1.Login");
             Console.WriteLine("2.Register");
             Console.WriteLine("");
-
+            LoginRegister();
             
         }
 
@@ -36,6 +36,20 @@ namespace StockManagement.View
                 string username = Console.ReadLine();
                 Console.WriteLine("Masukkan Password:");
                 string password = Console.ReadLine();
+
+                User foundUser = userList.FirstOrDefault(u => u.Username.Equals(username) && u.Password.Equals(password));
+                Console.WriteLine("Username: " + foundUser.Username + "Password: " + foundUser.Password);
+                if (foundUser != null)
+                {
+                    cont.ChangeState(
+                        foundUser.Role == User.Roles.Staff ? 1 :
+                        foundUser.Role == User.Roles.Manager ? 2 :
+                        3);
+                }
+                else {
+                    Console.WriteLine("Password atau User salah");
+                    callMenu();
+                }
                 
 
             }
@@ -54,6 +68,8 @@ namespace StockManagement.View
                     role == "2" ? User.Roles.Manager :
                     User.Roles.Admin,
                     password);
+                userList.Add(newUser);
+                callMenu();
 
             }
         }
