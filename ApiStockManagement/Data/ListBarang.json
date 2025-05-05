@@ -1,15 +1,1 @@
-[
-    {
-        "kodeBarang": "string",
-        "namaBarang": "string",
-        "kategori": 0,
-        "stok": 0,
-        "harga": 0,
-        "tanggalKadaluarsa": "2025-05-05",
-        "kodeGudang": "string",
-        "gudang": {
-            "namaGudang": "string",
-            "lokasi": "string"
-        }
-    }
-]
+[{"kodeBarang":"string","namaBarang":"string","kategori":0,"stok":0,"harga":0,"tanggalKadaluarsa":"2025-05-05","kodeGudang":"string","gudang":{"KodeGudang":null,"NamaGudang":null,"Lokasi":null}}]

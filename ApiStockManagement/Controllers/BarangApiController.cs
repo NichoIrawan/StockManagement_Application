@@ -11,7 +11,7 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class BarangApiController : ControllerBase
     {
-        private static String filePath = "D:/Nicho/C# Visual Studio/StockManagement/ApiStockManagement/Data/ListBarang.json";
+        private static String filePath = "Data/ListBarang.json";
         private static List<Barang> listBarang;
 
         // GET: api/<BarangController>
@@ -92,7 +92,6 @@ namespace ApiStockManagement.Controllers
         public void Delete(String kodeBarang)
         {
             listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
-
             listBarang.RemoveAll(item => item.kodeBarang == kodeBarang);
             JsonHandler<List<Barang>>.writeJsonToFile(filePath, listBarang);
         }
