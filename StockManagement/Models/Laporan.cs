@@ -24,20 +24,20 @@ namespace StockManagement.Models
             this.tempatPenyimpanan = penyimpanan;
             this.daftarBarang = daftar;
         }
-        
- /*       public override string ToString()
+
+        public override string ToString()
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Tanggal Pembuatan : {tanggalPembuatan}");
-            sb.AppendLine($"Tempat Penyimpanan: {tempatPenyimpanan.namaGudang} - {tempatPenyimpanan.lokasi}");
+            sb.AppendLine($"Tempat Penyimpanan: {tempatPenyimpanan.NamaGudang} - {tempatPenyimpanan.Lokasi}");
 
             sb.AppendLine("Daftar Barang:");
             foreach (var barang in daftarBarang)
             {
-                sb.AppendLine($" - {barang.namaBarang} (Kode: {barang.kodeBarang}), Kategori: {barang.kategori}, Jumlah: {barang.jumlah}, Harga: {barang.harga}, Kadaluarsa: {barang.tanggalKadaluarsa}");
+                sb.AppendLine($" - {barang.namaBarang} (Kode: {barang.kodeBarang}), Kategori: {barang.kategori}, Jumlah: {barang.stok}, Harga: {barang.harga}, Kadaluarsa: {barang.tanggalKadaluarsa}");
             }
 
             return sb.ToString();
-        }*/
+        }
     }
 }
