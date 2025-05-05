@@ -9,7 +9,7 @@ using StockManagement.Models;
 
 namespace StockManagement.Controllers
 {
-    class BarangController
+    public class BarangController
     {
         private readonly HttpClient _client;
 

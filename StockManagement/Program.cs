@@ -1,10 +1,6 @@
-﻿using StockManagementLibrary;
+﻿using StockManagement.Controllers;
+using StockManagement.Models;
+using StockManagementLibrary;
 
-class main
-{
-    public static void Main(string[] args)
-    {
-        BahasaConfig bahasaConfig = new BahasaConfig();
-        Console.WriteLine(Path.GetFullPath(BahasaConfig.filePath));
-    }
-}
+Console.WriteLine("Hello, World!");
+
