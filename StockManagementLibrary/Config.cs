@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace StockManagementLibrary
 {
-    class Config
+    public class Config
     {
-        public string BahasaIndonesia { get; set; }
-        public string BahasaInggris { get; set; }
-        public Config() { }
-          
+        public Bahasa bahasa { get; set; }
 
-        public Config(string bahasaIndonesia, string bahasaInggris)
+        public Config()
         {
-            this.BahasaIndonesia = bahasaIndonesia;
-            this.BahasaInggris = bahasaInggris;
+            this.bahasa = Bahasa.Indonesia;
         }
     }
 }

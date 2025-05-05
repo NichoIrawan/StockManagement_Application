@@ -12,6 +12,7 @@ namespace ApiStockManagement.Controllers
     public class BarangApiController : ControllerBase
     {
         private static String filePath = "Data/ListBarang.json";
+
         private static List<Barang> listBarang;
 
         // GET: api/<BarangController>
