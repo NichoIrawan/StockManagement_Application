@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using StockManagement.Models;
+using StockManagementLibrary;
 
 namespace StockManagement.Controllers
 {
@@ -13,48 +15,96 @@ namespace StockManagement.Controllers
     {
         private readonly HttpClient _client;
 
+
         public BarangController()
         {
-            var api = new ApiClient();
-            _client = api.Client;
+            _client = new HttpClient();
+            _client.BaseAddress = new Uri("http://localhost:5052/api/");
         }
 
-        // GET /api/BarangApi
-        public async Task<List<Barang>> GetListBarangAsync()
+        public async Task<List<Barang>> tampilkanBarang()
         {
-            return await _client.GetFromJsonAsync<List<Barang>>("api/BarangApi").ConfigureAwait(false);
-        }
-
-        // GET /api/BarangApi/{kodeBarang}
-        public async Task<Barang> GetBarangByIdAsync(string kodeBarang)
-        {
-            var response = await _client.GetAsync($"/api/BarangApi/{kodeBarang}");
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return await response.Content.ReadFromJsonAsync<Barang>();
+                var response = await _client.GetAsync("BarangApi");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<Barang>();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<List<Barang>>(json);
+                return result?? new List<Barang>();
+            } catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                return new List<Barang>();
             }
-            return null;
         }
 
-        // POST /api/BarangApi
-        public async Task InputBarangAsync(Barang barang)
+
+        public async Task<Barang> cariBarangDenganId(string kodeBarang)
         {
-            var response = await _client.PostAsJsonAsync("/api/BarangApi", barang);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await _client.GetAsync($"BarangApi/{kodeBarang}");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Barang();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<Barang>(json);
+
+                return result?? new Barang();
+            } catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                return new Barang();
+            }
+        }
+
+        public async Task beliBarang(Barang barang)
+        {
+            try
+            {
+                var json = JsonSerializer.Serialize(barang);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _client.PostAsync("BarangApi", content);
+                response.EnsureSuccessStatusCode();
+            } catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+            }
         }
 
         // PUT /api/BarangApi/{kodeBarang}
-        public async Task UpdateBarangAsync(string kodeBarang, Barang barang)
+        public async Task updateDataBarang(string kodeBarang, Barang barang)
         {
-            var response = await _client.PutAsJsonAsync($"/api/BarangApi/{kodeBarang}", barang);
+            var json = JsonSerializer.Serialize(barang);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _client.PutAsync($"BarangApi/{kodeBarang}", content);
             response.EnsureSuccessStatusCode();
         }
 
         // DELETE /api/BarangApi/{kodeBarang}
-        public async Task DeleteBarangAsync(string kodeBarang)
+        public async Task jualBarang(string kodeBarang)
         {
-            var response = await _client.DeleteAsync($"/api/BarangApi/{kodeBarang}");
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await _client.DeleteAsync($"BarangApi/{kodeBarang}");
+                response.EnsureSuccessStatusCode();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+            }
         }
     }
 }
