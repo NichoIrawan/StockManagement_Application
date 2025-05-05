@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using StockManagement.Models;
-using StockManagement.Models;
 using StockManagementLibrary;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,7 +11,7 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class GudangApiController : ControllerBase
     {
-        private static String filePath = "D:/Nicho/C# Visual Studio/StockManagement/ApiStockManagement/Data/ListGudang.json";
+        private static String filePath = "Data/ListGudang.json";
         private static List<Gudang> listGudang;
 
         // GET: api/<GudangApiController>
