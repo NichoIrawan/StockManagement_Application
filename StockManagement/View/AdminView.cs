@@ -17,14 +17,22 @@ namespace StockManagement.View
         {
             var menuActions = new Dictionary<string, Action>
         {
-            { "1", () => Console.WriteLine("Fitur Admin - Lihat Barang") }
+            { "1", () => Console.WriteLine("Fitur Admin - Lihat Barang") },
+            { "2", () => Console.WriteLine("Fitur Admin - Insert Barang") },
+            { "3", () => Console.WriteLine("Fitur Admin - Delete Barang") },
+            { "4", () => Console.WriteLine("Fitur Admin - Edit Barang") },
+            { "5", () => Console.WriteLine("Fitur Admin - Lihat Laporan") },
         };
 
             string input;
             do
             {
                 Console.WriteLine("Selamat datang di menu Admin");
-                Console.WriteLine("1. Fitur admin");
+                Console.WriteLine("1. Lihat Barang");
+                Console.WriteLine("2. Insert Barang");
+                Console.WriteLine("3. Delete Barang");
+                Console.WriteLine("4. Edit Barang");
+                Console.WriteLine("5. Lihat Laporan");
                 Console.WriteLine("0. Keluar\n");
                 input = Console.ReadLine();
 
