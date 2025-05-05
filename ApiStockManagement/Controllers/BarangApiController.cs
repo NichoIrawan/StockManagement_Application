@@ -11,7 +11,11 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class BarangApiController : ControllerBase
     {
+<<<<<<< HEAD
         private static String filePath = "D:/Nicho/C# Visual Studio/StockManagement/ApiStockManagement/Data/ListBarang.json";
+=======
+        private static String filePath = "Data/ListBarang.json";
+>>>>>>> a6e93391243ac1491817240e1b703e429db1a088
         private static List<Barang> listBarang;
 
         // GET: api/<BarangController>
