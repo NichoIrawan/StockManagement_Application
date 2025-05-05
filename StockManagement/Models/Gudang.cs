@@ -10,18 +10,13 @@ namespace StockManagement.Models
     {
         public  string? NamaGudang { get; set; }
         public string? Lokasi { get; set; }
-        public List<Barang> DaftarBarang { get; set; }
 
-        public Gudang()
-        {
-            DaftarBarang = new List<Barang>();
-        }
+        public Gudang() {}
 
-        public Gudang(string namaGudang, string lokasi, List<Barang> daftarBarang)
+        public Gudang(string namaGudang, string lokasi)
         {
             this.NamaGudang = namaGudang;
             this.Lokasi = lokasi;
-            this.DaftarBarang = daftarBarang;
         }
     }
 }
