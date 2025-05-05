@@ -4,4 +4,4 @@
     public enum NotifApp { keluar, masuk, notif_habis, notif_expired };
     public enum Roles { Manager, Admin, Staff };
     public enum Bahasa { Indonesia, English };
-}
+ }

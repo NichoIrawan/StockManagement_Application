@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockManagement.Models;
+using StockManagementLibrary;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,42 +12,62 @@ namespace ApiStockManagement.Controllers
     {
 
         //Placeholder for database context -> Will be changed
-        private static List<Riwayat> listRiwayat = new List<Riwayat>()
-        {
-            new Riwayat(DateTime.Now, "Masuk", new Barang(), 10, new Gudang(), new User()),
-            new Riwayat(DateTime.Now, "Keluar", new Barang(), 5, new Gudang(), new User()),
-        };
+        private static String filePath = "Data/ListRiwayat.json";
+        private static List<Riwayat> listRiwayat;
 
         // GET: api/<RiwayatApiController>
         [HttpGet]
-        public IEnumerable<Riwayat> Get()
+        public ActionResult<Riwayat> Get()
         {
-            return listRiwayat;
+            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
+            return listRiwayat is null ? NotFound() : Ok(listRiwayat);
         }
 
         // GET api/<RiwayatApiController>/5
-        [HttpGet("{id}")]
-        public Riwayat Get(int id)
+        [HttpGet("{tanggal}")]
+        public Riwayat Get(DateTime tanggal)
         {
-            return listRiwayat.ElementAt(id);
+            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
+            if (listRiwayat is null)
+            {
+                return null;
+            }
+            var gudang = listRiwayat.FirstOrDefault(item => item.tanggal == tanggal);
+            return gudang is null ? null : gudang;
         }
 
         // POST api/<RiwayatApiController>
         [HttpPost]
-        public void Post([FromBody] Riwayat riwayat)
+        public ActionResult Post([FromBody] Riwayat newRiwayat)
         {
-            listRiwayat.Add(riwayat);
+            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
+
+            if (newRiwayat == null)
+            {
+                return NotFound("Gudang cannot be null");
+            }
+
+            foreach (Riwayat riwayat in listRiwayat)
+            {
+                if (riwayat.tanggal == newRiwayat.tanggal)
+                    return NotFound("Gudang with the same code already exists");
+            }
+
+            JsonHandler<List<Riwayat>>.writeJsonToFile(filePath, listRiwayat);
+
+            return CreatedAtAction(nameof(Get), new { kodeGudang = newRiwayat.tanggal }, newRiwayat);
         }
 
         // PUT api/<RiwayatApiController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Riwayat newRiwayat)
+        [HttpPut("{tanggal}")]
+        public ActionResult Put(DateTime tanggal, [FromBody] Riwayat newRiwayat)
         {
-            Riwayat riwayat = listRiwayat.ElementAt(id);
+            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
+            var riwayat = listRiwayat.FirstOrDefault(item => item.tanggal == tanggal);
 
-            if (riwayat == null)
+            if (newRiwayat == null)
             {
-                return;
+                return BadRequest("Laporan cannot be null");
             }
 
             riwayat.tanggal = newRiwayat.tanggal;
@@ -55,20 +76,19 @@ namespace ApiStockManagement.Controllers
             riwayat.jumlah_barang = newRiwayat.jumlah_barang;
             riwayat.lokasi_penyimpanan = newRiwayat.lokasi_penyimpanan;
             riwayat.pic = newRiwayat.pic;
+
+            JsonHandler<List<Riwayat>>.writeJsonToFile(filePath, listRiwayat);
+
+            return CreatedAtAction(nameof(Get), new { id = newRiwayat.tanggal }, newRiwayat);
         }
 
         // DELETE api/<RiwayatApiController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{tanggal}")]
+        public void Delete(DateTime tanggal)
         {
-            try
-            {
-                listRiwayat.RemoveAt(id);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Id Riwayat tidak ditemukan");
-            }
+            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
+            listRiwayat.RemoveAll(item => item.tanggal == tanggal);
+            JsonHandler<List<Riwayat>>.writeJsonToFile(filePath, listRiwayat);
         }
     }
 }
