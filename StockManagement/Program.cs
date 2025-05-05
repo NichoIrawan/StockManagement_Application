@@ -1,4 +1,5 @@
-﻿using StockManagementLibrary;
+﻿using StockManagement.View;
+using StockManagementLibrary;
 
 class main
 {
@@ -6,5 +7,9 @@ class main
     {
         BahasaConfig bahasaConfig = new BahasaConfig();
         Console.WriteLine(Path.GetFullPath(BahasaConfig.filePath));
+
+        StartupView startupView = new StartupView();
+
+        startupView.callMenu();
     }
 }
