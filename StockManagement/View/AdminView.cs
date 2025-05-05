@@ -10,27 +10,32 @@ namespace StockManagement.View
     class AdminView
     {
         public StartupView startView = new StartupView();
-        public AdminView(AdminController admin) {
-        }
+
+        public AdminView(AdminController admin) { }
 
         public void callMenu()
         {
+            var menuActions = new Dictionary<string, Action>
+        {
+            { "1", () => Console.WriteLine("Fitur Admin - Lihat Barang") }
+        };
+
             string input;
             do
             {
                 Console.WriteLine("Selamat datang di menu Admin");
                 Console.WriteLine("1. Fitur admin");
-                Console.WriteLine("0. Keluar");
-                Console.WriteLine("");
+                Console.WriteLine("0. Keluar\n");
                 input = Console.ReadLine();
-                switch (input)
-                {
-                    case "1":
-                        Console.WriteLine("Lihat barang");
-                        break;
-                   
-                }
-            } while (input != "0");
+
+                if (input == "0") break;
+
+                if (menuActions.ContainsKey(input))
+                    menuActions[input].Invoke();
+                else
+                    Console.WriteLine("Pilihan tidak valid.");
+            } while (true);
+
             startView.callMenu();
         }
     }

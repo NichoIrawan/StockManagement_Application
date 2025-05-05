@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddItem" xml:space="preserve">
+    <value>Add item</value>
+  </data>
+  <data name="AdminFeatureView" xml:space="preserve">
+    <value>Viewing items</value>
+  </data>
+  <data name="AdminOption0" xml:space="preserve">
+    <value>0. Exit</value>
+  </data>
+  <data name="AdminOption1" xml:space="preserve">
+    <value>1. Admin Feature</value>
+  </data>
+  <data name="EditItem" xml:space="preserve">
+    <value>Edit item</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Enter Password:</value>
+  </data>
+  <data name="EnterUsername" xml:space="preserve">
+    <value>Enter Username:</value>
+  </data>
+  <data name="ExitItem" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="ExitMessage" xml:space="preserve">
+    <value>Thanks for using the app, exiting....</value>
+  </data>
+  <data name="InvalidLogin" xml:space="preserve">
+    <value>Incorrect username or password.</value>
+  </data>
+  <data name="LoginSuccesful" xml:space="preserve">
+    <value>Login succesful as </value>
+  </data>
+  <data name="LoginOption" xml:space="preserve">
+    <value> 1. Login</value>
+  </data>
+  <data name="LoginRegisterPrompt" xml:space="preserve">
+    <value>Please Login or Register:</value>
+  </data>
+  <data name="ManagerAddItem " xml:space="preserve">
+    <value>Adding new item</value>
+  </data>
+  <data name="ManagerEditItem" xml:space="preserve">
+    <value>Editing item</value>
+  </data>
+  <data name="ManagerOption0 " xml:space="preserve">
+    <value>0. Exit</value>
+  </data>
+  <data name="ManagerOption1" xml:space="preserve">
+    <value>1. View Item List</value>
+  </data>
+  <data name="ManagerOption2" xml:space="preserve">
+    <value>2. Add Item</value>
+  </data>
+  <data name="ManagerOption3" xml:space="preserve">
+    <value>3. Edit Item</value>
+  </data>
+  <data name="ManagerOption4" xml:space="preserve">
+    <value>4. Print Item Report</value>
+  </data>
+  <data name="ManagerOption5" xml:space="preserve">
+    <value>5. View History</value>
+  </data>
+  <data name="ManagerViewHistory" xml:space="preserve">
+    <value>Viewing history</value>
+  </data>
+  <data name="ManagerViewItem" xml:space="preserve">
+    <value>Viewing items</value>
+  </data>
+  <data name="RegisterOption" xml:space="preserve">
+    <value>2. Register</value>
+  </data>
+  <data name="StaffAddItem" xml:space="preserve">
+    <value>Adding new item</value>
+  </data>
+  <data name="StaffEditItem" xml:space="preserve">
+    <value>Editing item</value>
+  </data>
+  <data name="StaffViewItem" xml:space="preserve">
+    <value>Viewing items</value>
+  </data>
+  <data name="ViewItem" xml:space="preserve">
+    <value>View item list</value>
+  </data>
+  <data name="WelcomeAdminMenu" xml:space="preserve">
+    <value>Welcome to the Admin Menu</value>
+  </data>
+  <data name="WelcomeManagerMenu" xml:space="preserve">
+    <value>Welcome to the Manager Menu</value>
+  </data>
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>Welcome to Supermarket A Inventory Management App!</value>
+  </data>
+  <data name="WelcomeMessageStaff" xml:space="preserve">
+    <value>Welcome to the Staff menu </value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Enter name:</value>
+  </data>
+  <data name="EnterRole" xml:space="preserve">
+    <value>Enter Role (1: Staff, 2: Manager, 3: Admin):</value>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>Invalid input</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Choose Language</value>
+  </data>
+</root>

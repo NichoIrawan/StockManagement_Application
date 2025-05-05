@@ -11,11 +11,20 @@ namespace StockManagement.View
     class ManagerView
     {
         public StartupView startView = new StartupView();
-        public ManagerView(ManagerController manager) {
-           
-        }
 
-        public void callMenu() {
+        public ManagerView(ManagerController manager) { }
+
+        public void callMenu()
+        {
+            var menuActions = new Dictionary<string, Action>
+        {
+            { "1", () => Console.WriteLine("Lihat barang") },
+            { "2", () => Console.WriteLine("Tambah Barang") },
+            { "3", () => Console.WriteLine("Edit Barang") },
+            { "4", () => Console.WriteLine("Print Laporan barang") },
+            { "5", () => Console.WriteLine("Lihat Riwayat") },
+        };
+
             string input;
             do
             {
@@ -25,25 +34,18 @@ namespace StockManagement.View
                 Console.WriteLine("3. Edit barang");
                 Console.WriteLine("4. Print Laporan barang");
                 Console.WriteLine("5. Lihat Riwayat");
-                Console.WriteLine("0. Keluar");
-                Console.WriteLine("");
+                Console.WriteLine("0. Keluar\n");
+
                 input = Console.ReadLine();
-                switch (input)
-                {
-                    case "1":
-                        Console.WriteLine("Lihat barang");
-                        break;
-                    case "2":
-                        Console.WriteLine("Tambah Barang");
-                        break;
-                    case "3":
-                        Console.WriteLine("Edit Barang");
-                        break;
-                    case "4":
-                        Console.WriteLine("Lihat Riwayat");
-                        break;
-                }
-            } while (input != "0");
+
+                if (input == "0") break;
+
+                if (menuActions.ContainsKey(input))
+                    menuActions[input].Invoke();
+                else
+                    Console.WriteLine("Pilihan tidak valid.");
+            } while (true);
+
             startView.callMenu();
         }
     }

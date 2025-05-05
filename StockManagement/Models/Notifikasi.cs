@@ -8,7 +8,7 @@ namespace StockManagement.Models
 {
     public class Notifikasi
     {
-        public enum notifApp { keluar, masuk, notif_habis, notif_expired };
+        public enum notifApp { keluar, masuk, habis, kadaluarsa };
 
         string[] screenName = { "Notif Keluar", "Notif Masuk", "Notif Habis", "Notif Expired" };
 

@@ -11,11 +11,18 @@ namespace StockManagement.View
     public class StaffView
     {
         public StartupView startView = new StartupView();
-        public StaffView(StaffController staff) {}
-       
+
+        public StaffView(StaffController staff) { }
 
         public void callMenu()
         {
+            var menuActions = new Dictionary<string, Action>
+        {
+            { "1", () => Console.WriteLine("Lihat barang") },
+            { "2", () => Console.WriteLine("Tambah Barang") },
+            { "3", () => Console.WriteLine("Edit Barang") },
+        };
+
             string input;
             do
             {
@@ -23,24 +30,19 @@ namespace StockManagement.View
                 Console.WriteLine("1. Lihat list barang");
                 Console.WriteLine("2. Tambah barang");
                 Console.WriteLine("3. Edit barang");
-                Console.WriteLine("0. Keluar");
-                Console.WriteLine("");
+                Console.WriteLine("0. Keluar\n");
+
                 input = Console.ReadLine();
-                switch (input)
-                {
-                    case "1":
-                        Console.WriteLine("Lihat barang");
-                        break;
-                    case "2":
-                        Console.WriteLine("Tambah Barang");
-                        break;
-                    case "3":
-                        Console.WriteLine("Edit Barang");
-                        break;
-                }
-            } while (input != "0");
+
+                if (input == "0") break;
+
+                if (menuActions.ContainsKey(input))
+                    menuActions[input].Invoke();
+                else
+                    Console.WriteLine("Pilihan tidak valid.");
+            } while (true);
+
             startView.callMenu();
-            
         }
 
     }

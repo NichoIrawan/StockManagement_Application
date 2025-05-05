@@ -1,6 +1,12 @@
-﻿using StockManagement.Controllers;
-using StockManagement.Models;
+using StockManagement.View;
 using StockManagementLibrary;
 
-Console.WriteLine("Hello, World!");
-
+class main
+{
+    public static void Main(string[] args)
+    {
+        StartupView startupView = new StartupView();
+        startupView.selectLanguage();
+        startupView.callMenu();
+    }
+}

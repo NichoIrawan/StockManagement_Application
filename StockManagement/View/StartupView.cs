@@ -4,76 +4,124 @@ using StockManagementLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace StockManagement.View
 {
     public class StartupView
     {
         UserStateController cont = new UserStateController();
-
         List<User> userList = new List<User>();
-        public StartupView() {   
+
+        public StartupView() {
         }
 
-        public void callMenu() {
-      
-            Console.WriteLine("Selamat Datang di Aplikasi Manajemen Inventori Supermarket A!");
-            Console.WriteLine("Silahkan Login atau Register:");
-            Console.WriteLine("1.Login");
-            Console.WriteLine("2.Register");
-            Console.WriteLine("");
-            LoginRegister();
+        public void selectLanguage() {
+
+            BahasaConfig bahasaConfig = new BahasaConfig();
+            var conf = bahasaConfig.GetCurrentLanguage();
+            if (conf == Bahasa.Indonesia)
+            {
+                Localization.SetLanguage("id");
+            }
+            else {
+                Localization.SetLanguage("en");
+            }
+            Console.WriteLine(Localization.Get("ChooseLang"));
+            Console.WriteLine("1. English");
+            Console.WriteLine("2. Bahasa Indonesia");
+            string langChoice = Console.ReadLine();
+            if (langChoice == "1")
+            {
+                conf = Bahasa.English;
+            }
+            else {
+                conf = Bahasa.Indonesia;
+            }
+            bahasaConfig.ChangeLanguage(conf);
+            if (conf == Bahasa.Indonesia)
+            {
+                Localization.SetLanguage("id");
+            }
+            else
+            {
+                Localization.SetLanguage("en");
+            }
+        }
+
+        public void callMenu()
+        {
             
-        }
+            Console.WriteLine(Localization.Get("WelcomeMessage"));
+            Console.WriteLine(Localization.Get("LoginRegisterPrompt"));
+            Console.WriteLine("1. Login");
+            Console.WriteLine("2. Register");
+            Console.WriteLine("0. Keluar\n");
 
-        public void LoginRegister() {
+            var menuActions = new Dictionary<string, Action>
+    {
+        { "1", Login },
+        { "2", Register },
+        { "0", () => {
+            Console.WriteLine(Localization.Get("ExitMessage"));
+            Environment.Exit(0); // keluar dari aplikasi
+        }}
+    };
+
             string input = Console.ReadLine();
-            if (input == "1")
-            {
-                Console.WriteLine("Masukkan username:");
-                string username = Console.ReadLine();
-                Console.WriteLine("Masukkan password:");
-                string password = Console.ReadLine();
 
-                User foundUser = userList.FirstOrDefault(u => u.username.Equals(username) && u.password.Equals(password));
-                Console.WriteLine("username: " + foundUser.username + "password: " + foundUser.password);
-                if (foundUser != null)
-                {
-                    cont.ChangeState(
-                        foundUser.role == Roles.Staff ? 1 :
-                        foundUser.role == Roles.Manager ? 2 :
-                        3);
-                }
-                else {
-                    Console.WriteLine("password atau User salah");
-                    callMenu();
-                }
-                
-
-            }
-            else if (input == "2")
+            if (menuActions.ContainsKey(input))
+                menuActions[input].Invoke();
+            else
             {
-                Console.WriteLine("Masukkan username: ");
-                string username = Console.ReadLine();
-                Console.WriteLine("Masukkan Name: ");
-                string name = Console.ReadLine();
-                Console.WriteLine("Masukkan password:");
-                string password = Console.ReadLine();
-                Console.WriteLine("Masukkan role(1: Staff, 2: Manager, 3: Admin): ");
-                string role = Console.ReadLine();
-                User newUser = new User(username, name,
-                    role == "1" ? Roles.Staff :
-                    role == "2" ? Roles.Manager :
-                    Roles.Admin,
-                    password);
-                userList.Add(newUser);
+                Console.WriteLine(Localization.Get("LoginRegisterPrompt\n"));
                 callMenu();
-
             }
         }
 
+
+        private void Login()
+        {
+            Console.WriteLine(Localization.Get("EnterUsername"));
+            string username = Console.ReadLine();
+            Console.WriteLine(Localization.Get("EnterPassword"));
+            string password = Console.ReadLine();
+
+            User foundUser = userList.FirstOrDefault(u => u.username.Equals(username) && u.password.Equals(password));
+
+            if (foundUser != null)
+            {
+                Console.WriteLine(Localization.Get("LoginSuccesful") + " " +  foundUser.role);
+                cont.ChangeState(
+                    foundUser.role == Roles.Staff ? 1 :
+                    foundUser.role == Roles.Manager ? 2 : 3);
+            }
+            else
+            {
+                Console.WriteLine(Localization.Get("InvalidLogin"));
+                callMenu();
+            }
+        }
+
+        private void Register()
+        {
+            Console.WriteLine(Localization.Get("EnterUsername"));
+            string username = Console.ReadLine();
+            Console.WriteLine(Localization.Get("EnterName"));
+            string name = Console.ReadLine();
+            Console.WriteLine(Localization.Get("EnterPassword"));
+            string password = Console.ReadLine();
+            Console.WriteLine(Localization.Get("EnterRole"));
+            string roleInput = Console.ReadLine();
+
+            Roles role = roleInput == "1" ? Roles.Staff :
+                         roleInput == "2" ? Roles.Manager :
+                         Roles.Admin;
+
+            User newUser = new User(username, name, role, password);
+            userList.Add(newUser);
+
+            Console.WriteLine("Registrasi berhasil! Silakan login kembali.\n");
+            callMenu();
+        }
     }
 }
