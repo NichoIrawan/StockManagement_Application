@@ -31,7 +31,7 @@ namespace ApiStockManagement.Controllers
             {
                 return null;
             }
-            var gudang = listGudang.FirstOrDefault(item => item.KodeGudang == kodeGudang);
+            var gudang = listGudang.FirstOrDefault(item => item.kodeGudang == kodeGudang);
             return gudang is null ? null : gudang;
         }
 
@@ -57,12 +57,12 @@ namespace ApiStockManagement.Controllers
 
             foreach (Gudang gudang in listGudang)
             {
-                if (gudang.KodeGudang == newGudang.KodeGudang) return BadRequest("Gudang with the same code already exists");
+                if (gudang.kodeGudang == newGudang.kodeGudang) return BadRequest("Gudang with the same code already exists");
             }
 
             JsonHandler<List<Gudang>>.writeJsonToFile(filePath, listGudang);
 
-            return CreatedAtAction(nameof(Get), new { kodeGudang = newGudang.KodeGudang }, newGudang);
+            return CreatedAtAction(nameof(Get), new { kodeGudang = newGudang.kodeGudang }, newGudang);
         }
 
         // PUT api/<GudangApiController>/5
@@ -73,12 +73,12 @@ namespace ApiStockManagement.Controllers
 
             if (gudangBaru == null) return;
 
-            var gudang = listGudang.FirstOrDefault(item => item.KodeGudang == gudangBaru.KodeGudang);
+            var gudang = listGudang.FirstOrDefault(item => item.kodeGudang == gudangBaru.kodeGudang);
 
             if (gudang == null) return;
 
-            gudang.NamaGudang = gudangBaru.NamaGudang;
-            gudang.Lokasi = gudangBaru.Lokasi;
+            gudang.namaGudang = gudangBaru.namaGudang;
+            gudang.lokasi = gudangBaru.lokasi;
 
             JsonHandler<List<Gudang>>.writeJsonToFile(filePath, listGudang);
         }
@@ -88,7 +88,7 @@ namespace ApiStockManagement.Controllers
         public void Delete(String kodeGudang)
         {
             listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(filePath);
-            listGudang.RemoveAll(item => item.KodeGudang == kodeGudang);
+            listGudang.RemoveAll(item => item.kodeGudang == kodeGudang);
             JsonHandler<List<Gudang>>.writeJsonToFile(filePath, listGudang);
         }
     }
