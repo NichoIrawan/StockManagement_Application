@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StockManagementLibrary;
 
 namespace StockManagement.Models
 {
     public class User
     {
-        public enum Roles { Manager = 2, Admin = 3, Staff = 1 }
-        public string? Username { get; set; }
-        public string? Name { get; set; }
-        public Roles? Role { get; set; }
-        public string? Password { get; set; }
+        public string? username { get; set; }
+        public string? name { get; set; }
+        public Roles? role { get; set; }
+        public string? password { get; set; }
 
         public User() { }
    
         public User(string username, string name, Roles role, string password)
         {
-            this.Username = username;
-            this.Name = name;
-            this.Role = role;
-            this.Password = password;
+            this.username = username;
+            this.name = name;
+            this.role = role;
+            this.password = password;
         }
     }
 }
