@@ -29,7 +29,7 @@ namespace StockManagement.Models
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Tanggal Pembuatan : {tanggalPembuatan}");
-            sb.AppendLine($"Tempat Penyimpanan: {tempatPenyimpanan.NamaGudang} - {tempatPenyimpanan.Lokasi}");
+            sb.AppendLine($"Tempat Penyimpanan: {tempatPenyimpanan.namaGudang} - {tempatPenyimpanan.lokasi}");
 
             sb.AppendLine("Daftar Barang:");
             foreach (var barang in daftarBarang)
