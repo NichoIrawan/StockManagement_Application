@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockManagement.Models;
+using StockManagementLibrary;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,39 +11,65 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class BarangApiController : ControllerBase
     {
-        //Placholder for database context -> Will be changed
-        private static List<Barang> listBarang = new List<Barang>
-        {
-            new Barang("001", "Barang A", "Kategori A", 10, 10000, DateOnly.FromDateTime(DateTime.Now.AddDays(30)), "G001"),
-            new Barang("002", "Barang B", "Kategori B", 20, 20000, DateOnly.FromDateTime(DateTime.Now.AddDays(60)), "G002")
-        };
+        private static String filePath = "D:/Nicho/C# Visual Studio/StockManagement/ApiStockManagement/Data/ListBarang.json";
+        private static List<Barang> listBarang;
 
         // GET: api/<BarangController>
         [HttpGet]
-        public IEnumerable<Barang> Get()
+        public ActionResult<IEnumerable<Barang>> Get()
         {
-            return listBarang;
+            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
+            
+            return listBarang is null? NotFound() : Ok(listBarang);
         }
 
         // GET api/<BarangController>/5
-        [HttpGet("{id}")]
-        public Barang Get(int id)
+        [HttpGet("{kodeBarang}")]
+        public ActionResult<Barang> Get(String kodeBarang)
         {
-            return listBarang.ElementAt(id);
+            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
+
+            if (listBarang is null)
+            {
+                return NotFound("Barang not found");
+            }
+
+            var barang = listBarang.FirstOrDefault(item => item.kodeBarang == kodeBarang);
+            
+            return barang is null? NotFound() : Ok(barang);
         }
 
         // POST api/<BarangController>
         [HttpPost]
-        public void Post([FromBody]Barang newBarang)
+        public ActionResult Post([FromBody]Barang newBarang)
         {
+            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
+
+            if (newBarang == null)
+            {
+                return BadRequest("Barang cannot be null");
+            }
+
+            foreach (Barang barang in listBarang)
+            {
+                if (barang.kodeBarang == newBarang.kodeBarang)
+                {
+                    return BadRequest("Barang with the same code already exists");
+                }
+            }
+
             listBarang.Add(newBarang);
+            JsonHandler<List<Barang>>.writeJsonToFile(filePath, listBarang);
+
+            return CreatedAtAction(nameof(Get), new { id = newBarang.kodeBarang }, newBarang);
         }
 
         // PUT api/<BarangController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Barang newbarang)
+        [HttpPut("{kodeBarang}")]
+        public void Put(String kodeBarang, [FromBody]Barang newbarang)
         {
-            Barang barang = listBarang.ElementAt(id);
+            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
+            var barang = listBarang.FirstOrDefault(item => item.kodeBarang == kodeBarang);
 
             if (barang == null)
             {
@@ -55,20 +83,18 @@ namespace ApiStockManagement.Controllers
             barang.harga = newbarang.harga;
             barang.tanggalKadaluarsa = newbarang.tanggalKadaluarsa;
             barang.kodeGudang = newbarang.kodeGudang;
+
+            JsonHandler<List<Barang>>.writeJsonToFile(filePath, listBarang);
         }
 
         // DELETE api/<BarangController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{kodeBarang}")]
+        public void Delete(String kodeBarang)
         {
-            try
-            {
-                listBarang.RemoveAt(id);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Barang tidak ditemukan");
-            }
+            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
+
+            listBarang.RemoveAll(item => item.kodeBarang == kodeBarang);
+            JsonHandler<List<Barang>>.writeJsonToFile(filePath, listBarang);
         }
     }
 }
