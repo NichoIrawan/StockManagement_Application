@@ -1,4 +1,4 @@
-﻿using StockManagement.View;
+using StockManagement.View;
 using StockManagementLibrary;
 
 class main
