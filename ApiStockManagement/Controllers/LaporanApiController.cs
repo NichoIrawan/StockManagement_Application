@@ -80,15 +80,6 @@ namespace ApiStockManagement.Controllers
         public void Post([FromBody] Laporan newLaporan)
         {
             listLaporan.Add(newLaporan);
-            Console.WriteLine("Laporan Baru ditambahkan: ");
-            Console.WriteLine($"Tanggal Pembuatan: {newLaporan.tanggalPembuatan}");
-            Console.WriteLine($"Gudang: {newLaporan.tempatPenyimpanan.nama} - {newLaporan.tempatPenyimpanan.kota}");
-            Console.WriteLine("Daftar Barang:");
-            foreach (var barang in newLaporan.daftarBarang)
-            {
-                Console.WriteLine($"ID: {barang.id}, Nama: {barang.nama}, Kategori: {barang.kategori}, Harga: {barang.harga}");
-            }
-            Console.WriteLine("---------------------------------");
         }
 
         // PUT api/<LaporanApiController>/5
