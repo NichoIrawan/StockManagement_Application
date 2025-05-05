@@ -117,112 +117,68 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddItem" xml:space="preserve">
-    <value>Add item</value>
-  </data>
-  <data name="AdminFeatureView" xml:space="preserve">
-    <value>Viewing items</value>
-  </data>
   <data name="AdminOption0" xml:space="preserve">
-    <value>0. Exit</value>
-  </data>
-  <data name="AdminOption1" xml:space="preserve">
-    <value>1. Admin Feature</value>
-  </data>
-  <data name="EditItem" xml:space="preserve">
-    <value>Edit item</value>
+    <value>0. Keluar</value>
   </data>
   <data name="EnterPassword" xml:space="preserve">
-    <value>Enter Password:</value>
+    <value>Masukkan Password:</value>
   </data>
   <data name="EnterUsername" xml:space="preserve">
-    <value>Enter Username:</value>
+    <value>Masukkan Username:</value>
   </data>
   <data name="ExitItem" xml:space="preserve">
-    <value>Exit</value>
+    <value>Keluar</value>
   </data>
   <data name="ExitMessage" xml:space="preserve">
-    <value>Thanks for using the app, exiting....</value>
+    <value>Terima kasih telah menggunakan aplikasi. Keluar...</value>
   </data>
   <data name="InvalidLogin" xml:space="preserve">
-    <value>Incorrect username or password.</value>
+    <value>Username atau Password Salah</value>
   </data>
   <data name="LoginSuccesful" xml:space="preserve">
-    <value>Login succesful as </value>
+    <value>Login berhasil sebagai</value>
   </data>
   <data name="LoginOption" xml:space="preserve">
-    <value> 1. Login</value>
+    <value>1.Login</value>
   </data>
   <data name="LoginRegisterPrompt" xml:space="preserve">
-    <value>Please Login or Register:</value>
+    <value>Silahkan Login atau Register</value>
   </data>
-  <data name="ManagerAddItem " xml:space="preserve">
-    <value>Adding new item</value>
-  </data>
-  <data name="ManagerEditItem" xml:space="preserve">
-    <value>Editing item</value>
-  </data>
-  <data name="ManagerOption0 " xml:space="preserve">
-    <value>0. Exit</value>
-  </data>
-  <data name="ManagerOption1" xml:space="preserve">
-    <value>1. View Item List</value>
-  </data>
-  <data name="ManagerOption2" xml:space="preserve">
-    <value>2. Add Item</value>
-  </data>
-  <data name="ManagerOption3" xml:space="preserve">
-    <value>3. Edit Item</value>
-  </data>
-  <data name="ManagerOption4" xml:space="preserve">
-    <value>4. Print Item Report</value>
-  </data>
-  <data name="ManagerOption5" xml:space="preserve">
-    <value>5. View History</value>
-  </data>
-  <data name="ManagerViewHistory" xml:space="preserve">
-    <value>Viewing history</value>
-  </data>
-  <data name="ManagerViewItem" xml:space="preserve">
-    <value>Viewing items</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ManagerAddItem " type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="RegisterOption" xml:space="preserve">
-    <value>2. Register</value>
+    <value>2.Register</value>
   </data>
-  <data name="StaffAddItem" xml:space="preserve">
-    <value>Adding new item</value>
+  <data name="StaffAddItem" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="StaffEditItem" xml:space="preserve">
-    <value>Editing item</value>
-  </data>
-  <data name="StaffViewItem" xml:space="preserve">
-    <value>Viewing items</value>
-  </data>
-  <data name="ViewItem" xml:space="preserve">
-    <value>View item list</value>
+  <data name="ViewItem" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="WelcomeAdminMenu" xml:space="preserve">
-    <value>Welcome to the Admin Menu</value>
+    <value>Selamat datang di menu Admin</value>
   </data>
   <data name="WelcomeManagerMenu" xml:space="preserve">
-    <value>Welcome to the Manager Menu</value>
+    <value>Selamat datang di menu Manager</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
-    <value>Welcome to Supermarket A Inventory Management App!</value>
+    <value>Selamat Datang di Aplikasi Manajemen Inventori Supermarket A!</value>
   </data>
   <data name="WelcomeMessageStaff" xml:space="preserve">
-    <value>Welcome to the Staff menu </value>
+    <value>Selamat datang di menu Staff</value>
   </data>
   <data name="EnterName" xml:space="preserve">
-    <value>Enter name:</value>
+    <value>Masukkan nama:</value>
   </data>
   <data name="EnterRole" xml:space="preserve">
-    <value>Enter Role (1: Staff, 2: Manager, 3: Admin):</value>
+    <value>Masukkan Role (1: Staff, 2: Manager, 3: Admin):</value>
   </data>
   <data name="InvalidInput" xml:space="preserve">
-    <value>Invalid input</value>
+    <value>Input tidak sesuai</value>
   </data>
   <data name="ChooseLang" xml:space="preserve">
-    <value>Choose Language</value>
+    <value>Pilih Bahasa</value>
   </data>
 </root>

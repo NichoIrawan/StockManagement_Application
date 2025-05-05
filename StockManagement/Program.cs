@@ -5,11 +5,8 @@ class main
 {
     public static void Main(string[] args)
     {
-        BahasaConfig bahasaConfig = new BahasaConfig();
-        Console.WriteLine(Path.GetFullPath(BahasaConfig.filePath));
-
         StartupView startupView = new StartupView();
-
+        startupView.selectLanguage();
         startupView.callMenu();
     }
 }
