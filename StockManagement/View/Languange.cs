@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement.Controller.UserController
+namespace StockManagement.View
 {
-    public class AdminController
+    class Languange
     {
-
     }
 }

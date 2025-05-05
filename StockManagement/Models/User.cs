@@ -8,7 +8,7 @@ namespace StockManagement.Models
 {
     public class User
     {
-        public enum Roles { Manager, Admin, Staff }
+        public enum Roles { Manager = 2, Admin = 3, Staff = 1 }
         public string? Username { get; set; }
         public string? Name { get; set; }
         public Roles? Role { get; set; }
