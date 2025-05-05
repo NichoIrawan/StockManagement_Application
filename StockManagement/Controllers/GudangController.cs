@@ -19,41 +19,46 @@ namespace StockManagement.Controller
             _client = api.Client;
         }
 
-        // GET /api/BarangApi
-        public async Task<List<Barang>> GetListBarangAsync()
+        // GET /api/GudangApi
+        public async Task<List<Gudang>> GetListBarangAsync()
         {
-            return await _client.GetFromJsonAsync<List<Barang>>("api/BarangApi").ConfigureAwait(false);
+            return await _client.GetFromJsonAsync<List<Gudang>>("api/GudangApi").ConfigureAwait(false);
         }
 
-        // GET /api/BarangApi/{kodeBarang}
-        public async Task<Barang> GetBarangByIdAsync(string kodeBarang)
+        public async Task<List<Gudang>> GetListBarangByIdAsync(string kodeGudang)
         {
-            var response = await _client.GetAsync($"/api/BarangApi/{kodeBarang}");
+            return await _client.GetFromJsonAsync<List<Gudang>>($"api/GudangApi/{kodeGudang}").ConfigureAwait(false);
+        }
+
+        // GET /api/GudangApi/{kodeBarang}
+        public async Task<Gudang> GetBarangByIdAsync(string kodeGudang)
+        {
+            var response = await _client.GetAsync($"/api/GudangApi/{kodeGudang}");
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<Barang>();
+                return await response.Content.ReadFromJsonAsync<Gudang>();
             }
             return null;
         }
 
-        // POST /api/BarangApi
-        public async Task InputBarangAsync(Barang barang)
+        // POST /api/GudangApi
+        public async Task InputGudangAsync(Gudang gudang)
         {
-            var response = await _client.PostAsJsonAsync("/api/BarangApi", barang);
+            var response = await _client.PostAsJsonAsync("/api/GudangApi", gudang);
             response.EnsureSuccessStatusCode();
         }
 
-        // PUT /api/BarangApi/{kodeBarang}
-        public async Task UpdateBarangAsync(string kodeBarang, Barang barang)
+        // PUT /api/GudangApi/{kodeBarang}
+        public async Task UpdateGudangAsync(string kodeGudang, Gudang gudang)
         {
-            var response = await _client.PutAsJsonAsync($"/api/BarangApi/{kodeBarang}", barang);
+            var response = await _client.PutAsJsonAsync($"/api/GudangApi/{kodeGudang}", gudang);
             response.EnsureSuccessStatusCode();
         }
 
-        // DELETE /api/BarangApi/{kodeBarang}
-        public async Task DeleteBarangAsync(string kodeBarang)
+        // DELETE /api/GudangApi/{kodeBarang}
+        public async Task DeleteGudangAsync(string kodeGudang)
         {
-            var response = await _client.DeleteAsync($"/api/BarangApi/{kodeBarang}");
+            var response = await _client.DeleteAsync($"/api/GudangApi/{kodeGudang}");
             response.EnsureSuccessStatusCode();
         }
     }
