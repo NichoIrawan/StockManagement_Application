@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Controller.UserController
 {
-    class AdminController
+    public class AdminController
     {
 
     }

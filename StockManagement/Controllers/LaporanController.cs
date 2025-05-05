@@ -8,5 +8,6 @@ namespace StockManagement.Controller
 {
     class LaporanController
     {
+
     }
 }

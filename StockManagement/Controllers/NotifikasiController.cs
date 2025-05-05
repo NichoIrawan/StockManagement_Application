@@ -87,8 +87,5 @@ namespace StockManagement.Controller
                        .Select(b => $"{b.namaBarang} - {notif.ReadNotif(Notifikasi.notifApp.kadaluarsa)}")
                        .ToList();
         }
-
-
-
     }
 }
