@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace StockManagement.Models
 {
     public class Laporan
@@ -24,7 +25,7 @@ namespace StockManagement.Models
             this.daftarBarang = daftar;
         }
         
-        public override string ToString()
+ /*       public override string ToString()
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Tanggal Pembuatan : {tanggalPembuatan}");
@@ -37,6 +38,6 @@ namespace StockManagement.Models
             }
 
             return sb.ToString();
-        }
+        }*/
     }
 }
