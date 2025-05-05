@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using StockManagementLibrary;
+
+class main
+{
+    public static void Main(string[] args)
+    {
+        BahasaConfig bahasaConfig = new BahasaConfig();
+        Console.WriteLine(Path.GetFullPath(BahasaConfig.filePath));
+    }
+}
