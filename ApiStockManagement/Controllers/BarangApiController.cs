@@ -92,7 +92,6 @@ namespace ApiStockManagement.Controllers
         public void Delete(String kodeBarang)
         {
             listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
-
             listBarang.RemoveAll(item => item.kodeBarang == kodeBarang);
             JsonHandler<List<Barang>>.writeJsonToFile(filePath, listBarang);
         }
