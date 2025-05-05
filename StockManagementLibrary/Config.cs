@@ -10,6 +10,7 @@ namespace StockManagementLibrary
     {
         public Bahasa bahasa { get; set; }
 
+
         public Config()
         {
             this.bahasa = Bahasa.Indonesia;
