@@ -12,17 +12,48 @@ namespace StockManagementLibrary
         public Config config;
         public const string filePath = @"Config.json";
 
+
         public BahasaConfig()
         {
             try
             {
-                JsonHandler<Config>.readJsonFromFile(filePath);
+                config = JsonHandler<Config>.readJsonFromFile(filePath);
             }
             catch (Exception)
             {
                 config = new Config();
-                JsonHandler<String>.writeJsonToFile(filePath, JsonSerializer.Serialize(config));
+                SaveConfig(); // Save default if file doesn't exist
             }
         }
+
+        public Config ReadConfigFile()
+        {
+            string file = File.ReadAllText(filePath);
+            config = JsonSerializer.Deserialize<Config>(file);
+            return config;
+        }
+        public Bahasa GetCurrentLanguage()
+        {
+            config = ReadConfigFile(); // Ensure latest config is loaded
+            return config.bahasa;
+        }
+        private void SaveConfig()
+        {
+            string json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, json);
+        }
+
+        public void ChangeLanguage(Bahasa newBahasa)
+        {
+            config.bahasa = newBahasa;
+            SaveConfig(); // Save changes
+        }
+
+       
+
+       
+
+
+
     }
 }

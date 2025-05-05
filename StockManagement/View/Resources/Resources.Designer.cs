@@ -97,6 +97,15 @@ namespace StockManagement.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose Language.
+        /// </summary>
+        internal static string ChooseLang {
+            get {
+                return ResourceManager.GetString("ChooseLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit item.
         /// </summary>
         internal static string EditItem {
@@ -106,11 +115,29 @@ namespace StockManagement.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter name:.
+        /// </summary>
+        internal static string EnterName {
+            get {
+                return ResourceManager.GetString("EnterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Password:.
         /// </summary>
         internal static string EnterPassword {
             get {
                 return ResourceManager.GetString("EnterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Role (1: Staff, 2: Manager, 3: Admin):.
+        /// </summary>
+        internal static string EnterRole {
+            get {
+                return ResourceManager.GetString("EnterRole", resourceCulture);
             }
         }
         
@@ -129,6 +156,24 @@ namespace StockManagement.View.Resources {
         internal static string ExitItem {
             get {
                 return ResourceManager.GetString("ExitItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thanks for using the app, exiting.....
+        /// </summary>
+        internal static string ExitMessage {
+            get {
+                return ResourceManager.GetString("ExitMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid input.
+        /// </summary>
+        internal static string InvalidInput {
+            get {
+                return ResourceManager.GetString("InvalidInput", resourceCulture);
             }
         }
         
@@ -156,6 +201,15 @@ namespace StockManagement.View.Resources {
         internal static string LoginRegisterPrompt {
             get {
                 return ResourceManager.GetString("LoginRegisterPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login succesful as .
+        /// </summary>
+        internal static string LoginSuccesful {
+            get {
+                return ResourceManager.GetString("LoginSuccesful", resourceCulture);
             }
         }
         
