@@ -1,0 +1,10 @@
+[
+  {
+    "tanggal": "2023-10-01",
+    "jenis_transaksi": "Masuk",
+    "Barang": "Laptop",
+    "jumlah_barang": "10",
+    "lokasi_penyimpanan": "Gudang A",
+    "pic": "John Doe"
+  }
+]
