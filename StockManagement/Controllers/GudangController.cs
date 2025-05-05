@@ -20,18 +20,19 @@ namespace StockManagement.Controller
         }
 
         // GET /api/GudangApi
-        public async Task<List<Gudang>> GetListBarangAsync()
+        public async Task<List<Gudang>> GetListGudangAsync()
         {
             return await _client.GetFromJsonAsync<List<Gudang>>("api/GudangApi").ConfigureAwait(false);
         }
 
+        // GET /api/GudangApi/{kodeBarang}
         public async Task<List<Gudang>> GetListBarangByIdAsync(string kodeGudang)
         {
-            return await _client.GetFromJsonAsync<List<Gudang>>($"api/GudangApi/{kodeGudang}").ConfigureAwait(false);
+            return await _client.GetFromJsonAsync<List<Gudang>>($"api/GudangApi/barang").ConfigureAwait(false);
         }
 
         // GET /api/GudangApi/{kodeBarang}
-        public async Task<Gudang> GetBarangByIdAsync(string kodeGudang)
+        public async Task<Gudang> GetGudangByIdAsync(string kodeGudang)
         {
             var response = await _client.GetAsync($"/api/GudangApi/{kodeGudang}");
             if (response.IsSuccessStatusCode)
