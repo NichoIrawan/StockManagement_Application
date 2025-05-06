@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Controller
 {
-    class GudangController
+    public class GudangController
     {
         private readonly HttpClient _client;
 

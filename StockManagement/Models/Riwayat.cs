@@ -16,6 +16,9 @@ namespace StockManagement.Models
         public Gudang lokasi_penyimpanan { get; set; }
         public User pic { get; set; }
 
+        public Riwayat() { }
+
+
 
         public Riwayat(DateTime tanggal, string jenis_transaksi, Barang barang, int jumlah_barang, Gudang lokasi, User pic) {
             this.tanggal = tanggal;
