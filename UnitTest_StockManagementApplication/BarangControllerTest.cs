@@ -56,7 +56,6 @@ namespace UnitTest_StockManagementApplication
         }
     }
 
-    // BarangController versi modifikasi buat testing
     public class BarangControllerForTest : BarangController
     {
         public BarangControllerForTest(HttpClient client)

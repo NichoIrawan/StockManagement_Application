@@ -15,6 +15,7 @@ namespace StockManagement.Models
         public int jumlah_barang { get; set; }
         public Gudang lokasi_penyimpanan { get; set; }
         public User pic { get; set; }
+        public Riwayat() { }
 
         public Riwayat() { }
 

@@ -1,4 +1,6 @@
 ﻿using StockManagement.Controller.UserController;
+using StockManagement.Controllers;
+using StockManagement.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,17 +12,60 @@ namespace StockManagement.View
 {
     public class StaffView
     {
+        BarangController barangController = new BarangController();
+
         public StartupView startView = new StartupView();
 
         public StaffView(StaffController staff) { }
 
-        public void callMenu()
+        public async Task callMenu()
         {
             var menuActions = new Dictionary<string, Action>
         {
-            { "1", () => Console.WriteLine("Lihat barang") },
-            { "2", () => Console.WriteLine("Tambah Barang") },
-            { "3", () => Console.WriteLine("Edit Barang") },
+            { "1", async () => {
+                var listBarang = await barangController.tampilkanBarang();
+
+                foreach (var barang in listBarang)
+                {
+                    Console.WriteLine($"Kode Barang: {barang.kodeBarang} \t Nama Barang: {barang.namaBarang} \t Stok: {barang.stok} \t Expired: {barang.tanggalKadaluarsa}");
+                } 
+            }
+        },
+            { "2", async () => {
+                Barang barang = new Barang();
+
+                barang.kodeBarang = Console.ReadLine();
+                barang.namaBarang = Console.ReadLine();
+                barang.stok = int.Parse(Console.ReadLine());
+                barang.harga = double.Parse(Console.ReadLine());
+                barang.kodeGudang = Console.ReadLine();
+                barang.tanggalKadaluarsa = DateOnly.FromDateTime(DateTime.Now.AddMonths(6));
+
+                await barangController.beliBarang(barang);
+                }
+            },
+            { "3", async () => {
+                string kodeBarang = Console.ReadLine();
+
+                var barang = await barangController.cariBarangDenganId(kodeBarang);
+
+                if (barang == null) 
+                {
+                    Console.WriteLine("[Error] Barang tidak ada"); 
+                }
+                else
+                {
+                    barang.namaBarang = Console.ReadLine();
+                    barang.stok = int.Parse(Console.ReadLine());
+                    barang.harga = double.Parse(Console.ReadLine());
+                    barang.kodeGudang = Console.ReadLine();
+                    barang.tanggalKadaluarsa = DateOnly.FromDateTime(DateTime.Now.AddMonths(6));
+
+                    await barangController.updateDataBarang(barang.kodeBarang, barang);
+                }
+
+                } 
+            },
         };
 
             string input;

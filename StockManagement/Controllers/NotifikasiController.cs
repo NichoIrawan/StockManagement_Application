@@ -1,5 +1,6 @@
 ﻿using StockManagement.Controller.UserController;
 using StockManagement.Models;
+using StockManagementLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +11,16 @@ namespace StockManagement.Controller
 {
     class NotifikasiController
     {
-        public enum State
+        private readonly HttpClient _client;
+
+        public NotifikasiController()
         {
-            CekMasuk, CekKeluar, CekStok, CekExpired, Selesai
+            _client = new HttpClient();
+            _client.BaseAddress = new Uri("http://localhost:5052/api/");
         }
 
         private readonly Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>> stateActions;
         private readonly Notifikasi notif = new Notifikasi();
-
-        public NotifikasiController()
-        {
-            stateActions = new Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>>
-            {
-                { State.CekMasuk, BarangMasuk },
-                { State.CekKeluar, BarangKeluar },
-                { State.CekStok, BarangHabis },
-                { State.CekExpired, BarangExpired }
-            };
-        }
 
         public void TampilkanNotifikasi(List<Barang> stokSebelumnya, List<Barang> stokSekarang)
         {

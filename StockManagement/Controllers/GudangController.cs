@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace StockManagement.Controller
@@ -15,52 +16,123 @@ namespace StockManagement.Controller
 
         public GudangController()
         {
-            var api = new ApiClient();
-            _client = api.Client;
+            _client = new HttpClient();
+            _client.BaseAddress = new Uri("http://localhost:5052/api/");
         }
 
         // GET /api/GudangApi
         public async Task<List<Gudang>> GetListGudangAsync()
         {
-            return await _client.GetFromJsonAsync<List<Gudang>>("api/GudangApi").ConfigureAwait(false);
+            try
+            {
+                var response = await _client.GetAsync("BarangApi");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<Gudang>();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<List<Gudang>>(json);
+                return result ?? new List<Gudang>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                return new List<Gudang>();
+            }
         }
 
         // GET /api/GudangApi/{kodeBarang}
-        public async Task<List<Gudang>> GetListBarangByIdAsync(string kodeGudang)
+        public async Task<List<Barang>> GetListBarangById(string kodeGudang)
         {
-            return await _client.GetFromJsonAsync<List<Gudang>>($"api/GudangApi/barang").ConfigureAwait(false);
+            try
+            {
+                var response = await _client.GetAsync("BarangApi");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<Barang>();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<List<Barang>>(json);
+
+                return result.Where(item => item.kodeGudang == kodeGudang).ToList() ?? new List<Barang>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                return new List<Barang>();
+            }
         }
 
         // GET /api/GudangApi/{kodeBarang}
         public async Task<Gudang> GetGudangByIdAsync(string kodeGudang)
         {
-            var response = await _client.GetAsync($"/api/GudangApi/{kodeGudang}");
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return await response.Content.ReadFromJsonAsync<Gudang>();
+                var response = await _client.GetAsync($"GudangApi/{kodeGudang}");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Gudang();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<Gudang>(json);
+
+                return result ?? new Gudang();
             }
-            return null;
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                return new Gudang();
+            }
         }
 
         // POST /api/GudangApi
         public async Task InputGudangAsync(Gudang gudang)
         {
-            var response = await _client.PostAsJsonAsync("/api/GudangApi", gudang);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var json = JsonSerializer.Serialize(gudang);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _client.PostAsync("GudangApi", content);
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+            }
         }
 
         // PUT /api/GudangApi/{kodeBarang}
         public async Task UpdateGudangAsync(string kodeGudang, Gudang gudang)
         {
-            var response = await _client.PutAsJsonAsync($"/api/GudangApi/{kodeGudang}", gudang);
+            var json = JsonSerializer.Serialize(gudang);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _client.PutAsync($"BarangApi/{kodeGudang}", content);
             response.EnsureSuccessStatusCode();
         }
 
         // DELETE /api/GudangApi/{kodeBarang}
         public async Task DeleteGudangAsync(string kodeGudang)
         {
-            var response = await _client.DeleteAsync($"/api/GudangApi/{kodeGudang}");
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await _client.DeleteAsync($"BarangApi/{kodeGudang}");
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+            }
         }
     }
 }
