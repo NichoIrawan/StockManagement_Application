@@ -45,29 +45,29 @@ namespace StockManagement.Controller
         }
 
         // GET /api/GudangApi/{kodeBarang}
-        //public async Task<Gudang>> GetListBarangById(string kodeGudang)
-        //{
-        //    try
-        //    {
-        //        var response = await _client.GetAsync($"GudangApi/{kodeGudang}");
+        public async Task<List<Barang>> GetListBarangById(string kodeGudang)
+        {
+            try
+            {
+                var response = await _client.GetAsync("BarangApi");
 
-        //        if (!response.IsSuccessStatusCode)
-        //        {
-        //            return new Gudang();
-        //        }
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<Barang>();
+                }
 
-        //        var json = await response.Content.ReadAsStringAsync();
+                var json = await response.Content.ReadAsStringAsync();
 
-        //        var result = JsonSerializer.Deserialize<Gudang>(json);
+                var result = JsonSerializer.Deserialize<List<Barang>>(json);
 
-        //        return result ?? new Gudang();  
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine($"Error: {e.Message}");
-        //        return new Gudang();
-        //    }
-        //}
+                return result.Where(item => item.kodeGudang == kodeGudang).ToList() ?? new List<Barang>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                return new List<Barang>();
+            }
+        }
 
         // GET /api/GudangApi/{kodeBarang}
         public async Task<Gudang> GetGudangByIdAsync(string kodeGudang)
