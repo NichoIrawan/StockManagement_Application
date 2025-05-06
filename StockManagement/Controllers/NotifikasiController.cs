@@ -1,5 +1,6 @@
 ﻿using StockManagement.Controller.UserController;
 using StockManagement.Models;
+using StockManagementLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,6 @@ namespace StockManagement.Controller
         {
             _client = new HttpClient();
             _client.BaseAddress = new Uri("http://localhost:5052/api/");
-        }
-
-        public enum State
-        {
-            CekMasuk, CekKeluar, CekStok, CekExpired, Selesai
         }
 
         private readonly Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>> stateActions;

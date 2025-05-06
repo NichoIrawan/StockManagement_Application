@@ -1,4 +1,7 @@
-﻿using StockManagement.Controller.UserController;
+﻿using StockManagement.Controller;
+using StockManagement.Controller.UserController;
+using StockManagement.Controllers;
+using StockManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,9 @@ namespace StockManagement.View
 {
     class AdminView
     {
+        BarangController barangController = new BarangController();
+        LaporanController laporanController = new LaporanController();
+
         public StartupView startView = new StartupView();
 
         public AdminView(AdminController admin) { }
@@ -17,11 +23,67 @@ namespace StockManagement.View
         {
             var menuActions = new Dictionary<string, Action>
         {
-            { "1", () => Console.WriteLine("Fitur Admin - Lihat Barang") },
-            { "2", () => Console.WriteLine("Fitur Admin - Insert Barang") },
-            { "3", () => Console.WriteLine("Fitur Admin - Delete Barang") },
-            { "4", () => Console.WriteLine("Fitur Admin - Edit Barang") },
-            { "5", () => Console.WriteLine("Fitur Admin - Lihat Laporan") },
+            { "1", async() =>
+                {
+                    var listBarang = await barangController.tampilkanBarang();
+                    foreach (var barang in listBarang)
+                    {
+                        Console.WriteLine($"Kode Barang: {barang.kodeBarang} \t Nama Barang: {barang.namaBarang} \t Stok: {barang.stok} \t Expired: {barang.tanggalKadaluarsa}");
+                    }
+                }
+            },
+            { "2", async () => 
+                {
+                    Barang barang = new Barang();
+
+                    barang.kodeBarang = Console.ReadLine();
+                    barang.namaBarang = Console.ReadLine();
+                    barang.stok = int.Parse(Console.ReadLine());
+                    barang.harga = double.Parse(Console.ReadLine());
+                    barang.kodeGudang = Console.ReadLine();
+                    barang.tanggalKadaluarsa = DateOnly.FromDateTime(DateTime.Now.AddMonths(6));
+
+                    await barangController.beliBarang(barang);
+                }    
+            },
+            { "3", async () => 
+                {
+                    string kodeBarang = Console.ReadLine();
+
+                    await barangController.jualBarang(kodeBarang);
+                } 
+            },
+            { "4", async () => 
+                {
+                    string kodeBarang = Console.ReadLine();
+
+                    var barang = await barangController.cariBarangDenganId(kodeBarang);
+
+                    if (barang == null)
+                    {
+                        Console.WriteLine("[Error] Barang tidak ada");
+                    }
+                    else
+                    {
+                        barang.namaBarang = Console.ReadLine();
+                        barang.stok = int.Parse(Console.ReadLine());
+                        barang.harga = double.Parse(Console.ReadLine());
+                        barang.kodeGudang = Console.ReadLine();
+                        barang.tanggalKadaluarsa = DateOnly.FromDateTime(DateTime.Now.AddMonths(6));
+
+                        await barangController.updateDataBarang(barang.kodeBarang, barang);
+                    }
+                }  
+            },
+            { "5", async () =>
+                {
+                    var listLaporan = await laporanController.GetListLaporanAsync();
+                    foreach (var laporan in listLaporan)
+                    {
+                        Console.WriteLine(laporan);
+                    }
+                } 
+            },
         };
 
             string input;

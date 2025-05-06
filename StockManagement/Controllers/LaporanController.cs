@@ -21,7 +21,7 @@ namespace StockManagement.Controller
         }
 
         // GET /api/LaporanApi
-        public async Task<List<Laporan>> GetListBarangAsync()
+        public async Task<List<Laporan>> GetListLaporanAsync()
         {
             try
             {
@@ -45,7 +45,7 @@ namespace StockManagement.Controller
         }
 
         // GET /api/LaporanApi/{tanggalPembuatan}
-        public async Task<Laporan> GetBarangByIdAsync(DateTime tanggalPembuatan)
+        public async Task<Laporan> GetLaporanByIdAsync(DateTime tanggalPembuatan)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace StockManagement.Controller
         }
 
         // POST /api/LaporanApi
-        public async Task InputGudangAsync(Gudang gudang)
+        public async Task InputLaporanAsync(Gudang gudang)
         {
             try
             {
