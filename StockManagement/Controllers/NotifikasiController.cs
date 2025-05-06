@@ -10,6 +10,14 @@ namespace StockManagement.Controller
 {
     class NotifikasiController
     {
+        private readonly HttpClient _client;
+
+        public NotifikasiController()
+        {
+            _client = new HttpClient();
+            _client.BaseAddress = new Uri("http://localhost:5052/api/");
+        }
+
         public enum State
         {
             CekMasuk, CekKeluar, CekStok, CekExpired, Selesai
@@ -17,17 +25,6 @@ namespace StockManagement.Controller
 
         private readonly Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>> stateActions;
         private readonly Notifikasi notif = new Notifikasi();
-
-        public NotifikasiController()
-        {
-            stateActions = new Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>>
-            {
-                { State.CekMasuk, BarangMasuk },
-                { State.CekKeluar, BarangKeluar },
-                { State.CekStok, BarangHabis },
-                { State.CekExpired, BarangExpired }
-            };
-        }
 
         public void TampilkanNotifikasi(List<Barang> stokSebelumnya, List<Barang> stokSekarang)
         {
