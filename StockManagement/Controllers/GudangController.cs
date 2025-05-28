@@ -85,7 +85,7 @@ namespace StockManagement.Controller
 
                 var result = JsonSerializer.Deserialize<Gudang>(json);
 
-                return result ?? new Gudang();
+                return result;
             }
             catch (Exception e)
             {

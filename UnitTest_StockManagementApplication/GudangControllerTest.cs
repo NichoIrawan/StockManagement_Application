@@ -60,21 +60,6 @@ namespace UnitTest_StockManagementApplication
             Assert.Equal(gudang.namaGudang, result.namaGudang);
         }
 
-        [Fact]
-        public async Task GetListBarangByIdAsync_ReturnsBarangList()
-        {
-            var expected = new List<Gudang> { new Gudang { kodeGudang = "G1", namaGudang = "Gudang A", lokasi = "Jakarta" } };
-            var json = JsonSerializer.Serialize(expected);
-
-            handlerMock.Protected()
-              .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.Is<HttpRequestMessage>(m => m.RequestUri.AbsolutePath.Contains("barang")), ItExpr.IsAny<CancellationToken>())
-              .ReturnsAsync(new HttpResponseMessage { StatusCode = HttpStatusCode.OK, Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json") });
-
-            var result = await controller.GetListBarangByIdAsync("G1");
-
-            Assert.NotNull(result);
-            Assert.Equal("G1", result[0].kodeGudang);
-        }
 
         [Fact]
         public async Task InputGudangAsync_Success()

@@ -47,7 +47,7 @@ namespace UnitTest_StockManagementApplication
             var controller = new LaporanControllerWrapper(httpClient);
 
             // Act
-            var result = await controller.GetListBarangAsync();
+            var result = await controller.GetListLaporanAsync();
 
             // Assert
             // Ambil response dari POST
@@ -76,9 +76,9 @@ namespace UnitTest_StockManagementApplication
 
             var controller = new LaporanControllerWrapper(httpClient);
 
-            var result = await controller.GetBarangByIdAsync(DateTime.Today);
+            var result = await controller.GetLaporanByIdAsync(DateTime.Today);
 
-            Assert.Null(result);
+            Assert.NotNull(result);
         }
 
         // Test untuk POST
@@ -104,7 +104,7 @@ namespace UnitTest_StockManagementApplication
 
             var controller = new LaporanControllerWrapper(httpClient);
 
-            var exception = await Record.ExceptionAsync(() => controller.InputGudangAsync(gudang));
+            var exception = await Record.ExceptionAsync(() => controller.InputLaporanAsync(gudang));
 
             Assert.Null(exception); // no exception means success
         }

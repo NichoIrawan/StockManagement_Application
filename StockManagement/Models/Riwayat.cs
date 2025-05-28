@@ -17,8 +17,7 @@ namespace StockManagement.Models
         public User pic { get; set; }
         public Riwayat() { }
 
-        public Riwayat() { }
-
+       
 
 
         public Riwayat(DateTime tanggal, string jenis_transaksi, Barang barang, int jumlah_barang, Gudang lokasi, User pic) {
