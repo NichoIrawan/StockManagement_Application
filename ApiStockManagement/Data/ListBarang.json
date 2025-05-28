@@ -1,1 +1,30 @@
-[{"kodeBarang":"string","namaBarang":"string","kategori":0,"stok":0,"harga":0,"tanggalKadaluarsa":"2025-05-05","kodeGudang":"string","gudang":{"KodeGudang":null,"NamaGudang":null,"Lokasi":null}}]
+[
+    {
+        "kodeBarang": "MK001",
+        "namaBarang": "Pringles",
+        "kategori": 0,
+        "stok": 100,
+        "harga": 20000,
+        "tanggalKadaluarsa": "2025-07-05",
+        "kodeGudang": "G01",
+        "gudang": {
+            "kodeGudang": "G01",
+            "namaGudang": "Gudang Garam",
+            "lokasi": "Pejaten"
+        }
+    },
+    {
+        "kodeBarang": "MS001",
+        "namaBarang": "Microsoft",
+        "kategori": 3,
+        "stok": 10,
+        "harga": 100000,
+        "tanggalKadaluarsa": "2025-05-05",
+        "kodeGudang": "G01",
+        "gudang": {
+            "kodeGudang": "G01",
+            "namaGudang": "Gudang Garam",
+            "lokasi": "Pejaten"
+        }
+    }
+]

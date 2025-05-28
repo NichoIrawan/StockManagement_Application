@@ -31,7 +31,7 @@ namespace ApiStockManagement.Controllers
             {
                 return null;
             }
-            var gudang = listGudang.FirstOrDefault(item => item.kodeGudang == kodeGudang);
+            var gudang = listGudang.FirstOrDefault(item => item.kodeGudang.Equals(kodeGudang));
             return gudang is null ? null : gudang;
         }
 
@@ -66,8 +66,8 @@ namespace ApiStockManagement.Controllers
         }
 
         // PUT api/<GudangApiController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Gudang gudangBaru)
+        [HttpPut("{kodeGudang}")]
+        public void Put(string kodeGudang, [FromBody] Gudang gudangBaru)
         {
             listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(filePath);
 

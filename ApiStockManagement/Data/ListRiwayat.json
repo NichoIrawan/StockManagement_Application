@@ -2,9 +2,21 @@
   {
     "tanggal": "2023-10-01",
     "jenis_transaksi": "Masuk",
-    "Barang": "Laptop",
-    "jumlah_barang": "10",
-    "lokasi_penyimpanan": "Gudang A",
-    "pic": "John Doe"
+    "barang": {
+      "id": 1,
+      "nama": "Laptop"
+    },
+    "jumlah_barang": 10,
+    "lokasi_penyimpanan": {
+      "id": "G001",
+      "nama": "Gudang A",
+      "lokasi": "Jakarta"
+    },
+    "pic": {
+      "id": 1,
+      "nama": "John Doe",
+      "username": "jdoe",
+      "password": "secret"
+    }
   }
 ]
