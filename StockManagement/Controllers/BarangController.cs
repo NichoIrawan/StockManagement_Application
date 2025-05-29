@@ -36,7 +36,7 @@ namespace StockManagement.Controllers
                 var json = await response.Content.ReadAsStringAsync();
 
                 var result = JsonSerializer.Deserialize<List<Barang>>(json);
-                return result?? new List<Barang>();
+                return result ?? new List<Barang>();
             } catch (Exception e)
             {
                 Console.WriteLine($"Error: {e.Message}");
