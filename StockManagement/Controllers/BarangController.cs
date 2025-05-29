@@ -15,7 +15,6 @@ namespace StockManagement.Controllers
     {
         private readonly HttpClient _client;
 
-
         public BarangController()
         {
             _client = new HttpClient();

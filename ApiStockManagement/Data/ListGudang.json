@@ -2,11 +2,11 @@
   {
     "kodeGudang": "G001",
     "namaGudang": "Gudang Utama",
-    "lokasi": "Jakarta",
-
+    "lokasi": "Jakarta"
+  },
   {
     "kodeGudang": "G002",
     "namaGudang": "Gudang Cabang",
-    "lokasi": "Bandung",
+    "lokasi": "Bandung"
   }
 ]

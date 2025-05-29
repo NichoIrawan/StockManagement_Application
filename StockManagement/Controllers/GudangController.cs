@@ -25,7 +25,7 @@ namespace StockManagement.Controller
         {
             try
             {
-                var response = await _client.GetAsync("BarangApi");
+                var response = await _client.GetAsync("GudangApi");
 
                 if (!response.IsSuccessStatusCode)
                 {
