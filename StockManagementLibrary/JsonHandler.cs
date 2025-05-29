@@ -24,7 +24,7 @@ namespace StockManagementLibrary
                 WriteIndented = true
             };
 
-            string json = JsonSerializer.Serialize(data);
+            string json = JsonSerializer.Serialize(data, options);
             File.WriteAllText(filepath, json);
         }
     }
