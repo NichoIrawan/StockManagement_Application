@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Controller
 {
-    class GudangController
+    public class GudangController
     {
         private readonly HttpClient _client;
 
@@ -85,7 +85,7 @@ namespace StockManagement.Controller
 
                 var result = JsonSerializer.Deserialize<Gudang>(json);
 
-                return result ?? new Gudang();
+                return result;
             }
             catch (Exception e)
             {
