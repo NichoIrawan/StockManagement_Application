@@ -66,34 +66,45 @@ namespace ApiStockManagement.Controllers
 
         // API to update an existing "Barang" by kodeBarang.
         [HttpPut("{kodeBarang}")]
-        public void Put(string kodeBarang, [FromBody]Barang newbarang)
+        public ActionResult Put(string kodeBarang, [FromBody]Barang newBarang)
         {
             _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
             var barang = _listBarang.FirstOrDefault(item => item.kodeBarang == kodeBarang);
 
-            if (barang == null) return;
-
-            barang.kodeBarang = newbarang.kodeBarang;
-            barang.namaBarang = newbarang.namaBarang;
-            barang.kategori = newbarang.kategori;
-            barang.stok = newbarang.stok;
-            barang.harga = newbarang.harga;
-            barang.tanggalKadaluarsa = newbarang.tanggalKadaluarsa;
-            barang.kodeGudang = newbarang.kodeGudang;
+            try
+            {
+                barang.kodeBarang = newBarang.kodeBarang;
+                barang.namaBarang = newBarang.namaBarang;
+                barang.kategori = newBarang.kategori;
+                barang.stok = newBarang.stok;
+                barang.harga = newBarang.harga;
+                barang.tanggalKadaluarsa = newBarang.tanggalKadaluarsa;
+                barang.kodeGudang = newBarang.kodeGudang;
+            }
+            catch
+            {
+                return NotFound("Barang not found or invalid data provided");
+            }
 
             JsonHandler<List<Barang>>.writeJsonToFile(_filePath, _listBarang);
+            return NoContent();
         }
 
         // API to delete an existing "Barang" by kodeBarang.
         [HttpDelete("{kodeBarang}")]
-        public void Delete(string kodeBarang)
+        public ActionResult Delete(string kodeBarang)
         {
             _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
-            
-            if (_listBarang != null)
+
+            try
             {
                 _listBarang.RemoveAll(item => item.kodeBarang == kodeBarang);
                 JsonHandler<List<Barang>>.writeJsonToFile(_filePath, _listBarang);
+                return NoContent();
+            }
+            catch
+            {
+                return BadRequest("List Barang cannot be empty");
             }
         }
     }
