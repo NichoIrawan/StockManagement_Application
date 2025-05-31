@@ -11,35 +11,35 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class GudangApiController : ControllerBase
     {
-        private static String filePath = "Data/ListGudang.json";
-        private static List<Gudang> listGudang;
+        private static readonly string _filePath = "Data/ListGudang.json";
+        private static List<Gudang> _listGudang;
 
-        // GET: api/<GudangApiController>
+        // API to get "Gudang" as List.
         [HttpGet]
         public ActionResult Get()
         {
-            listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(filePath);
-            return listGudang is null? NotFound() : Ok(listGudang);
+            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
+            return _listGudang is null? NotFound() : Ok(_listGudang);
         }
 
-        // GET api/<GudangApiController>/5
+        // API to get "Gudang" by kodeGudang.
         [HttpGet("{kodeGudang}")]
         public Gudang Get(String kodeGudang)
         {
-            listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(filePath);
-            if (listGudang is null)
+            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
+            if (_listGudang is null)
             {
                 return null;
             }
-            var gudang = listGudang.FirstOrDefault(item => item.kodeGudang.Equals(kodeGudang));
+            var gudang = _listGudang.FirstOrDefault(item => item.kodeGudang.Equals(kodeGudang));
             return gudang is null ? null : gudang;
         }
 
-        // GET api/<GudangApiController>/5
+        // API to get "Barang" in a specific "Gudang" by kodeGudang.
         [HttpGet("barang")]
         public ActionResult GetBarangInGudang(String kodeGudang)
         {
-            var listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath).Where(item =>
+            var listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath).Where(item =>
             {
                 return item.kodeGudang == kodeGudang;
             }).ToList();
@@ -47,49 +47,49 @@ namespace ApiStockManagement.Controllers
             return Ok(listBarang);
         }
 
-        // POST api/<GudangApiController>
+        // API to add a new "Gudang".
         [HttpPost]
         public ActionResult Post([FromBody] Gudang newGudang)
         {
-            listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(filePath);
+            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
 
             if (newGudang == null) return NotFound("Gudang cannot be null");
 
-            foreach (Gudang gudang in listGudang)
+            foreach (Gudang gudang in _listGudang)
             {
                 if (gudang.kodeGudang == newGudang.kodeGudang) return BadRequest("Gudang with the same code already exists");
             }
 
-            JsonHandler<List<Gudang>>.writeJsonToFile(filePath, listGudang);
+            JsonHandler<List<Gudang>>.writeJsonToFile(_filePath, _listGudang);
 
             return CreatedAtAction(nameof(Get), new { kodeGudang = newGudang.kodeGudang }, newGudang);
         }
 
-        // PUT api/<GudangApiController>/5
+        // API to update an existing "Gudang" by kodeGudang.
         [HttpPut("{kodeGudang}")]
         public void Put(string kodeGudang, [FromBody] Gudang gudangBaru)
         {
-            listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(filePath);
+            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
 
             if (gudangBaru == null) return;
 
-            var gudang = listGudang.FirstOrDefault(item => item.kodeGudang == gudangBaru.kodeGudang);
+            var gudang = _listGudang.FirstOrDefault(item => item.kodeGudang == gudangBaru.kodeGudang);
 
             if (gudang == null) return;
 
             gudang.namaGudang = gudangBaru.namaGudang;
             gudang.lokasi = gudangBaru.lokasi;
 
-            JsonHandler<List<Gudang>>.writeJsonToFile(filePath, listGudang);
+            JsonHandler<List<Gudang>>.writeJsonToFile(_filePath, _listGudang);
         }
 
-        // DELETE api/<GudangApiController>/5
+        // API to delete an existing "Gudang" by kodeGudang.
         [HttpDelete("{kodeGudang}")]
         public void Delete(String kodeGudang)
         {
-            listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(filePath);
-            listGudang.RemoveAll(item => item.kodeGudang == kodeGudang);
-            JsonHandler<List<Gudang>>.writeJsonToFile(filePath, listGudang);
+            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
+            _listGudang.RemoveAll(item => item.kodeGudang == kodeGudang);
+            JsonHandler<List<Gudang>>.writeJsonToFile(_filePath, _listGudang);
         }
     }
 }
