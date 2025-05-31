@@ -10,58 +10,58 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class RiwayatApiController : ControllerBase
     {
-        private static string filePath = "Data/ListRiwayat.json";
-        private static List<Riwayat>? listRiwayat;
+        private static readonly string _filePath = "Data/ListRiwayat.json";
+        private static List<Riwayat>? _listRiwayat;
 
-        // GET: api/<RiwayatApiController>
+        // API to get "Riwayat" as List.
         [HttpGet]
         public ActionResult<Riwayat> Get()
         {
-            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
-            return listRiwayat is null ? NotFound() : Ok(listRiwayat);
+            _listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(_filePath);
+            return _listRiwayat is null ? NotFound() : Ok(_listRiwayat);
         }
 
-        // GET api/<RiwayatApiController>/5
+        // API to get "Riwayat" by tanggal.
         [HttpGet("{tanggal}")]
         public Riwayat Get(DateTime tanggal)
         {
-            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
-            if (listRiwayat is null)
+            _listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(_filePath);
+            if (_listRiwayat is null)
             {
                 return null;
             }
-            var gudang = listRiwayat.FirstOrDefault(item => item.tanggal == tanggal);
+            var gudang = _listRiwayat.FirstOrDefault(item => item.tanggal == tanggal);
             return gudang is null ? null : gudang;
         }
 
-        // POST api/<RiwayatApiController>
+        // API to add a new "Riwayat".
         [HttpPost]
         public ActionResult Post([FromBody] Riwayat newRiwayat)
         {
-            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
+            _listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(_filePath);
 
             if (newRiwayat == null)
             {
                 return NotFound("Gudang cannot be null");
             }
 
-            foreach (Riwayat riwayat in listRiwayat)
+            foreach (Riwayat riwayat in _listRiwayat)
             {
                 if (riwayat.tanggal == newRiwayat.tanggal)
                     return NotFound("Gudang with the same code already exists");
             }
 
-            JsonHandler<List<Riwayat>>.writeJsonToFile(filePath, listRiwayat);
+            JsonHandler<List<Riwayat>>.writeJsonToFile(_filePath, _listRiwayat);
 
             return CreatedAtAction(nameof(Get), new { kodeGudang = newRiwayat.tanggal }, newRiwayat);
         }
 
-        // PUT api/<RiwayatApiController>/5
+        // API to update an existing "Riwayat" by tanggal.
         [HttpPut("{tanggal}")]
         public ActionResult Put(DateTime tanggal, [FromBody] Riwayat newRiwayat)
         {
-            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
-            var riwayat = listRiwayat.FirstOrDefault(item => item.tanggal == tanggal);
+            _listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(_filePath);
+            var riwayat = _listRiwayat.FirstOrDefault(item => item.tanggal == tanggal);
 
             if (newRiwayat == null)
             {
@@ -75,18 +75,18 @@ namespace ApiStockManagement.Controllers
             riwayat.lokasi_penyimpanan = newRiwayat.lokasi_penyimpanan;
             riwayat.pic = newRiwayat.pic;
 
-            JsonHandler<List<Riwayat>>.writeJsonToFile(filePath, listRiwayat);
+            JsonHandler<List<Riwayat>>.writeJsonToFile(_filePath, _listRiwayat);
 
             return CreatedAtAction(nameof(Get), new { id = newRiwayat.tanggal }, newRiwayat);
         }
 
-        // DELETE api/<RiwayatApiController>/5
+        // API to delete an existing "Riwayat" by tanggal.
         [HttpDelete("{tanggal}")]
         public void Delete(DateTime tanggal)
         {
-            listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(filePath);
-            listRiwayat.RemoveAll(item => item.tanggal == tanggal);
-            JsonHandler<List<Riwayat>>.writeJsonToFile(filePath, listRiwayat);
+            _listRiwayat = JsonHandler<List<Riwayat>>.readJsonFromFile(_filePath);
+            _listRiwayat.RemoveAll(item => item.tanggal == tanggal);
+            JsonHandler<List<Riwayat>>.writeJsonToFile(_filePath, _listRiwayat);
         }
     }
 }

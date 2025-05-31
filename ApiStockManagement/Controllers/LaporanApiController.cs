@@ -11,45 +11,45 @@ namespace ApiStockManagement.Controllers
     public class LaporanApiController : ControllerBase
     {
         // Placeholder for database context -> Will be changed
-        private static String filePath = "Data/ListLaporan.json";
-        private static List<Laporan> listLaporan;
+        private static readonly string _filePath = "Data/ListLaporan.json";
+        private static List<Laporan> _listLaporan;
 
-        // GET: api/<LaporanApiController>
+        // API to get "Laporan" as List.
         [HttpGet]
         public ActionResult Get()
         {
-            listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(filePath);
-            return listLaporan is null ? NotFound() : Ok(listLaporan);
+            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
+            return _listLaporan is null ? NotFound() : Ok(_listLaporan);
         }
 
-        // GET api/<LaporanApiController>/5
+        // API to get "Laporan" by tanggalPembuatan.
         [HttpGet("{tanggalPembuatan}")]
         public Laporan Get(DateTime tanggalPembuatan)
         {
-            listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(filePath);
+            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
 
-            if (listLaporan is null)
+            if (_listLaporan is null)
             {
                 return null;
 
             }
-            var laporan = listLaporan.FirstOrDefault(item => item.tanggalPembuatan == tanggalPembuatan);
+            var laporan = _listLaporan.FirstOrDefault(item => item.tanggalPembuatan == tanggalPembuatan);
             return laporan is null ? null : laporan;
         }
 
 
-        // POST api/<LaporanApiController>
+        // API to add a new "Laporan".
         [HttpPost]
         public ActionResult Post([FromBody] Laporan newLaporan)
         {
-            listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(filePath);
+            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
 
             if (newLaporan == null)
             {
                 return NotFound("Laporan cannot be null");
             }
 
-            foreach (Laporan laporan in listLaporan)
+            foreach (Laporan laporan in _listLaporan)
             {
                 if (laporan.tanggalPembuatan == newLaporan.tanggalPembuatan)
                 {
@@ -57,18 +57,18 @@ namespace ApiStockManagement.Controllers
                 }
             }
 
-            listLaporan.Add(newLaporan);
-            JsonHandler<List<Laporan>>.writeJsonToFile(filePath, listLaporan);
+            _listLaporan.Add(newLaporan);
+            JsonHandler<List<Laporan>>.writeJsonToFile(_filePath, _listLaporan);
 
             return CreatedAtAction(nameof(Get), new { id = newLaporan.tanggalPembuatan }, newLaporan);
         }
 
-        // PUT api/<LaporanApiController>/5
+        // API to update an existing "Laporan".
         [HttpPut("{tanggalPembuatan}")]
         public ActionResult Put(DateTime tanggalPembuatan, [FromBody] Laporan newLaporan)
         {
-            listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(filePath);
-            var laporan = listLaporan.FirstOrDefault(item => item.tanggalPembuatan == tanggalPembuatan);
+            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
+            var laporan = _listLaporan.FirstOrDefault(item => item.tanggalPembuatan == tanggalPembuatan);
 
             if (newLaporan == null)
             {
@@ -79,19 +79,19 @@ namespace ApiStockManagement.Controllers
             laporan.tempatPenyimpanan = newLaporan.tempatPenyimpanan;
             laporan.daftarBarang = newLaporan.daftarBarang;
 
-            JsonHandler<List<Laporan>>.writeJsonToFile(filePath, listLaporan);
+            JsonHandler<List<Laporan>>.writeJsonToFile(_filePath, _listLaporan);
 
             return CreatedAtAction(nameof(Get), new { id = newLaporan.tanggalPembuatan }, newLaporan);
         }
 
-        // DELETE api/<LaporanApiController>/5
+        // API to delete an existing "Laporan" by tanggalPembuatan.
         [HttpDelete("{tanggalPembuatan}")]
         public void Delete(DateTime tanggalPembuatan)
         {
 
-            listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(filePath);
-            listLaporan.RemoveAll(item => item.tanggalPembuatan == tanggalPembuatan);
-            JsonHandler<List<Laporan>>.writeJsonToFile(filePath, listLaporan);
+            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
+            _listLaporan.RemoveAll(item => item.tanggalPembuatan == tanggalPembuatan);
+            JsonHandler<List<Laporan>>.writeJsonToFile(_filePath, _listLaporan);
 
         }
     }
