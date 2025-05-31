@@ -66,8 +66,8 @@ namespace ApiStockManagement.Controllers
         }
 
         // PUT api/<GudangApiController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Gudang gudangBaru)
+        [HttpPut("{kodeGudang}")]
+        public void Put(string kodeGudang, [FromBody] Gudang gudangBaru)
         {
             listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(filePath);
 
