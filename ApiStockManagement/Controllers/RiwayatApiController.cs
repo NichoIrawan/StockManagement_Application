@@ -10,10 +10,8 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class RiwayatApiController : ControllerBase
     {
-
-        //Placeholder for database context -> Will be changed
-        private static String filePath = "Data/ListRiwayat.json";
-        private static List<Riwayat> listRiwayat;
+        private static string filePath = "Data/ListRiwayat.json";
+        private static List<Riwayat>? listRiwayat;
 
         // GET: api/<RiwayatApiController>
         [HttpGet]

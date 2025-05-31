@@ -11,47 +11,46 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class BarangApiController : ControllerBase
     {
-        private static String filePath = "Data/ListBarang.json";
+        private static readonly string _filePath = "Data/ListBarang.json";
+        private static List<Barang>? _listBarang;
 
-        private static List<Barang> listBarang;
-
-        // GET: api/<BarangController>
+        // API to get "Barang" as List.
         [HttpGet]
         public ActionResult<IEnumerable<Barang>> Get()
         {
-            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
+            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
             
-            return listBarang is null? NotFound() : Ok(listBarang);
+            return _listBarang is null? NotFound() : Ok(_listBarang);
         }
 
-        // GET api/<BarangController>/5
+        // API to get "Barang" by kodeBarang.
         [HttpGet("{kodeBarang}")]
-        public ActionResult<Barang> Get(String kodeBarang)
+        public ActionResult<Barang> Get(string kodeBarang)
         {
-            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
+            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
 
-            if (listBarang is null)
+            if (_listBarang is null)
             {
                 return NotFound("Barang not found");
             }
 
-            var barang = listBarang.FirstOrDefault(item => item.kodeBarang == kodeBarang);
+            var barang = _listBarang.FirstOrDefault(item => item.kodeBarang == kodeBarang);
             
             return barang is null? NotFound() : Ok(barang);
         }
 
-        // POST api/<BarangController>
+        // API to add a new "Barang".
         [HttpPost]
         public ActionResult Post([FromBody]Barang newBarang)
         {
-            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
+            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
 
             if (newBarang == null)
             {
                 return BadRequest("Barang cannot be null");
             }
 
-            foreach (Barang barang in listBarang)
+            foreach (Barang barang in _listBarang)
             {
                 if (barang.kodeBarang == newBarang.kodeBarang)
                 {
@@ -59,42 +58,54 @@ namespace ApiStockManagement.Controllers
                 }
             }
 
-            listBarang.Add(newBarang);
-            JsonHandler<List<Barang>>.writeJsonToFile(filePath, listBarang);
+            _listBarang.Add(newBarang);
+            JsonHandler<List<Barang>>.writeJsonToFile(_filePath, _listBarang);
 
             return CreatedAtAction(nameof(Get), new { id = newBarang.kodeBarang }, newBarang);
         }
 
-        // PUT api/<BarangController>/5
+        // API to update an existing "Barang" by kodeBarang.
         [HttpPut("{kodeBarang}")]
-        public void Put(String kodeBarang, [FromBody]Barang newbarang)
+        public ActionResult Put(string kodeBarang, [FromBody]Barang newBarang)
         {
-            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
-            var barang = listBarang.FirstOrDefault(item => item.kodeBarang == kodeBarang);
+            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
+            var barang = _listBarang.FirstOrDefault(item => item.kodeBarang == kodeBarang);
 
-            if (barang == null)
+            try
             {
-                return;
+                barang.kodeBarang = newBarang.kodeBarang;
+                barang.namaBarang = newBarang.namaBarang;
+                barang.kategori = newBarang.kategori;
+                barang.stok = newBarang.stok;
+                barang.harga = newBarang.harga;
+                barang.tanggalKadaluarsa = newBarang.tanggalKadaluarsa;
+                barang.kodeGudang = newBarang.kodeGudang;
+            }
+            catch
+            {
+                return NotFound("Barang not found or invalid data provided");
             }
 
-            barang.kodeBarang = newbarang.kodeBarang;
-            barang.namaBarang = newbarang.namaBarang;
-            barang.kategori = newbarang.kategori;
-            barang.stok = newbarang.stok;
-            barang.harga = newbarang.harga;
-            barang.tanggalKadaluarsa = newbarang.tanggalKadaluarsa;
-            barang.kodeGudang = newbarang.kodeGudang;
-
-            JsonHandler<List<Barang>>.writeJsonToFile(filePath, listBarang);
+            JsonHandler<List<Barang>>.writeJsonToFile(_filePath, _listBarang);
+            return NoContent();
         }
 
-        // DELETE api/<BarangController>/5
+        // API to delete an existing "Barang" by kodeBarang.
         [HttpDelete("{kodeBarang}")]
-        public void Delete(String kodeBarang)
+        public ActionResult Delete(string kodeBarang)
         {
-            listBarang = JsonHandler<List<Barang>>.readJsonFromFile(filePath);
-            listBarang.RemoveAll(item => item.kodeBarang == kodeBarang);
-            JsonHandler<List<Barang>>.writeJsonToFile(filePath, listBarang);
+            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
+
+            try
+            {
+                _listBarang.RemoveAll(item => item.kodeBarang == kodeBarang);
+                JsonHandler<List<Barang>>.writeJsonToFile(_filePath, _listBarang);
+                return NoContent();
+            }
+            catch
+            {
+                return BadRequest("List Barang cannot be empty");
+            }
         }
     }
 }
