@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest_StockManagementApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagementView", "StockManagementView\StockManagementView.csproj", "{1FD300DA-4B80-475B-B9CA-22A1C77C0681}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementGUI", "ManagementGUI\ManagementGUI.csproj", "{30A8B934-2FA7-453D-9D73-7E3EF1E96422}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1FD300DA-4B80-475B-B9CA-22A1C77C0681}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FD300DA-4B80-475B-B9CA-22A1C77C0681}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FD300DA-4B80-475B-B9CA-22A1C77C0681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30A8B934-2FA7-453D-9D73-7E3EF1E96422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30A8B934-2FA7-453D-9D73-7E3EF1E96422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30A8B934-2FA7-453D-9D73-7E3EF1E96422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30A8B934-2FA7-453D-9D73-7E3EF1E96422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
