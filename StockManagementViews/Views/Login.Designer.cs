@@ -167,6 +167,8 @@
             // 
             // Login
             // 
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(853, 480);
             Controls.Add(button1);
             Controls.Add(label1);
