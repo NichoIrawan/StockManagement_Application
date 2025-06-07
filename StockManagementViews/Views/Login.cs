@@ -8,25 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StockManagementView
+namespace StockManagementViews.Views
 {
     public partial class Login : Form
     {
         public Login()
         {
             InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Form1
-            // 
-            this.ClientSize = new System.Drawing.Size(744, 448);
-            this.Name = "Form1";
-            this.ResumeLayout(false);
-
         }
     }
 }
