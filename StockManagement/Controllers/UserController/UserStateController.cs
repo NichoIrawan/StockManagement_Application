@@ -39,20 +39,7 @@ namespace StockManagement.Controllers.UserController
             {
                 switch (userType)
                 {
-                    case 1:
-                        var staffView = new StaffView(context.staffController);
-                        staffView.callMenu();
-                        break;
-                    case 2:
-                        context.SetState(new ManagerState());
-                        var managerView = new ManagerView(context.managerController);
-                        managerView.callMenu();
-                        break;
-                    case 3:
-                        context.SetState(new AdminState());
-                        var adminView = new AdminView(context.adminController);
-                        adminView.callMenu();
-                        break;
+                    
                 }
             }
         }
@@ -63,16 +50,7 @@ namespace StockManagement.Controllers.UserController
             {
                 switch (userType)
                 {
-                    case 2:
-                        context.SetState(new ManagerState());
-                        var managerView = new ManagerView(context.managerController);
-                        managerView.callMenu();
-                        break;
-                    case 3:
-                        context.SetState(new AdminState());
-                        var adminView = new AdminView(context.adminController);
-                        adminView.callMenu();
-                        break;
+                   
                 }
             }
         }
@@ -83,16 +61,7 @@ namespace StockManagement.Controllers.UserController
             {
                 switch (userType)
                 {
-                    case 1:
-                        context.SetState(new StaffState());
-                        var staffView = new StaffView(context.staffController);
-                        staffView.callMenu();
-                        break;
-                    case 3:
-                        context.SetState(new AdminState());
-                        var adminView = new AdminView(context.adminController);
-                        adminView.callMenu();
-                        break;
+                  
                 }
             }
         }
@@ -103,16 +72,6 @@ namespace StockManagement.Controllers.UserController
             {
                 switch (userType)
                 {
-                    case 1:
-                        context.SetState(new StaffState());
-                        var staffView = new StaffView(context.staffController);
-                        staffView.callMenu();
-                        break;
-                    case 2:
-                        context.SetState(new ManagerState());
-                        var managerView = new ManagerView(context.managerController);
-                        managerView.callMenu();
-                        break;
                 }
             }
         }
