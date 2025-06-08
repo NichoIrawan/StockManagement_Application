@@ -1,16 +1,18 @@
 [
-  {
-    "tanggalPembuatan": "2023-10-01",
-    "tempatPenyimpanan": "Gudang A",
-    "daftarBarang": "[
     {
-      "namaBarang": "Laptop",
-      "jumlah": 10,
-      "kondisi": "Baik"
-    },
-    {
-      "namaBarang": "Printer",
-      "jumlah": 5,
-      "kondisi": "Rusak"
+        "tanggalPembuatan": "2023-10-01",
+        "tempatPenyimpanan": "Gudang A",
+        "daftarBarang": [
+            {
+                "namaBarang": "Laptop",
+                "jumlah": 10,
+                "kondisi": "Baik"
+            },
+            {
+                "namaBarang": "Printer",
+                "jumlah": 5,
+                "kondisi": "Rusak"
+            }
+        ]
     }
 ]
