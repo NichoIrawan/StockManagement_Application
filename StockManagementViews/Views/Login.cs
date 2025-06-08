@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StockManagementView
+namespace StockManagementViews.Views
 {
     public partial class Login : Form
     {

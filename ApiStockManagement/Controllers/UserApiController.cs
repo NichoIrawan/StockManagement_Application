@@ -11,38 +11,38 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class UserAPIControll : ControllerBase
     {
-        private string filePath = "Data/ListUser.json";
-        private static List<User>? listUser;
+        private readonly string _filePath = "Data/ListUser.json";
+        private static List<User>? _listUser;
 
-        // GET: api/<User>
+        // API to get "User" as List.
         [HttpGet]
         public ActionResult<IEnumerable<User>> Get()
         {
-            listUser = JsonHandler<List<User>>.readJsonFromFile(filePath);
+            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
 
-            return Ok(listUser);
+            return Ok(_listUser);
         }
 
-        // GET api/<User>/5
+        // API to get "User" by username.
         [HttpGet("{username}")]
         public ActionResult<User> Get(string username)
         {
-            listUser = JsonHandler<List<User>>.readJsonFromFile(filePath);
+            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
 
-            if (listUser == null) return NotFound();
+            if (_listUser == null) return NotFound();
 
-            var user = listUser.FirstOrDefault(u => u.username == username);
+            var user = _listUser.FirstOrDefault(u => u.username == username);
 
             return user != null ? Ok(user) : NotFound();
         }
 
-        // POST api/<User>
+        // API to add a new "User".
         [HttpPost]
         public ActionResult Post([FromBody]User userBaru)
         {
-            listUser = JsonHandler<List<User>>.readJsonFromFile(filePath);
+            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
 
-            foreach (User user in listUser)
+            foreach (User user in _listUser)
             {
                 if (user.username == userBaru.username)
                 {
@@ -50,40 +50,40 @@ namespace ApiStockManagement.Controllers
                 }
             }
             
-            listUser.Add(userBaru);
-            JsonHandler<List<User>>.writeJsonToFile(filePath, listUser);
+            _listUser.Add(userBaru);
+            JsonHandler<List<User>>.writeJsonToFile(_filePath, _listUser);
             return CreatedAtAction(nameof(Get), new { id = userBaru.username }, userBaru);
         }
 
-        // PUT api/<User>/5
+        // API to update an existing "User" by username.
         [HttpPut("{username}")]
         public void Put(string username, [FromBody]User userBaru)
         {
-            listUser = JsonHandler<List<User>>.readJsonFromFile(filePath);
+            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
 
-            if (listUser == null) return;
+            if (_listUser == null) return;
 
-            var user = listUser.FirstOrDefault(u => u.username == userBaru.username);
+            var user = _listUser.FirstOrDefault(u => u.username == userBaru.username);
 
             user.username = userBaru.username;
             user.name = userBaru.name;
             user.role = userBaru.role;
             user.password = userBaru.password;
 
-            JsonHandler<List<User>>.writeJsonToFile(filePath, listUser);
+            JsonHandler<List<User>>.writeJsonToFile(_filePath, _listUser);
         }
 
-        // DELETE api/<User>/5
+        // API to delete an existing "User" by username.
         [HttpDelete("{username}")]
         public void Delete(string username)
         {
-            listUser = JsonHandler<List<User>>.readJsonFromFile(filePath);
+            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
 
-            if (listUser == null) return;
+            if (_listUser == null) return;
 
-            listUser.RemoveAll(u => u.username == username);
+            _listUser.RemoveAll(u => u.username == username);
 
-            JsonHandler<List<User>>.writeJsonToFile(filePath, listUser);
+            JsonHandler<List<User>>.writeJsonToFile(_filePath, _listUser);
         }
     }
 }
