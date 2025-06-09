@@ -9,7 +9,7 @@ namespace ApiStockManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserAPIControll : ControllerBase
+    public class UserApiController : ControllerBase
     {
         private readonly string _filePath = "Data/ListUser.json";
         private static List<User>? _listUser;
