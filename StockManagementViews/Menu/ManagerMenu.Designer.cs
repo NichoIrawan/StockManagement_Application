@@ -167,6 +167,7 @@
             button1.Text = "            Laporan Dashboard";
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // panel5
             // 
@@ -194,6 +195,7 @@
             button4.Text = "            Riwayat";
             button4.TextAlign = ContentAlignment.MiddleLeft;
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // ManagerMenu
             // 

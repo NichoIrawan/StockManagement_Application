@@ -137,6 +137,7 @@
             button2.Text = "            Barang Dashboard";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel4
             // 
