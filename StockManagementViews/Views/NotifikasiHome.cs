@@ -7,32 +7,38 @@ namespace StockManagementViews
     public partial class NotifikasiHome : Form
     {
         private NotifikasiController _controller = new NotifikasiController();
-        private List<string> notifications = new List<string>();
-
         public NotifikasiHome()
         {
             InitializeComponent();
             this.Load += Notifikasi_Load;
-            txtSearch.TextChanged += TxtSearch_TextChanged;
         }
 
         private async void Notifikasi_Load(object sender, EventArgs e)
         {
+            try
+            {
+                RefreshList();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private async void RefreshList()
+        {
+            dgvNotifications.DataSource = null;
             var stokSekarang = await _controller.GetBarangListFromApiAsync();
             var notificationItems = _controller.ProcessNotification(stokSekarang);
 
             dgvNotifications.DataSource = notificationItems;
         }
 
-
-        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        private void btn1_Click(object sender, EventArgs e)
         {
-            var filter = txtSearch.Text.ToLower();
-            var filtered = notifications
-                .Where(n => n.ToLower().Contains(filter))
-                .Select(n => new { Notifikasi = n })
-                .ToList();
-            dgvNotifications.DataSource = filtered;
+            RefreshList();
+
         }
     }
 }

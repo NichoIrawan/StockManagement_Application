@@ -28,120 +28,83 @@
         /// </summary>
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Label lblMenu;
-        private System.Windows.Forms.PictureBox picUser;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblRole;
-        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btn1;
-        private System.Windows.Forms.Button btn2;
-        private System.Windows.Forms.Button btn3;
         private System.Windows.Forms.DataGridView dgvNotifications;
 
         private void InitializeComponent()
         {
             headerPanel = new Panel();
-            lblMenu = new Label();
-            picUser = new PictureBox();
-            lblName = new Label();
+            pictureBox1 = new PictureBox();
             lblRole = new Label();
-            txtSearch = new TextBox();
+            lblMenu = new Label();
+            lblName = new Label();
             btn1 = new Button();
-            btn2 = new Button();
-            btn3 = new Button();
             dgvNotifications = new DataGridView();
             headerPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)picUser).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvNotifications).BeginInit();
             SuspendLayout();
             // 
             // headerPanel
             // 
             headerPanel.BackColor = Color.Gainsboro;
-            headerPanel.Controls.Add(lblMenu);
-            headerPanel.Controls.Add(picUser);
-            headerPanel.Controls.Add(lblName);
+            headerPanel.Controls.Add(pictureBox1);
             headerPanel.Controls.Add(lblRole);
-            headerPanel.Controls.Add(txtSearch);
+            headerPanel.Controls.Add(lblMenu);
+            headerPanel.Controls.Add(lblName);
             headerPanel.Controls.Add(btn1);
-            headerPanel.Controls.Add(btn2);
-            headerPanel.Controls.Add(btn3);
             headerPanel.Dock = DockStyle.Top;
             headerPanel.Location = new Point(0, 0);
             headerPanel.Name = "headerPanel";
             headerPanel.Size = new Size(624, 99);
             headerPanel.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(512, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(35, 35);
+            pictureBox1.TabIndex = 10;
+            pictureBox1.TabStop = false;
+            // 
+            // lblRole
+            // 
+            lblRole.AutoSize = true;
+            lblRole.Location = new Point(553, 32);
+            lblRole.Name = "lblRole";
+            lblRole.Size = new Size(30, 15);
+            lblRole.TabIndex = 9;
+            lblRole.Text = "Role";
+            lblRole.TextAlign = ContentAlignment.TopCenter;
+            // 
             // lblMenu
             // 
             lblMenu.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblMenu.Location = new Point(12, 14);
             lblMenu.Name = "lblMenu";
-            lblMenu.Size = new Size(100, 35);
+            lblMenu.Size = new Size(136, 35);
             lblMenu.TabIndex = 0;
-            lblMenu.Text = "Menu";
-            // 
-            // picUser
-            // 
-            picUser.BackColor = Color.White;
-            picUser.BorderStyle = BorderStyle.FixedSingle;
-            picUser.Location = new Point(452, 9);
-            picUser.Name = "picUser";
-            picUser.Size = new Size(40, 40);
-            picUser.TabIndex = 1;
-            picUser.TabStop = false;
+            lblMenu.Text = "Notifikasi";
             // 
             // lblName
             // 
-            lblName.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblName.Location = new Point(502, 9);
+            lblName.AutoSize = true;
+            lblName.Location = new Point(553, 12);
             lblName.Name = "lblName";
-            lblName.Size = new Size(100, 23);
-            lblName.TabIndex = 2;
+            lblName.Size = new Size(39, 15);
+            lblName.TabIndex = 8;
             lblName.Text = "Name";
-            // 
-            // lblRole
-            // 
-            lblRole.Font = new Font("Segoe UI", 8F);
-            lblRole.Location = new Point(502, 29);
-            lblRole.Name = "lblRole";
-            lblRole.Size = new Size(100, 23);
-            lblRole.TabIndex = 3;
-            lblRole.Text = "Role";
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(12, 67);
-            txtSearch.Name = "txtSearch";
-            txtSearch.PlaceholderText = "Search bar";
-            txtSearch.Size = new Size(354, 23);
-            txtSearch.TabIndex = 4;
             // 
             // btn1
             // 
             btn1.BackColor = Color.Lavender;
-            btn1.Location = new Point(432, 62);
+            btn1.Location = new Point(436, 14);
             btn1.Name = "btn1";
-            btn1.Size = new Size(51, 30);
+            btn1.Size = new Size(57, 30);
             btn1.TabIndex = 5;
+            btn1.Text = "Refresh";
             btn1.UseVisualStyleBackColor = false;
-            // 
-            // btn2
-            // 
-            btn2.BackColor = Color.Lavender;
-            btn2.Location = new Point(491, 62);
-            btn2.Name = "btn2";
-            btn2.Size = new Size(51, 30);
-            btn2.TabIndex = 6;
-            btn2.UseVisualStyleBackColor = false;
-            // 
-            // btn3
-            // 
-            btn3.BackColor = Color.Lavender;
-            btn3.Location = new Point(551, 62);
-            btn3.Name = "btn3";
-            btn3.Size = new Size(51, 30);
-            btn3.TabIndex = 7;
-            btn3.UseVisualStyleBackColor = false;
+            btn1.Click += btn1_Click;
             // 
             // dgvNotifications
             // 
@@ -151,20 +114,24 @@
             dgvNotifications.Size = new Size(592, 312);
             dgvNotifications.TabIndex = 1;
             // 
-            // Notifikasi
+            // NotifikasiHome
             // 
             ClientSize = new Size(624, 441);
             Controls.Add(headerPanel);
             Controls.Add(dgvNotifications);
-            Name = "Notifikasi";
+            Name = "NotifikasiHome";
             Text = "Notifikasi";
             headerPanel.ResumeLayout(false);
             headerPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)picUser).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvNotifications).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
+
+        private PictureBox pictureBox1;
+        private Label lblRole;
+        private Label lblName;
     }
 }
