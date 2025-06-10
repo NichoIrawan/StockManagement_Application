@@ -105,5 +105,10 @@ namespace StockManagement.Controllers
                 Console.WriteLine($"Error: {e.Message}");
             }
         }
+
+        public async Task InputBarangAsync(Barang barangbaru)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

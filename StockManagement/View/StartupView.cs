@@ -92,8 +92,8 @@ namespace StockManagement.View
             {
                 Console.WriteLine(Localization.Get("LoginSuccesful") + " " +  foundUser.role);
                 cont.ChangeState(
-                    foundUser.role == Roles.Staff ? 1 :
-                    foundUser.role == Roles.Manager ? 2 : 3);
+                    foundUser.role == Roles.STAFF ? 1 :
+                    foundUser.role == Roles.MANAGER ? 2 : 3);
             }
             else
             {
@@ -113,9 +113,9 @@ namespace StockManagement.View
             Console.WriteLine(Localization.Get("EnterRole"));
             string roleInput = Console.ReadLine();
 
-            Roles role = roleInput == "1" ? Roles.Staff :
-                         roleInput == "2" ? Roles.Manager :
-                         Roles.Admin;
+            Roles role = roleInput == "1" ? Roles.STAFF :
+                         roleInput == "2" ? Roles.MANAGER :
+                         Roles.ADMIN;
 
             User newUser = new User(username, name, role, password);
             userList.Add(newUser);
