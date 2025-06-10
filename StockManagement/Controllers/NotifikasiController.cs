@@ -17,7 +17,7 @@ namespace StockManagement.Controller
         private readonly Dictionary<State, Func<List<Barang>, List<string>>> StateActions;
         private readonly Notifikasi notif = new Notifikasi();
         private readonly HttpClient _httpClient;
-        private readonly string _apiBaseUrl = "http://localhost:5052/api/BarangApi"; // Adjust as needed
+        private readonly string _apiBaseUrl = "http://localhost:5052/api/BarangApi"; 
 
         public NotifikasiController()
         {
@@ -35,22 +35,33 @@ namespace StockManagement.Controller
             return result ?? new List<Barang>();
         }
 
-        public List<string> ProcessNotification(List<Barang> stokSekarang)
+        public List<NotifikasiItem> ProcessNotification(List<Barang> stokSekarang)
         {
-            var hasil = new List<string>();
-            var state = State.CheckStock;
+            var hasil = new List<NotifikasiItem>();
 
-            while (state != State.Selesai)
-            {
-                if (StateActions.TryGetValue(state, out var action))
-                    hasil.AddRange(action(stokSekarang));
+            hasil.AddRange(
+                stokSekarang
+                    .Where(b => b.stok == 0)
+                    .Select(b => new NotifikasiItem
+                    {
+                        NamaBarang = b.namaBarang ?? "",
+                        Tipe = "Habis",
+                        Pesan = $"Stok {b.namaBarang} sudah habis!"
+                    })
+            );
 
-                state = state switch
-                {
-                    State.CheckStock => State.CheckExpired,
-                    _ => State.Selesai
-                };
-            }
+            DateOnly hariIni = DateOnly.FromDateTime(DateTime.Now);
+            DateOnly batas = hariIni.AddDays(7);
+            hasil.AddRange(
+                stokSekarang
+                    .Where(b => b.tanggalKadaluarsa.HasValue && b.tanggalKadaluarsa.Value <= batas)
+                    .Select(b => new NotifikasiItem
+                    {
+                        NamaBarang = b.namaBarang ?? "",
+                        Tipe = "Expired",
+                        Pesan = $"Stok {b.namaBarang} akan kadaluarsa pada {b.tanggalKadaluarsa:dd/MM/yyyy}!"
+                    })
+            );
 
             return hasil;
         }

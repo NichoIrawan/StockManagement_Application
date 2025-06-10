@@ -18,14 +18,10 @@ namespace StockManagementViews
 
         private async void Notifikasi_Load(object sender, EventArgs e)
         {
-            // Fetch current stock from API
             var stokSekarang = await _controller.GetBarangListFromApiAsync();
+            var notificationItems = _controller.ProcessNotification(stokSekarang);
 
-            // Process notifications (expired & out of stock)
-            notifications = _controller.ProcessNotification(stokSekarang);
-
-            // Bind notifications to DataGridView
-            dgvNotifications.DataSource = notifications.Select(n => new { Notifikasi = n }).ToList();
+            dgvNotifications.DataSource = notificationItems;
         }
 
 
@@ -37,11 +33,6 @@ namespace StockManagementViews
                 .Select(n => new { Notifikasi = n })
                 .ToList();
             dgvNotifications.DataSource = filtered;
-        }
-
-        private void headerPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

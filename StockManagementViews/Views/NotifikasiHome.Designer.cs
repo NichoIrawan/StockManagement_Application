@@ -70,7 +70,6 @@
             headerPanel.Name = "headerPanel";
             headerPanel.Size = new Size(624, 99);
             headerPanel.TabIndex = 0;
-            headerPanel.Paint += headerPanel_Paint;
             // 
             // lblMenu
             // 
