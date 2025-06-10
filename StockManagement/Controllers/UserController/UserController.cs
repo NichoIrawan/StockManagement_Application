@@ -44,7 +44,6 @@ namespace StockManagement.UControllers.UserController
             }
         }
 
-
         public async Task<User> GetUserByUsernameAsync(string username)
         {
             try
