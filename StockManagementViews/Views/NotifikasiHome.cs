@@ -4,12 +4,12 @@ using System.Text.Json;
 
 namespace StockManagementViews
 {
-    public partial class Notifikasi : Form
+    public partial class NotifikasiHome : Form
     {
         private NotifikasiController _controller = new NotifikasiController();
         private List<string> notifications = new List<string>();
 
-        public Notifikasi()
+        public NotifikasiHome()
         {
             InitializeComponent();
             this.Load += Notifikasi_Load;
@@ -18,10 +18,10 @@ namespace StockManagementViews
 
         private async void Notifikasi_Load(object sender, EventArgs e)
         {
-            var stokSebelumnya = await GetBarangListFromApi("api/barang/previous");
-            var stokSekarang = await GetBarangListFromApi("api/barang/current");
+            //var stokSebelumnya = await GetBarangListFromApi("api/barang/previous");
+            //var stokSekarang = await GetBarangListFromApi("api/barang/current");
+            var stokSebelumnya = await _controller.GetBarangListFromApiAsync();
 
-            notifications = _controller.ProcessNotification(stokSekarang, stokSebelumnya);
 
             dgvNotifications.DataSource = notifications.Select(n => new { Notifikasi = n }).ToList();
         }

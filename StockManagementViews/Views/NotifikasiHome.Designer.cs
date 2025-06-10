@@ -1,6 +1,6 @@
 ﻿namespace StockManagementViews
 {
-    partial class Notifikasi
+    partial class NotifikasiHome
     {
         /// <summary>
         ///  Required designer variable.
