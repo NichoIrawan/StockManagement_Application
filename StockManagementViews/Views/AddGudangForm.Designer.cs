@@ -120,7 +120,6 @@
             Controls.Add(txtKodeGudang);
             Name = "AddGudangForm";
             Text = "AddGudangForm";
-            Load += AddGudangForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

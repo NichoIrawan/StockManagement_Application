@@ -1,81 +1,82 @@
-﻿using StockManagement.Controller.UserController;
-using StockManagement.Models;
-using StockManagementLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using StockManagement.Models;
+using System.Collections.Generic;
+using System;
 
 namespace StockManagement.Controller
 {
-    class NotifikasiController
+    public class NotifikasiController
     {
-        private readonly HttpClient _client;
+        public enum State
+        {
+            CheckStock, CheckExpired, Selesai
+        }
+
+        private readonly Dictionary<State, Func<List<Barang>, List<string>>> StateActions;
+        private readonly Notifikasi notif = new Notifikasi();
+        private readonly HttpClient _httpClient;
+        private readonly string _apiBaseUrl = "http://localhost:5052/api/BarangApi"; 
 
         public NotifikasiController()
         {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://localhost:5052/api/");
+            _httpClient = new HttpClient();
+            StateActions = new Dictionary<State, Func<List<Barang>, List<string>>>
+            {
+                { State.CheckStock, OutOfStockItem },
+                { State.CheckExpired, ExpiredStock }
+            };
         }
 
-        private readonly Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>> stateActions;
-        private readonly Notifikasi notif = new Notifikasi();
-
-        public void TampilkanNotifikasi(List<Barang> stokSebelumnya, List<Barang> stokSekarang)
+        public async Task<List<Barang>> GetBarangListFromApiAsync()
         {
-            var hasil = ProsesNotifikasi(stokSekarang, stokSebelumnya);
-
-            Console.WriteLine("=== Notifikasi ===");
-            foreach (var h in hasil)
-            {
-                Console.WriteLine(h);
-            }
+            var result = await _httpClient.GetFromJsonAsync<List<Barang>>(_apiBaseUrl);
+            return result ?? new List<Barang>();
         }
 
-        public List<string> ProsesNotifikasi(List<Barang> terbaru, List<Barang> sebelumnya)
+        public List<NotifikasiItem> ProcessNotification(List<Barang> stokSekarang)
         {
-            var hasil = new List<string>();
-            var state = State.CekMasuk;
+            var hasil = new List<NotifikasiItem>();
 
-            while (state != State.Selesai)
-            {
-                if (stateActions.TryGetValue(state, out var action))
-                    hasil.AddRange(action(terbaru, sebelumnya));
+            hasil.AddRange(
+                stokSekarang
+                    .Where(b => b.stok == 0)
+                    .Select(b => new NotifikasiItem
+                    {
+                        NamaBarang = b.namaBarang ?? "",
+                        Tipe = "Habis",
+                        Pesan = $"Stok {b.namaBarang} sudah habis!"
+                    })
+            );
 
-                state = state switch
-                {
-                    State.CekMasuk => State.CekKeluar,
-                    State.CekKeluar => State.CekStok,
-                    State.CekStok => State.CekExpired,
-                    _ => State.Selesai
-                };
-            }
+            DateOnly hariIni = DateOnly.FromDateTime(DateTime.Now);
+            DateOnly batas = hariIni.AddDays(7);
+            hasil.AddRange(
+                stokSekarang
+                    .Where(b => b.tanggalKadaluarsa.HasValue && b.tanggalKadaluarsa.Value <= batas)
+                    .Select(b => new NotifikasiItem
+                    {
+                        NamaBarang = b.namaBarang ?? "",
+                        Tipe = "Expired",
+                        Pesan = $"Stok {b.namaBarang} akan kadaluarsa pada {b.tanggalKadaluarsa:dd/MM/yyyy}!"
+                    })
+            );
 
             return hasil;
         }
 
-        private List<string> BarangMasuk(List<Barang> baru, List<Barang> lama) =>
-            baru.Where(b => lama.Any(l => l.kodeBarang == b.kodeBarang && b.stok > l.stok))
-                .Select(b => $"{b.namaBarang} - {notif.ReadNotif(Notifikasi.notifApp.masuk)}")
-                .ToList();
-
-        private List<string> BarangKeluar(List<Barang> baru, List<Barang> lama) =>
-            baru.Where(b => lama.Any(l => l.kodeBarang == b.kodeBarang && b.stok < l.stok))
-                .Select(b => $"{b.namaBarang} - {notif.ReadNotif(Notifikasi.notifApp.keluar)}")
-                .ToList();
-
-        private List<string> BarangHabis(List<Barang> baru, List<Barang> _) =>
-            baru.Where(b => b.stok == 0)
+        private List<string> OutOfStockItem(List<Barang> stok) =>
+            stok.Where(b => b.stok == 0)
                 .Select(b => $"{b.namaBarang} - {notif.ReadNotif(Notifikasi.notifApp.habis)}")
                 .ToList();
 
-        private List<string> BarangExpired(List<Barang> baru, List<Barang> _)
+        private List<string> ExpiredStock(List<Barang> stok)
         {
             DateOnly hariIni = DateOnly.FromDateTime(DateTime.Now);
             DateOnly batas = hariIni.AddDays(7);
 
-            return baru.Where(b => b.tanggalKadaluarsa.HasValue &&
+            return stok.Where(b => b.tanggalKadaluarsa.HasValue &&
                                    b.tanggalKadaluarsa.Value <= batas)
                        .Select(b => $"{b.namaBarang} - {notif.ReadNotif(Notifikasi.notifApp.kadaluarsa)}")
                        .ToList();
