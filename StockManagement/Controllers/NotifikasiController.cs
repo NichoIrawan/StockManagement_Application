@@ -1,30 +1,48 @@
-﻿using StockManagement.Controller.UserController;
-using StockManagement.Models;
-using StockManagementLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using StockManagement.Models;
+using System.Collections.Generic;
+using System;
 
 namespace StockManagement.Controller
 {
-    class NotifikasiController
+    public class NotifikasiController
     {
-        private readonly HttpClient _client;
+        public enum State
+        {
+            In, Out, CheckStock, CheckExpired, Selesai
+        }
+
+        private readonly Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>> StateActions;
+        private readonly Notifikasi notif = new Notifikasi();
+        private readonly HttpClient _httpClient;
+        private readonly string _apiBaseUrl = "http://localhost:5000/api/BarangApi"; // Adjust as needed
 
         public NotifikasiController()
         {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://localhost:5052/api/");
+            _httpClient = new HttpClient();
+            StateActions = new Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>>
+            {
+                { State.In, IncomingStock },
+                { State.Out, OutgoingStock },
+                { State.CheckStock, OutOfStockItem },
+                { State.CheckExpired, ExpiredStock }
+            };
         }
 
-        private readonly Dictionary<State, Func<List<Barang>, List<Barang>, List<string>>> stateActions;
-        private readonly Notifikasi notif = new Notifikasi();
-
-        public void TampilkanNotifikasi(List<Barang> stokSebelumnya, List<Barang> stokSekarang)
+        // Fetches the current list of Barang from the API
+        public async Task<List<Barang>> GetBarangListFromApiAsync()
         {
-            var hasil = ProsesNotifikasi(stokSekarang, stokSebelumnya);
+            var result = await _httpClient.GetFromJsonAsync<List<Barang>>(_apiBaseUrl);
+            return result ?? new List<Barang>();
+        }
+
+        // Example: Show notification using data from API
+        public async Task ShowNotificationFromApiAsync(List<Barang> stokSebelumnya)
+        {
+            var stokSekarang = await GetBarangListFromApiAsync();
+            var hasil = ProcessNotification(stokSekarang, stokSebelumnya);
 
             Console.WriteLine("=== Notifikasi ===");
             foreach (var h in hasil)
@@ -33,21 +51,21 @@ namespace StockManagement.Controller
             }
         }
 
-        public List<string> ProsesNotifikasi(List<Barang> terbaru, List<Barang> sebelumnya)
+        public List<string> ProcessNotification(List<Barang> stokSekarang, List<Barang> stokSebelumnya)
         {
             var hasil = new List<string>();
-            var state = State.CekMasuk;
+            var state = State.In;
 
             while (state != State.Selesai)
             {
-                if (stateActions.TryGetValue(state, out var action))
-                    hasil.AddRange(action(terbaru, sebelumnya));
+                if (StateActions.TryGetValue(state, out var action))
+                    hasil.AddRange(action(stokSekarang, stokSebelumnya));
 
                 state = state switch
                 {
-                    State.CekMasuk => State.CekKeluar,
-                    State.CekKeluar => State.CekStok,
-                    State.CekStok => State.CekExpired,
+                    State.In => State.Out,
+                    State.Out => State.CheckStock,
+                    State.CheckStock => State.CheckExpired,
                     _ => State.Selesai
                 };
             }
@@ -55,22 +73,22 @@ namespace StockManagement.Controller
             return hasil;
         }
 
-        private List<string> BarangMasuk(List<Barang> baru, List<Barang> lama) =>
+        private List<string> IncomingStock(List<Barang> baru, List<Barang> lama) =>
             baru.Where(b => lama.Any(l => l.kodeBarang == b.kodeBarang && b.stok > l.stok))
                 .Select(b => $"{b.namaBarang} - {notif.ReadNotif(Notifikasi.notifApp.masuk)}")
                 .ToList();
 
-        private List<string> BarangKeluar(List<Barang> baru, List<Barang> lama) =>
+        private List<string> OutgoingStock(List<Barang> baru, List<Barang> lama) =>
             baru.Where(b => lama.Any(l => l.kodeBarang == b.kodeBarang && b.stok < l.stok))
                 .Select(b => $"{b.namaBarang} - {notif.ReadNotif(Notifikasi.notifApp.keluar)}")
                 .ToList();
 
-        private List<string> BarangHabis(List<Barang> baru, List<Barang> _) =>
+        private List<string> OutOfStockItem(List<Barang> baru, List<Barang> _) =>
             baru.Where(b => b.stok == 0)
                 .Select(b => $"{b.namaBarang} - {notif.ReadNotif(Notifikasi.notifApp.habis)}")
                 .ToList();
 
-        private List<string> BarangExpired(List<Barang> baru, List<Barang> _)
+        private List<string> ExpiredStock(List<Barang> baru, List<Barang> _)
         {
             DateOnly hariIni = DateOnly.FromDateTime(DateTime.Now);
             DateOnly batas = hariIni.AddDays(7);
