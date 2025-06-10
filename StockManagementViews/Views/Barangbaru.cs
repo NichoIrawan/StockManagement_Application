@@ -16,7 +16,8 @@ namespace StockManagementViews.Views
     public partial class Barangbaru : Form
     {
         private readonly BarangController barangCont;
-
+        private RiwayatController riwayatController = new RiwayatController();
+        private GudangController gudangController = new GudangController();
         public Barangbaru()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace StockManagementViews.Views
                 return;
             }
 
-            Barang Barangbaru = new Barang
+            Barang newBarang = new Barang
             {
                 kodeBarang = txtKode.Text,
                 namaBarang = txtNama.Text,
@@ -45,9 +46,13 @@ namespace StockManagementViews.Views
                 kodeGudang = txtKodeGudang.Text
             };
 
+            User dummyUser = new User("Dummy Username", "Dummy", StockManagementLibrary.Roles.MANAGER, "123");
+
             try
             {
-                await barangCont.beliBarang(Barangbaru);
+                await barangCont.beliBarang(newBarang);
+                Gudang curGudang = await gudangController.GetGudangByIdAsync(txtKodeGudang.Text);
+                BarangMasuk(newBarang, int.Parse(txtStok.Text), curGudang, dummyUser);
                 MessageBox.Show("Barang berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -59,6 +64,22 @@ namespace StockManagementViews.Views
                 MessageBox.Show($"Error: {ex.Message}", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private async Task BarangMasuk(Barang barang, int stok, Gudang lokasi, User pic)
+        {
+            Riwayat riwayat = new Riwayat(
+                tanggal: DateTime.Now,
+                jenis_transaksi: "Masuk",
+                barang: barang,
+                jumlah_barang: stok,
+                lokasi_penyimpanan: lokasi,
+                pic: pic
+                );
+
+            await riwayatController.InputRiwayatAsync(riwayat);
+        }
+
+        
 
         private void Barangbaru_Load(object sender, EventArgs e)
         {

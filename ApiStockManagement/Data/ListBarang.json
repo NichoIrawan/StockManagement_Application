@@ -14,17 +14,13 @@
     }
   },
   {
-    "kodeBarang": "MS001",
-    "namaBarang": "Microsoft",
-    "kategori": 3,
+    "kodeBarang": "MK003",
+    "namaBarang": "Sosis",
+    "kategori": null,
     "stok": 10,
-    "harga": 100000,
-    "tanggalKadaluarsa": "2025-05-05",
-    "kodeGudang": "G01",
-    "gudang": {
-      "kodeGudang": "G01",
-      "namaGudang": "Gudang Garam",
-      "lokasi": "Pejaten"
-    }
+    "harga": 15000,
+    "tanggalKadaluarsa": "2025-06-10",
+    "kodeGudang": "G001",
+    "gudang": null
   }
 ]

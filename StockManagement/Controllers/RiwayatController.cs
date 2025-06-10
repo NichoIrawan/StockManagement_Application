@@ -78,7 +78,7 @@ namespace StockManagement.Controllers
                 var json = JsonSerializer.Serialize(riwayat);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _client.PostAsync("RiwayatgApi", content);
+                var response = await _client.PostAsync("RiwayatApi", content);
                 response.EnsureSuccessStatusCode();
             }
             catch (Exception e)

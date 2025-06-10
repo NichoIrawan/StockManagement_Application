@@ -54,5 +54,57 @@
       "role": 1,
       "password": "string"
     }
+  },
+  {
+    "tanggal": "2025-06-10T22:44:41.4054044+07:00",
+    "jenis_transaksi": "Masuk",
+    "barang": {
+      "kodeBarang": "MK002",
+      "namaBarang": "Indomie Sayur Lodeh",
+      "kategori": null,
+      "stok": 200,
+      "harga": 3000,
+      "tanggalKadaluarsa": "2025-06-10",
+      "kodeGudang": "G001",
+      "gudang": null
+    },
+    "jumlah_barang": 200,
+    "lokasi_penyimpanan": {
+      "kodeGudang": "G001",
+      "namaGudang": "Gudang Yudha",
+      "lokasi": "Jakarta"
+    },
+    "pic": {
+      "username": "Dummy Username",
+      "name": "Dummy",
+      "role": 0,
+      "password": "123"
+    }
+  },
+  {
+    "tanggal": "2025-06-10T22:46:55.1241022+07:00",
+    "jenis_transaksi": "Masuk",
+    "barang": {
+      "kodeBarang": "MK003",
+      "namaBarang": "Sosis",
+      "kategori": null,
+      "stok": 10,
+      "harga": 15000,
+      "tanggalKadaluarsa": "2025-06-10",
+      "kodeGudang": "G001",
+      "gudang": null
+    },
+    "jumlah_barang": 10,
+    "lokasi_penyimpanan": {
+      "kodeGudang": "G001",
+      "namaGudang": "Gudang Yudha",
+      "lokasi": "Jakarta"
+    },
+    "pic": {
+      "username": "Dummy Username",
+      "name": "Dummy",
+      "role": 0,
+      "password": "123"
+    }
   }
 ]
