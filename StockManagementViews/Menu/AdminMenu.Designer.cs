@@ -33,8 +33,8 @@
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
             button1 = new Button();
-            button2 = new Button();
             panel3 = new Panel();
+            button2 = new Button();
             panel4 = new Panel();
             button3 = new Button();
             flowLayoutPanel1.SuspendLayout();
@@ -110,6 +110,17 @@
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = true;
             // 
+            // panel3
+            // 
+            panel3.BackColor = Color.Transparent;
+            panel3.Controls.Add(button2);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 147);
+            panel3.Margin = new Padding(0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(213, 59);
+            panel3.TabIndex = 3;
+            // 
             // button2
             // 
             button2.Dock = DockStyle.Fill;
@@ -125,17 +136,6 @@
             button2.Text = "            Barang Dashboard";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.Transparent;
-            panel3.Controls.Add(button2);
-            panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 147);
-            panel3.Margin = new Padding(0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(213, 59);
-            panel3.TabIndex = 3;
             // 
             // panel4
             // 
@@ -163,6 +163,7 @@
             button3.Text = "            Gudang Dashboard";
             button3.TextAlign = ContentAlignment.MiddleLeft;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // AdminMenu
             // 
@@ -171,6 +172,7 @@
             ClientSize = new Size(853, 480);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            IsMdiContainer = true;
             Name = "AdminMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu";
