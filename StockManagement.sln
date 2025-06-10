@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiStockManagement", "ApiSt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockManagementLibrary", "StockManagementLibrary\StockManagementLibrary.csproj", "{8DAFFE28-CC3D-4249-8257-49B6A667CF1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest_StockManagementApplication", "UnitTest_StockManagementApplication\UnitTest_StockManagementApplication.csproj", "{F278FC78-D4EC-4CCD-8844-AB1B127B0F0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest_StockManagementApplication", "UnitTest_StockManagementApplication\UnitTest_StockManagementApplication.csproj", "{F278FC78-D4EC-4CCD-8844-AB1B127B0F0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagementViews", "StockManagementViews\StockManagementViews.csproj", "{8725BE10-C8D4-4BE5-8D76-FB64045EC8E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockManagementViews", "StockManagementViews\StockManagementViews.csproj", "{8725BE10-C8D4-4BE5-8D76-FB64045EC8E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
