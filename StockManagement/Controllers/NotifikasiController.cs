@@ -29,7 +29,6 @@ namespace StockManagement.Controller
             };
         }
 
-        // Fetches the current list of Barang from the API
         public async Task<List<Barang>> GetBarangListFromApiAsync()
         {
             var result = await _httpClient.GetFromJsonAsync<List<Barang>>(_apiBaseUrl);

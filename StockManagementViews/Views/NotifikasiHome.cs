@@ -18,23 +18,16 @@ namespace StockManagementViews
 
         private async void Notifikasi_Load(object sender, EventArgs e)
         {
-            //var stokSebelumnya = await GetBarangListFromApi("api/barang/previous");
-            //var stokSekarang = await GetBarangListFromApi("api/barang/current");
-            var stokSebelumnya = await _controller.GetBarangListFromApiAsync();
+            // Fetch current stock from API
+            var stokSekarang = await _controller.GetBarangListFromApiAsync();
 
+            // Process notifications (expired & out of stock)
+            notifications = _controller.ProcessNotification(stokSekarang);
 
+            // Bind notifications to DataGridView
             dgvNotifications.DataSource = notifications.Select(n => new { Notifikasi = n }).ToList();
         }
 
-        private async Task<List<Barang>> GetBarangListFromApi(string endpoint)
-        {
-            using var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5052/"); 
-            var response = await client.GetAsync(endpoint);
-            response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<List<Barang>>(json);
-        }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
