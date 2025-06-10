@@ -20,12 +20,12 @@ namespace StockManagement.Models
        
 
 
-        public Riwayat(DateTime tanggal, string jenis_transaksi, Barang barang, int jumlah_barang, Gudang lokasi, User pic) {
+        public Riwayat(DateTime tanggal, string jenis_transaksi, Barang barang, int jumlah_barang, Gudang lokasi_penyimpanan, User pic) {
             this.tanggal = tanggal;
             this.jenis_transaksi = jenis_transaksi;
             this.barang = barang;
             this.jumlah_barang = jumlah_barang;
-            this.lokasi_penyimpanan = lokasi;
+            this.lokasi_penyimpanan = lokasi_penyimpanan;
             this.pic = pic;
         }
     }

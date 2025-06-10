@@ -105,5 +105,7 @@ namespace StockManagement.Controllers
                 Console.WriteLine($"Error: {e.Message}");
             }
         }
+
+        
     }
 }

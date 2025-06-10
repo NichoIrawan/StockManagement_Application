@@ -52,8 +52,10 @@ namespace ApiStockManagement.Controllers
                 if (riwayat.tanggal == newRiwayat.tanggal)
                     return NotFound("Gudang with the same code already exists");
             }
+            _listRiwayat.Add(newRiwayat);
 
             _jsonHandlerList.WriteJsonToFile(_filePath, _listRiwayat);
+
 
             return CreatedAtAction(nameof(Get), new { kodeGudang = newRiwayat.tanggal }, newRiwayat);
         }
