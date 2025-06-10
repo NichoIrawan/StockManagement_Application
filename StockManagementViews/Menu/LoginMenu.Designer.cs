@@ -131,6 +131,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(231, 17);
             textBox1.TabIndex = 0;
+            textBox1.UseSystemPasswordChar = true;
             textBox1.WordWrap = false;
             // 
             // panel1
@@ -182,7 +183,7 @@
             lblUsername.TabIndex = 7;
             lblUsername.Text = "Username";
             // 
-            // Login
+            // LoginMenu
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
@@ -192,7 +193,7 @@
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             IsMdiContainer = true;
-            Name = "Login";
+            Name = "LoginMenu";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = " ";
