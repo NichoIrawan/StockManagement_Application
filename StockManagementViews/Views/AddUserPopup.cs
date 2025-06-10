@@ -42,7 +42,7 @@ namespace StockManagementViews.Views
                 User user = new User(
                     username: txtBoxUsername.Text,
                     name: txtBoxName.Text,
-                    role: (comboBoxRole.SelectedValue.Equals("Staff")) ? Roles.Staff : Roles.Manager,
+                    role: (comboBoxRole.SelectedValue.Equals("Staff")) ? Roles.STAFF : Roles.MANAGER,
                     password: txtBoxPassword.Text
                     );
                 await adminController.addUser(user);
