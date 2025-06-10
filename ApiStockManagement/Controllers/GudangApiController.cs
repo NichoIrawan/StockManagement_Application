@@ -60,6 +60,8 @@ namespace ApiStockManagement.Controllers
                 if (gudang.kodeGudang == newGudang.kodeGudang) return BadRequest("Gudang with the same code already exists");
             }
 
+            _listGudang.Add(newGudang);
+
             JsonHandler<List<Gudang>>.writeJsonToFile(_filePath, _listGudang);
 
             return CreatedAtAction(nameof(Get), new { kodeGudang = newGudang.kodeGudang }, newGudang);
