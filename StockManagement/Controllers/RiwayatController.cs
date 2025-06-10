@@ -8,9 +8,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace StockManagement.Controller
+namespace StockManagement.Controllers
 {
-    class RiwayatController
+    public class RiwayatController
     {
         private readonly HttpClient _client;
 
