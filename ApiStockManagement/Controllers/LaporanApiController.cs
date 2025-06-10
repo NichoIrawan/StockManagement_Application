@@ -14,11 +14,13 @@ namespace ApiStockManagement.Controllers
         private static readonly string _filePath = "Data/ListLaporan.json";
         private static List<Laporan> _listLaporan;
 
+        private JsonHandler<List<Laporan>> _jsonHandlerList = new();
+
         // API to get "Laporan" as List.
         [HttpGet]
         public ActionResult Get()
         {
-            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
+            _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
             return _listLaporan is null ? NotFound() : Ok(_listLaporan);
         }
 
@@ -26,7 +28,7 @@ namespace ApiStockManagement.Controllers
         [HttpGet("{tanggalPembuatan}")]
         public Laporan Get(DateTime tanggalPembuatan)
         {
-            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
+            _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (_listLaporan is null)
             {
@@ -42,7 +44,7 @@ namespace ApiStockManagement.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Laporan newLaporan)
         {
-            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
+            _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (newLaporan == null)
             {
@@ -58,7 +60,7 @@ namespace ApiStockManagement.Controllers
             }
 
             _listLaporan.Add(newLaporan);
-            JsonHandler<List<Laporan>>.writeJsonToFile(_filePath, _listLaporan);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listLaporan);
 
             return CreatedAtAction(nameof(Get), new { id = newLaporan.tanggalPembuatan }, newLaporan);
         }
@@ -67,7 +69,7 @@ namespace ApiStockManagement.Controllers
         [HttpPut("{tanggalPembuatan}")]
         public ActionResult Put(DateTime tanggalPembuatan, [FromBody] Laporan newLaporan)
         {
-            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
+            _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
             var laporan = _listLaporan.FirstOrDefault(item => item.tanggalPembuatan == tanggalPembuatan);
 
             if (newLaporan == null)
@@ -79,7 +81,7 @@ namespace ApiStockManagement.Controllers
             laporan.tempatPenyimpanan = newLaporan.tempatPenyimpanan;
             laporan.daftarBarang = newLaporan.daftarBarang;
 
-            JsonHandler<List<Laporan>>.writeJsonToFile(_filePath, _listLaporan);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listLaporan);
 
             return CreatedAtAction(nameof(Get), new { id = newLaporan.tanggalPembuatan }, newLaporan);
         }
@@ -89,10 +91,9 @@ namespace ApiStockManagement.Controllers
         public void Delete(DateTime tanggalPembuatan)
         {
 
-            _listLaporan = JsonHandler<List<Laporan>>.readJsonFromFile(_filePath);
+            _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
             _listLaporan.RemoveAll(item => item.tanggalPembuatan == tanggalPembuatan);
-            JsonHandler<List<Laporan>>.writeJsonToFile(_filePath, _listLaporan);
-
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listLaporan);
         }
     }
 }

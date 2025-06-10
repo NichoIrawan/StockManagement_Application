@@ -93,10 +93,9 @@ namespace StockManagementViews.Views
             tableUser.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             tableUser.Size = new Size(600, 308);
             tableUser.TabIndex = 4;
+            tableUser.CellBeginEdit += tableUser_CellBeginEdit;
             tableUser.CellContentClick += tableUser_CellContentClick;
             tableUser.CellEndEdit += tableUser_CellEndEdit;
-            tableUser.CellBeginEdit += tableUser_CellBeginEdit;
-
             // 
             // Username
             // 
@@ -174,9 +173,9 @@ namespace StockManagementViews.Views
             // 
             // UserManagement
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(624, 441);
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(640, 480);
             Controls.Add(btnRefresh);
             Controls.Add(searchButton);
             Controls.Add(pictureBox1);
@@ -186,8 +185,8 @@ namespace StockManagementViews.Views
             Controls.Add(buttonAdd);
             Controls.Add(label1);
             Controls.Add(searchBar);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(5, 15, 5, 15);
-           
             Text = "User Management";
             Load += UserManagement_Load;
             ((System.ComponentModel.ISupportInitialize)tableUser).EndInit();

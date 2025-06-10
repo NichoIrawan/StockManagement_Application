@@ -11,14 +11,16 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class BarangApiController : ControllerBase
     {
-        private static readonly string _filePath = "Data/ListBarang.json";
-        private static List<Barang>? _listBarang;
+        JsonHandler<List<Barang>> _jsonHandlerList = new ();
+
+        private readonly string _filePath = "Data/ListBarang.json";
+        private List<Barang>? _listBarang;
 
         // API to get "Barang" as List.
         [HttpGet]
         public ActionResult<IEnumerable<Barang>> Get()
         {
-            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
+            _listBarang = _jsonHandlerList.ReadJsonFromFile(_filePath);
             
             return _listBarang is null? NotFound() : Ok(_listBarang);
         }
@@ -27,7 +29,7 @@ namespace ApiStockManagement.Controllers
         [HttpGet("{kodeBarang}")]
         public ActionResult<Barang> Get(string kodeBarang)
         {
-            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
+            _listBarang = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (_listBarang is null)
             {
@@ -43,7 +45,7 @@ namespace ApiStockManagement.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]Barang newBarang)
         {
-            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
+            _listBarang = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (newBarang == null)
             {
@@ -59,7 +61,7 @@ namespace ApiStockManagement.Controllers
             }
 
             _listBarang.Add(newBarang);
-            JsonHandler<List<Barang>>.writeJsonToFile(_filePath, _listBarang);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listBarang);
 
             return CreatedAtAction(nameof(Get), new { id = newBarang.kodeBarang }, newBarang);
         }
@@ -68,7 +70,7 @@ namespace ApiStockManagement.Controllers
         [HttpPut("{kodeBarang}")]
         public ActionResult Put(string kodeBarang, [FromBody]Barang newBarang)
         {
-            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
+            _listBarang = _jsonHandlerList.ReadJsonFromFile(_filePath);
             var barang = _listBarang.FirstOrDefault(item => item.kodeBarang == kodeBarang);
 
             try
@@ -86,7 +88,7 @@ namespace ApiStockManagement.Controllers
                 return NotFound("Barang not found or invalid data provided");
             }
 
-            JsonHandler<List<Barang>>.writeJsonToFile(_filePath, _listBarang);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listBarang);
             return NoContent();
         }
 
@@ -94,12 +96,12 @@ namespace ApiStockManagement.Controllers
         [HttpDelete("{kodeBarang}")]
         public ActionResult Delete(string kodeBarang)
         {
-            _listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath);
+            _listBarang = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             try
             {
                 _listBarang.RemoveAll(item => item.kodeBarang == kodeBarang);
-                JsonHandler<List<Barang>>.writeJsonToFile(_filePath, _listBarang);
+                _jsonHandlerList.WriteJsonToFile(_filePath, _listBarang);
                 return NoContent();
             }
             catch

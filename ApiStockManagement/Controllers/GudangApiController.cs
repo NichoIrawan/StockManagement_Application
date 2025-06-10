@@ -13,12 +13,15 @@ namespace ApiStockManagement.Controllers
     {
         private static readonly string _filePath = "Data/ListGudang.json";
         private static List<Gudang> _listGudang;
+        
+        private JsonHandler<List<Gudang>> _jsonHandlerList = new();
+        private JsonHandler<List<Barang>> _jsonHandlerListBarang = new();
 
         // API to get "Gudang" as List.
         [HttpGet]
         public ActionResult Get()
         {
-            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
+            _listGudang = _jsonHandlerList.ReadJsonFromFile(_filePath);
             return _listGudang is null? NotFound() : Ok(_listGudang);
         }
 
@@ -26,7 +29,7 @@ namespace ApiStockManagement.Controllers
         [HttpGet("{kodeGudang}")]
         public Gudang Get(String kodeGudang)
         {
-            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
+            _listGudang = _jsonHandlerList.ReadJsonFromFile(_filePath);
             if (_listGudang is null)
             {
                 return null;
@@ -39,7 +42,7 @@ namespace ApiStockManagement.Controllers
         [HttpGet("barang")]
         public ActionResult GetBarangInGudang(String kodeGudang)
         {
-            var listBarang = JsonHandler<List<Barang>>.readJsonFromFile(_filePath).Where(item =>
+            var listBarang = _jsonHandlerListBarang.ReadJsonFromFile(_filePath).Where(item =>
             {
                 return item.kodeGudang == kodeGudang;
             }).ToList();
@@ -51,7 +54,7 @@ namespace ApiStockManagement.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Gudang newGudang)
         {
-            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
+            _listGudang = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (newGudang == null) return NotFound("Gudang cannot be null");
 
@@ -62,7 +65,7 @@ namespace ApiStockManagement.Controllers
 
             _listGudang.Add(newGudang);
 
-            JsonHandler<List<Gudang>>.writeJsonToFile(_filePath, _listGudang);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listGudang);
 
             return CreatedAtAction(nameof(Get), new { kodeGudang = newGudang.kodeGudang }, newGudang);
         }
@@ -71,7 +74,7 @@ namespace ApiStockManagement.Controllers
         [HttpPut("{kodeGudang}")]
         public void Put(string kodeGudang, [FromBody] Gudang gudangBaru)
         {
-            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
+            _listGudang = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (gudangBaru == null) return;
 
@@ -82,16 +85,16 @@ namespace ApiStockManagement.Controllers
             gudang.namaGudang = gudangBaru.namaGudang;
             gudang.lokasi = gudangBaru.lokasi;
 
-            JsonHandler<List<Gudang>>.writeJsonToFile(_filePath, _listGudang);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listGudang);
         }
 
         // API to delete an existing "Gudang" by kodeGudang.
         [HttpDelete("{kodeGudang}")]
         public void Delete(String kodeGudang)
         {
-            _listGudang = JsonHandler<List<Gudang>>.readJsonFromFile(_filePath);
+            _listGudang = _jsonHandlerList.ReadJsonFromFile(_filePath);
             _listGudang.RemoveAll(item => item.kodeGudang == kodeGudang);
-            JsonHandler<List<Gudang>>.writeJsonToFile(_filePath, _listGudang);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listGudang);
         }
     }
 }

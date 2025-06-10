@@ -7,9 +7,32 @@ using System.Threading.Tasks;
 
 namespace StockManagementLibrary
 {
-    public static class JsonHandler<T>
+    public class JsonHandler<T>
     {
-        public static T? readJsonFromFile(string filepath)
+        private JsonSerializerOptions _options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNameCaseInsensitive = true
+        };
+
+        private JsonHandler<T> _jsonHandler;
+
+        public JsonHandler()
+        {
+            _jsonHandler = GetJsonHandler();
+        }
+
+        private JsonHandler<T> GetJsonHandler()
+        {
+            if (_jsonHandler == null)
+            {
+                _jsonHandler = new JsonHandler<T>();
+            }
+
+            return _jsonHandler;
+        }
+
+        public T? ReadJsonFromFile(string filepath)
         {
             string json = File.ReadAllText(filepath);
             T data = JsonSerializer.Deserialize<T>(json);
@@ -17,14 +40,9 @@ namespace StockManagementLibrary
             return data;
         }
 
-        public static void writeJsonToFile(string filepath, T data)
+        public void WriteJsonToFile(string filepath, T data)
         {
-            JsonSerializerOptions options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-
-            string json = JsonSerializer.Serialize(data, options);
+            string json = JsonSerializer.Serialize(data, _options);
             File.WriteAllText(filepath, json);
         }
     }

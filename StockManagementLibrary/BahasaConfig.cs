@@ -12,12 +12,13 @@ namespace StockManagementLibrary
         public Config config;
         public const string filePath = @"Config.json";
 
+        private JsonHandler<Config> _jsonHandler = new JsonHandler<Config>();
 
         public BahasaConfig()
         {
             try
             {
-                config = JsonHandler<Config>.readJsonFromFile(filePath);
+                config = _jsonHandler.ReadJsonFromFile(filePath);
             }
             catch (Exception)
             {
@@ -48,12 +49,5 @@ namespace StockManagementLibrary
             config.bahasa = newBahasa;
             SaveConfig(); // Save changes
         }
-
-       
-
-       
-
-
-
     }
 }
