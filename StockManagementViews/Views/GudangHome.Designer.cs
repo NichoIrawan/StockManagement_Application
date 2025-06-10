@@ -147,7 +147,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(624, 441);
+            ClientSize = new Size(640, 480);
             Controls.Add(btnSearch);
             Controls.Add(btnRefresh);
             Controls.Add(btnAddGudang);
@@ -157,7 +157,9 @@
             Controls.Add(dataGridView1);
             Controls.Add(label1);
             Controls.Add(txtSearch);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "GudangHome";
+            StartPosition = FormStartPosition.Manual;
             Text = "GudangHome";
             Load += GudangHome_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
