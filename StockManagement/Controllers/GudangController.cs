@@ -78,7 +78,7 @@ namespace StockManagement.Controller
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Gudang();
+                    return null;
                 }
 
                 var json = await response.Content.ReadAsStringAsync();
@@ -90,7 +90,7 @@ namespace StockManagement.Controller
             catch (Exception e)
             {
                 Console.WriteLine($"Error: {e.Message}");
-                return new Gudang();
+                return null;
             }
         }
 
@@ -122,17 +122,19 @@ namespace StockManagement.Controller
         }
 
         // DELETE /api/GudangApi/{kodeBarang}
-        public async Task DeleteGudangAsync(string kodeGudang)
+        public async Task<bool> DeleteGudangAsync(string kodeGudang)
         {
             try
             {
-                var response = await _client.DeleteAsync($"BarangApi/{kodeGudang}");
+                var response = await _client.DeleteAsync($"GudangApi/{kodeGudang}");
                 response.EnsureSuccessStatusCode();
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Error: {e.Message}");
+               
             }
+            return false;
         }
     }
 }
