@@ -95,7 +95,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(22, 206);
             label6.Name = "label6";
-            label6.Size = new Size(115, 15);
+            label6.Size = new Size(114, 15);
             label6.TabIndex = 5;
             label6.Text = "Tanggal Kadaluarsa :";
             // 
@@ -181,6 +181,7 @@
             Controls.Add(label1);
             Name = "Barangbaru";
             Text = "Barangbaru";
+            Load += Barangbaru_Load;
             ResumeLayout(false);
             PerformLayout();
         }

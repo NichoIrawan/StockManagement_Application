@@ -106,9 +106,6 @@ namespace StockManagement.Controllers
             }
         }
 
-        public async Task InputBarangAsync(Barang barangbaru)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

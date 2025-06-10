@@ -15,12 +15,12 @@ namespace StockManagementViews.Views
 {
     public partial class Barangbaru : Form
     {
-        private readonly BarangController BarangController;
+        private readonly BarangController barangCont;
 
         public Barangbaru()
         {
             InitializeComponent();
-            BarangController = new BarangController();
+            barangCont = new BarangController();
         }
 
         private async void btnTambah_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace StockManagementViews.Views
 
             try
             {
-                await BarangController.InputBarangAsync(Barangbaru);
+                await barangCont.beliBarang(Barangbaru);
                 MessageBox.Show("Barang berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -58,6 +58,11 @@ namespace StockManagementViews.Views
             {
                 MessageBox.Show($"Error: {ex.Message}", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Barangbaru_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

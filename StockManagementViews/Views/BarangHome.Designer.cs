@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             label1 = new Label();
-            textBox1 = new TextBox();
+            txtSearch = new TextBox();
             label2 = new Label();
             label3 = new Label();
             btnTambah = new Button();
@@ -40,7 +41,9 @@
             Harga = new DataGridViewTextBoxColumn();
             Kadaluarsa = new DataGridViewTextBoxColumn();
             KodeGudang = new DataGridViewTextBoxColumn();
-            Delete = new DataGridViewTextBoxColumn();
+            Delete = new DataGridViewButtonColumn();
+            btnRefresh = new Button();
+            btnSearch = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -54,12 +57,12 @@
             label1.TabIndex = 0;
             label1.Text = "Barang";
             // 
-            // textBox1
+            // txtSearch
             // 
-            textBox1.Location = new Point(12, 12);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(284, 23);
-            textBox1.TabIndex = 1;
+            txtSearch.Location = new Point(12, 12);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(241, 23);
+            txtSearch.TabIndex = 1;
             // 
             // label2
             // 
@@ -83,22 +86,28 @@
             // 
             // btnTambah
             // 
+            btnTambah.BackColor = Color.MediumSlateBlue;
+            btnTambah.ForeColor = SystemColors.ButtonFace;
             btnTambah.Location = new Point(537, 59);
             btnTambah.Name = "btnTambah";
-            btnTambah.Size = new Size(75, 23);
+            btnTambah.Size = new Size(75, 28);
             btnTambah.TabIndex = 4;
             btnTambah.Text = "Tambah";
-            btnTambah.UseVisualStyleBackColor = true;
+            btnTambah.UseVisualStyleBackColor = false;
             btnTambah.Click += btnTambah_Click;
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { kode, Nama, Stok, Harga, Kadaluarsa, KodeGudang, Delete });
             dataGridView1.Location = new Point(12, 88);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(600, 341);
             dataGridView1.TabIndex = 5;
+            dataGridView1.CellBeginEdit += tableBarang_CellBeginEdit;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellEndEdit += tableBarang_CellEndEdit;
             // 
             // kode
             // 
@@ -132,19 +141,48 @@
             // 
             // Delete
             // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.Red;
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            Delete.DefaultCellStyle = dataGridViewCellStyle1;
+            Delete.FlatStyle = FlatStyle.Popup;
             Delete.HeaderText = "Delete";
             Delete.Name = "Delete";
+            Delete.Text = "Delete";
+            Delete.UseColumnTextForButtonValue = true;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.Location = new Point(94, 54);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(75, 23);
+            btnRefresh.TabIndex = 6;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(259, 14);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(75, 23);
+            btnSearch.TabIndex = 7;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // BarangHome
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(624, 441);
+            Controls.Add(btnSearch);
+            Controls.Add(btnRefresh);
             Controls.Add(dataGridView1);
             Controls.Add(btnTambah);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(txtSearch);
             Controls.Add(label1);
             Name = "BarangHome";
             Text = "BarangHome";
@@ -157,17 +195,19 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
+        private TextBox txtSearch;
         private Label label2;
         private Label label3;
         private Button btnTambah;
         private DataGridView dataGridView1;
+        private Button btnRefresh;
+        private Button btnSearch;
         private DataGridViewTextBoxColumn kode;
         private DataGridViewTextBoxColumn Nama;
         private DataGridViewTextBoxColumn Stok;
         private DataGridViewTextBoxColumn Harga;
         private DataGridViewTextBoxColumn Kadaluarsa;
         private DataGridViewTextBoxColumn KodeGudang;
-        private DataGridViewTextBoxColumn Delete;
+        private DataGridViewButtonColumn Delete;
     }
 }
