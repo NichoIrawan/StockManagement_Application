@@ -1,4 +1,6 @@
-﻿namespace StockManagementViews.Views
+﻿using System.Windows.Forms;
+
+namespace StockManagementViews.Views
 {
     partial class UserManagement
     {
@@ -28,11 +30,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             searchBar = new TextBox();
             label1 = new Label();
-            buttonDel = new Button();
             buttonAdd = new Button();
             tableUser = new DataGridView();
+            Username = new DataGridViewTextBoxColumn();
+            Name = new DataGridViewTextBoxColumn();
+            Role = new DataGridViewTextBoxColumn();
+            deleteButton = new DataGridViewButtonColumn();
             lblName = new Label();
             lblRole = new Label();
             pictureBox1 = new PictureBox();
@@ -60,16 +66,6 @@
             label1.TabIndex = 1;
             label1.Text = "User Management";
             // 
-            // buttonDel
-            // 
-            buttonDel.Location = new Point(382, 83);
-            buttonDel.Name = "buttonDel";
-            buttonDel.Size = new Size(112, 32);
-            buttonDel.TabIndex = 2;
-            buttonDel.Text = "Delete user";
-            buttonDel.UseVisualStyleBackColor = true;
-            buttonDel.Click += ButtonDel_Click;
-            // 
             // buttonAdd
             // 
             buttonAdd.BackColor = Color.MediumSlateBlue;
@@ -85,15 +81,49 @@
             // 
             // tableUser
             // 
+            tableUser.AllowUserToAddRows = false;
+            tableUser.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             tableUser.BorderStyle = BorderStyle.None;
             tableUser.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             tableUser.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             tableUser.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tableUser.Columns.AddRange(new DataGridViewColumn[] { Username, Name, Role, deleteButton });
             tableUser.Location = new Point(12, 121);
             tableUser.Name = "tableUser";
             tableUser.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             tableUser.Size = new Size(600, 308);
             tableUser.TabIndex = 4;
+            tableUser.CellContentClick += tableUser_CellContentClick;
+            tableUser.CellEndEdit += tableUser_CellEndEdit;
+            tableUser.CellBeginEdit += tableUser_CellBeginEdit;
+
+            // 
+            // Username
+            // 
+            Username.HeaderText = "Username";
+            Username.Name = "Username";
+            // 
+            // Name
+            // 
+            Name.HeaderText = "Name";
+            Name.Name = "Name";
+            // 
+            // Role
+            // 
+            Role.HeaderText = "Role";
+            Role.Name = "Role";
+            // 
+            // deleteButton
+            // 
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.Red;
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            deleteButton.DefaultCellStyle = dataGridViewCellStyle2;
+            deleteButton.FlatStyle = FlatStyle.Popup;
+            deleteButton.HeaderText = "Delete_row";
+            deleteButton.Name = "deleteButton";
+            deleteButton.Text = "Delete";
+            deleteButton.UseColumnTextForButtonValue = true;
             // 
             // lblName
             // 
@@ -154,11 +184,10 @@
             Controls.Add(lblName);
             Controls.Add(tableUser);
             Controls.Add(buttonAdd);
-            Controls.Add(buttonDel);
             Controls.Add(label1);
             Controls.Add(searchBar);
             Margin = new Padding(5, 15, 5, 15);
-            Name = "UserManagement";
+           
             Text = "User Management";
             Load += UserManagement_Load;
             ((System.ComponentModel.ISupportInitialize)tableUser).EndInit();
@@ -171,7 +200,6 @@
 
         private TextBox searchBar;
         private Label label1;
-        private Button buttonDel;
         private Button buttonAdd;
         private DataGridView tableUser;
         private Label lblName;
@@ -180,5 +208,9 @@
         private DataGridViewTextBoxColumn No;
         private Button searchButton;
         private Button btnRefresh;
+        private DataGridViewButtonColumn deleteButton;
+        private DataGridViewTextBoxColumn Username;
+        private DataGridViewTextBoxColumn Name;
+        private DataGridViewTextBoxColumn Role;
     }
 }

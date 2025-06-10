@@ -1,5 +1,6 @@
-﻿using StockManagement.Models;
-using StockManagementLibrary;
+﻿using StockManagement.Controller.UserController;
+using StockManagement.Controllers;
+using StockManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,118 +11,141 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StockManagementViews
+namespace StockManagementViews.Views
 {
     public partial class BarangHome : Form
     {
-        private List<Barang> daftarBarang = new List<Barang>();
-
+        List<Barang> barangList = new List<Barang>();
+        List<Barang> searchList = new List<Barang>();
+        BarangController barangCont = new BarangController();
+        Form addBarangbaru = new Barangbaru();
         public BarangHome()
         {
             InitializeComponent();
-            MuatDataAwal();
-            TampilkanBarang();
+        }
+
+        private void BarangHome_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                RefreshList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
-            Barang barang = new Barang
+            addBarangbaru.Show();
+        }
+
+        private async void RefreshList()
+        {
+            barangList.Clear();
+            dataGridView1.DataSource = null;
+            dataGridView1.Rows.Clear();
+            barangList = await barangCont.tampilkanBarang();
+            for (int i = 0; i < barangList.Count; i++)
             {
-                kodeBarang = txtKode.Text,
-                namaBarang = txtNama.Text,
-                stok = int.Parse(txtStok.Text),
-                harga = double.Parse(txtHarga.Text),
-                tanggalKadaluarsa = DateOnly.FromDateTime(dtpKadaluarsa.Value),
-                kodeGudang = txtKodeGudang.Text
+                int rownum = dataGridView1.Rows.Add();
+                dataGridView1.Rows[rownum].Cells[0].Value = barangList[i].kodeBarang;
+                dataGridView1.Rows[rownum].Cells[1].Value = barangList[i].namaBarang;
+                dataGridView1.Rows[rownum].Cells[2].Value = barangList[i].stok;
+                dataGridView1.Rows[rownum].Cells[3].Value = barangList[i].harga;
+                dataGridView1.Rows[rownum].Cells[4].Value = barangList[i].tanggalKadaluarsa;
+                dataGridView1.Rows[rownum].Cells[5].Value = barangList[i].kodeGudang;
+            }
+
+
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshList();
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String searchResult = txtSearch.Text;
+                dataGridView1.DataSource = null;
+                dataGridView1.Rows.Clear();
+                searchList.Clear();
+                var res = await barangCont.cariBarangDenganId(searchResult);
+                if (res == null)
+                {
+                    MessageBox.Show("User tidak ditemukan");
+                    RefreshList();
+                    return;
+                }
+                searchList.Add(res);
+                for (int i = 0; i < searchList.Count; i++)
+                {
+                    int rownum = dataGridView1.Rows.Add();
+                    dataGridView1.Rows[rownum].Cells[0].Value = barangList[i].kodeBarang;
+                    dataGridView1.Rows[rownum].Cells[1].Value = barangList[i].namaBarang;
+                    dataGridView1.Rows[rownum].Cells[2].Value = barangList[i].stok;
+                    dataGridView1.Rows[rownum].Cells[3].Value = barangList[i].harga;
+                    dataGridView1.Rows[rownum].Cells[4].Value = barangList[i].tanggalKadaluarsa;
+                    dataGridView1.Rows[rownum].Cells[5].Value = barangList[i].kodeGudang;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex);
+            }
+        }
+
+        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string username = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[6])
+            {
+                await barangCont.jualBarang(username);
+                dataGridView1.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+
+        private void tableBarang_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                e.Cancel = true;
+            }
+            if (e.ColumnIndex == 4)
+            {
+                e.Cancel = true;
+            }
+            if (e.ColumnIndex == 5)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private async void tableBarang_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow newRow = dataGridView1.Rows[e.RowIndex];
+            string kodeBarang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+
+            var res = await barangCont.cariBarangDenganId(kodeBarang);
+
+            Barang newBarang = new Barang
+            {
+                kodeBarang = res.kodeBarang,
+                namaBarang = newRow.Cells[1].Value.ToString(),
+                stok = int.Parse(newRow.Cells[2].Value.ToString()),
+                harga = double.Parse(newRow.Cells[3].Value.ToString()),
+                tanggalKadaluarsa = res.tanggalKadaluarsa,
+                kodeGudang = res.kodeGudang
             };
 
-            daftarBarang.Add(barang);
-            TampilkanBarang();
-            BersihkanForm();
-        }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int index = dgvBarang.CurrentRow.Index;
-            daftarBarang[index].kodeBarang = txtKode.Text;
-            daftarBarang[index].namaBarang = txtNama.Text;
-            daftarBarang[index].stok = int.Parse(txtStok.Text);
-            daftarBarang[index].harga = double.Parse(txtHarga.Text);
-            daftarBarang[index].tanggalKadaluarsa = DateOnly.FromDateTime(dtpKadaluarsa.Value);
-            daftarBarang[index].kodeGudang = txtKodeGudang.Text;
 
-            TampilkanBarang();
-            BersihkanForm();
-        }
-
-        private void btnHapus_Click(object sender, EventArgs e)
-        {
-            if (dgvBarang.CurrentRow != null)
-            {
-                int index = dgvBarang.CurrentRow.Index;
-                daftarBarang.RemoveAt(index);
-                TampilkanBarang();
-                BersihkanForm();
-            }
-        }
-
-        private void MuatDataAwal()
-        {
-            daftarBarang.Add(new Barang
-            {
-                kodeBarang = "BRG001",
-                namaBarang = "Sabun Mandi",
-                stok = 25,
-                harga = 7500,
-                tanggalKadaluarsa = DateOnly.FromDateTime(DateTime.Today.AddMonths(6)),
-                kodeGudang = "GD001"
-            });
-
-            daftarBarang.Add(new Barang
-            {
-                kodeBarang = "BRG002",
-                namaBarang = "Minyak Goreng",
-                stok = 40,
-                harga = 14500,
-                tanggalKadaluarsa = DateOnly.FromDateTime(DateTime.Today.AddMonths(4)),
-                kodeGudang = "GD002"
-            });
-        }
-
-        private void TampilkanBarang()
-        {
-            dgvBarang.DataSource = null;
-            dgvBarang.DataSource = daftarBarang;
-
-            if (dgvBarang.Columns["kategori"] != null)
-                dgvBarang.Columns["kategori"].Visible = false;
-
-            if (dgvBarang.Columns["gudang"] != null)
-                dgvBarang.Columns["gudang"].Visible = false;
-        }
-
-        private void dgvBarang_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                Barang barang = daftarBarang[e.RowIndex];
-                txtKode.Text = barang.kodeBarang;
-                txtNama.Text = barang.namaBarang;
-                txtStok.Text = barang.stok.ToString();
-                txtHarga.Text = barang.harga.ToString();
-                dtpKadaluarsa.Value = barang.tanggalKadaluarsa?.ToDateTime(TimeOnly.MinValue) ?? DateTime.Today;
-                txtKodeGudang.Text = barang.kodeGudang;
-            }
-        }
-
-        private void BersihkanForm()
-        {
-            txtKode.Clear();
-            txtNama.Clear();
-            txtStok.Clear();
-            txtHarga.Clear();
-            txtKodeGudang.Clear();
-            dtpKadaluarsa.Value = DateTime.Today;
+            await barangCont.updateDataBarang(kodeBarang, newBarang);
         }
     }
 }

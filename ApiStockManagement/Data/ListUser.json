@@ -1,23 +1,8 @@
 [
-<<<<<<< HEAD
     {
         "username": "admin",
         "name": "Budi Santoso",
         "role": 1,
         "password": "admin"
     }
-=======
-  {
-    "username": "NikoNikoNi",
-    "name": "Nicho",
-    "role": 0,
-    "password": "323"
-  },
-  {
-    "username": "Benben",
-    "name": "Benaya",
-    "role": 0,
-    "password": "3213"
-  }
->>>>>>> origin/Sidqi
 ]

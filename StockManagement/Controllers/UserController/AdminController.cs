@@ -87,14 +87,14 @@ namespace StockManagement.Controller.UserController
         }
 
         //// PUT /api/BarangApi/{kodeBarang}
-        //public async Task updateDataBarang(string kodeBarang, Barang barang)
-        //{
-        //    var json = JsonSerializer.Serialize(barang);
-        //    var content = new StringContent(json, Encoding.UTF8, "application/json");
+        public async Task updateDataBarang(string username, User user)
+        {
+            var json = JsonSerializer.Serialize(user);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        //    var response = await _client.PutAsync($"BarangApi/{kodeBarang}", content);
-        //    response.EnsureSuccessStatusCode();
-        //}
+            var response = await _client.PutAsync($"UserApi/{username}", content);
+            response.EnsureSuccessStatusCode();
+        }
 
         // DELETE /api/BarangApi/{kodeBarang}
         public async Task deleteUser(string username)
