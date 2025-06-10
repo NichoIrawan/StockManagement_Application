@@ -74,10 +74,11 @@
             textBox2.BackColor = SystemColors.Control;
             textBox2.BorderStyle = BorderStyle.None;
             textBox2.Cursor = Cursors.IBeam;
-            textBox2.Location = new Point(10, 10);
+            textBox2.Font = new Font("Verdana", 9.88F);
+            textBox2.Location = new Point(10, 11);
             textBox2.Margin = new Padding(16);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(231, 16);
+            textBox2.Size = new Size(231, 17);
             textBox2.TabIndex = 0;
             textBox2.WordWrap = false;
             // 
@@ -133,10 +134,11 @@
             textBox1.BackColor = SystemColors.Control;
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Cursor = Cursors.IBeam;
-            textBox1.Location = new Point(10, 10);
+            textBox1.Font = new Font("Verdana", 9.88F);
+            textBox1.Location = new Point(10, 11);
             textBox1.Margin = new Padding(16);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(231, 16);
+            textBox1.Size = new Size(231, 17);
             textBox1.TabIndex = 0;
             textBox1.WordWrap = false;
             // 
@@ -176,7 +178,8 @@
             Controls.Add(panel1);
             Controls.Add(lblUsername);
             Controls.Add(pictureBox1);
-            FormBorderStyle = FormBorderStyle.None;
+            ForeColor = Color.White;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Login";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
