@@ -32,13 +32,16 @@
             txtSearch = new TextBox();
             label1 = new Label();
             dataGridView1 = new DataGridView();
-            btnDelete = new DataGridViewButtonColumn();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             btnAddGudang = new Button();
             btnRefresh = new Button();
             btnSearch = new Button();
+            kodeGudang = new DataGridViewTextBoxColumn();
+            namaGudang = new DataGridViewTextBoxColumn();
+            lokasi = new DataGridViewTextBoxColumn();
+            btnDelete = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -61,24 +64,14 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { btnDelete });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { kodeGudang, namaGudang, lokasi, btnDelete });
             dataGridView1.Location = new Point(44, 154);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(367, 250);
+            dataGridView1.Size = new Size(447, 250);
             dataGridView1.TabIndex = 2;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // btnDelete
-            // 
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.MediumSlateBlue;
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            btnDelete.DefaultCellStyle = dataGridViewCellStyle1;
-            btnDelete.FlatStyle = FlatStyle.Popup;
-            btnDelete.HeaderText = "Delete_Row";
-            btnDelete.Name = "btnDelete";
-            btnDelete.Text = "Delete";
-            btnDelete.UseColumnTextForButtonValue = true;
+            dataGridView1.CellBeginEdit += tableUser_CellBeginEdit;
+            dataGridView1.CellEndEdit += tableUser_CellEndEdit;
             // 
             // label2
             // 
@@ -120,7 +113,7 @@
             btnAddGudang.Text = "AddGudang";
             btnAddGudang.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAddGudang.UseVisualStyleBackColor = false;
-            btnAddGudang.Click += button1_Click;
+            btnAddGudang.Click += _btnAddGudangClick;
             // 
             // btnRefresh
             // 
@@ -130,7 +123,7 @@
             btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh Daftar";
             btnRefresh.UseVisualStyleBackColor = true;
-            btnRefresh.Click += button3_Click;
+            btnRefresh.Click += _btnRefreshClick;
             // 
             // btnSearch
             // 
@@ -140,12 +133,39 @@
             btnSearch.TabIndex = 9;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += button4_Click;
+            btnSearch.Click += _btnSearchClick;
+            // 
+            // kodeGudang
+            // 
+            kodeGudang.HeaderText = "KodeGudang";
+            kodeGudang.Name = "kodeGudang";
+            // 
+            // namaGudang
+            // 
+            namaGudang.HeaderText = "NamaGudang";
+            namaGudang.Name = "namaGudang";
+            // 
+            // lokasi
+            // 
+            lokasi.HeaderText = "Lokasi";
+            lokasi.Name = "lokasi";
+            // 
+            // btnDelete
+            // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.MediumSlateBlue;
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            btnDelete.DefaultCellStyle = dataGridViewCellStyle1;
+            btnDelete.FlatStyle = FlatStyle.Popup;
+            btnDelete.HeaderText = "Delete_Row";
+            btnDelete.Name = "btnDelete";
+            btnDelete.Text = "Delete";
+            btnDelete.UseColumnTextForButtonValue = true;
             // 
             // GudangHome
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(640, 480);
             Controls.Add(btnSearch);
@@ -176,6 +196,9 @@
         private Button btnAddGudang;
         private Button btnRefresh;
         private Button btnSearch;
+        private DataGridViewTextBoxColumn kodeGudang;
+        private DataGridViewTextBoxColumn namaGudang;
+        private DataGridViewTextBoxColumn lokasi;
         private DataGridViewButtonColumn btnDelete;
     }
 }

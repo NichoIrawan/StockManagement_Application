@@ -9,37 +9,56 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using StockManagementViews.Views;
 
-namespace StockManagementViews
+namespace StockManagementViews.Menu
 {
     public partial class AdminMenu : Form
     {
-        GudangHome gudang;
+        GudangHome? gudang;
+        UserManagement? user;
+
         public AdminMenu()
         {
             InitializeComponent();
+        }
+
+        private void resetForms()
+        {
+            gudang = null;
+            user = null;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (gudang == null)
             {
+                resetForms();
+
                 gudang = new();
-                gudang.FormClosed += gudang_formClosed;
                 gudang.MdiParent = this;
                 gudang.Dock = DockStyle.Fill;
                 gudang.Show();
 
+                button1.BackColor = Color.Transparent;
+                button2.BackColor = Color.Transparent;
                 button3.BackColor = Color.Lavender;
-            }
-            else
-            {
-                gudang.Activate();
             }
         }
 
-        private void gudang_formClosed(object? sender, FormClosedEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            gudang = null;
+            if (user == null)
+            {
+                resetForms();
+
+                user = new();
+                user.MdiParent = this;
+                user.Dock = DockStyle.Fill;
+                user.Show();
+
+                button1.BackColor = Color.Lavender;
+                button2.BackColor = Color.Transparent;
+                button3.BackColor = Color.Transparent;
+            }
         }
     }
 }

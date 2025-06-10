@@ -26,10 +26,6 @@ namespace StockManagementViews.Views
             InitializeComponent();
         }
 
-
-
-     
-
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             addPopup.Show();

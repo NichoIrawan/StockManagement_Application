@@ -1,22 +1,58 @@
 [
   {
-    "tanggal": "2023-10-01",
+    "tanggal": "2023-10-01T00:00:00",
     "jenis_transaksi": "Masuk",
     "barang": {
-      "id": 1,
-      "nama": "Laptop"
+      "kodeBarang": null,
+      "namaBarang": null,
+      "kategori": null,
+      "stok": 0,
+      "harga": 0,
+      "tanggalKadaluarsa": null,
+      "kodeGudang": null,
+      "gudang": null
     },
     "jumlah_barang": 10,
     "lokasi_penyimpanan": {
-      "id": "G001",
-      "nama": "Gudang A",
+      "kodeGudang": null,
+      "namaGudang": null,
       "lokasi": "Jakarta"
     },
     "pic": {
-      "id": 1,
-      "nama": "John Doe",
       "username": "jdoe",
+      "name": null,
+      "role": null,
       "password": "secret"
+    }
+  },
+  {
+    "tanggal": "2025-06-10T14:46:24.106Z",
+    "jenis_transaksi": "string",
+    "barang": {
+      "kodeBarang": "MK001",
+      "namaBarang": "Kentang",
+      "kategori": 0,
+      "stok": 2,
+      "harga": 10,
+      "tanggalKadaluarsa": "2025-06-10",
+      "kodeGudang": "G002",
+      "gudang": {
+        "kodeGudang": "G002",
+        "namaGudang": "G002",
+        "lokasi": "Timur"
+      }
+    },
+    "jumlah_barang": 0,
+    "lokasi_penyimpanan": {
+      "kodeGudang": "G002",
+      "namaGudang": "Gudang Test",
+      "lokasi": "Timur"
+    },
+    "pic": {
+      "username": "Benaya",
+      "name": "Ben",
+      "role": 1,
+      "password": "string"
     }
   }
 ]

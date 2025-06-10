@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace StockManagementViews.Views
 {
-    public partial class Login : Form
+    public partial class LoginMenu : Form
     {
-        public Login()
+        public LoginMenu()
         {
             InitializeComponent();
         }
