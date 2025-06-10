@@ -16,7 +16,7 @@ namespace StockManagement.Models
 
         public User() { }
    
-        public User(string username, string name, Roles role, string password)
+        public User(string username, string name, Roles? role, string password)
         {
             this.username = username;
             this.name = name;
