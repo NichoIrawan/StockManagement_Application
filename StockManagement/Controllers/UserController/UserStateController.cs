@@ -1,25 +1,19 @@
 ﻿using StockManagement.Controller.UserController;
-using StockManagement.Models;
 using StockManagement.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StockManagement.Controllers.UserController
 {
-    
     public class UserStateController
     {
         public IUserState currentState;
         public AdminController adminController;
         public ManagerController managerController;
         public StaffController staffController;
-       
-        
-        public UserStateController() {
-            currentState = new NoneState();        
+
+
+        public UserStateController()
+        {
+            currentState = new NoneState();
         }
 
         public void SetState(IUserState state)
@@ -29,7 +23,6 @@ namespace StockManagement.Controllers.UserController
 
         public void ChangeState(int userType)
         {
-           
             currentState.transitionState(this, userType);
         }
 
@@ -80,12 +73,5 @@ namespace StockManagement.Controllers.UserController
             void transitionState(UserStateController controller, int userType);
         }
 
-
-
     }
-
-    
-
-
-
 }
