@@ -22,18 +22,27 @@ namespace StockManagementViews.Views
         {
             InitializeComponent();
         }
-        private async void LoadRiwayatAsync()
+
+        private async void LoadRiwayat()
+        {
+            _listRiwayat = await riwayatController.GetListRiwayatAsync();
+        }
+        private async Task LoadTableRiwayatAsync()
         {
             try
             {
-                _listRiwayat.Clear();
+                if (_listRiwayat.Count <= 0)
+                {
+                    _listRiwayat = await riwayatController.GetListRiwayatAsync();
+                }
+
+                //_listRiwayat.Clear();
                 TableRiwayat.DataSource = null;
                 TableRiwayat.Rows.Clear();
-                _listRiwayat = await riwayatController.GetListBarangAsync();
                 for (int i = 0; i < _listRiwayat.Count; i++)
                 {
                     TableRiwayat.Rows.Add();
-                    TableRiwayat.Rows[i].Cells[0].Value = DateTime.Now;
+                    TableRiwayat.Rows[i].Cells[0].Value = _listRiwayat[i].tanggal;
                     TableRiwayat.Rows[i].Cells[1].Value = _listRiwayat[i].barang.namaBarang;
                     TableRiwayat.Rows[i].Cells[2].Value = _listRiwayat[i].barang.kodeBarang;
                     TableRiwayat.Rows[i].Cells[3].Value = _listRiwayat[i].lokasi_penyimpanan.kodeGudang;
@@ -76,7 +85,8 @@ namespace StockManagementViews.Views
 
         private void Riwayat_Load(object sender, EventArgs e)
         {
-            LoadRiwayatAsync();
+            //LoadRiwayat();
+            LoadTableRiwayatAsync();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -96,21 +106,12 @@ namespace StockManagementViews.Views
 
         private void ButtonAdd(object sender, EventArgs e)
         {
-            
+
         }
 
         private async void textBox1_TextChanged(object sender, EventArgs e)
         {
-            String searchResult = textBoxSearchBar.Text;
-            TableRiwayat.DataSource = null;
-            TableRiwayat.Rows.Clear();
-            var bar = await riwayatController.GetRiwayatgByIdAsync(DateTime.Parse(searchResult));
-            if (bar == null)
-            {
-                MessageBox.Show("Riwayat tidak ditemukan");
-                LoadRiwayatAsync();
-                return;
-            }
+          
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -120,12 +121,44 @@ namespace StockManagementViews.Views
 
         private async void ButtonRefresh(object sender, EventArgs e)
         {
-            LoadRiwayatAsync();
+            LoadTableRiwayatAsync();
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private async void buttonAdd_Click(object sender, EventArgs e)
+        {
+            _listRiwayat.Clear();
+            await LoadTableRiwayatAsync();
+
+        }
+
+        private async void searchButton_Click(object sender, EventArgs e)
+        {
+            string searchResult = searchBar.Text;
+            TableRiwayat.DataSource = null;
+            
+            if (string.IsNullOrWhiteSpace(searchResult))
+            {
+                _listRiwayat.Clear();
+                await LoadTableRiwayatAsync();
+                return;
+            }
+
+            var riwayatByTanggal = await riwayatController.GetRiwayatByTanggalAsync(DateOnly.Parse(searchResult));
+            
+            if (riwayatByTanggal.Count <= 0)
+            {
+                MessageBox.Show("Riwayat tidak ditemukan");
+            }
+            else
+            {
+                _listRiwayat = riwayatByTanggal;
+                await LoadTableRiwayatAsync();
+            }
         }
     }
 }

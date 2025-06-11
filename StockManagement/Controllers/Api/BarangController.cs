@@ -43,7 +43,6 @@ namespace StockManagement.Controllers.Api
             }
         }
 
-
         public async Task<Barang> cariBarangDenganId(string kodeBarang)
         {
             try

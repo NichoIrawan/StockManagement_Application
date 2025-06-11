@@ -20,7 +20,7 @@ namespace StockManagement.Controllers.Api
         }
 
         // GET /api/LaporanApi
-        public async Task<List<Riwayat>> GetListBarangAsync()
+        public async Task<List<Riwayat>> GetListRiwayatAsync()
         {
             try
             {
@@ -32,8 +32,9 @@ namespace StockManagement.Controllers.Api
                 }
 
                 var json = await response.Content.ReadAsStringAsync();
-
                 var result = JsonSerializer.Deserialize<List<Riwayat>>(json);
+
+                
                 return result ?? new List<Riwayat>();
             }
             catch (Exception e)
@@ -44,27 +45,28 @@ namespace StockManagement.Controllers.Api
         }
 
         // GET /api/LaporanApi/{tanggalPembuatan}
-        public async Task<Riwayat> GetRiwayatgByIdAsync(DateTime tanggal)
+        public async Task<List<Riwayat>> GetRiwayatByTanggalAsync(DateOnly tanggal)
         {
             try
             {
-                var response = await _client.GetAsync($"RiwayatApi/{tanggal}");
+                var response = await _client.GetAsync($"RiwayatApi");
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Riwayat();
+                    return new List<Riwayat>();
                 }
 
                 var json = await response.Content.ReadAsStringAsync();
 
-                var result = JsonSerializer.Deserialize<Riwayat>(json);
+                var listRiwayat = JsonSerializer.Deserialize<List<Riwayat>>(json);
+                var result = listRiwayat.Where(item => (item.tanggal.DayOfYear + item.tanggal.Year) == tanggal.DayOfYear + tanggal.Year);
 
-                return result ?? new Riwayat();
+                return result.ToList() ?? new List<Riwayat>();
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Error: {e.Message}");
-                return new Riwayat();
+                return new List<Riwayat>();
             }
 
         }
@@ -77,7 +79,7 @@ namespace StockManagement.Controllers.Api
                 var json = JsonSerializer.Serialize(riwayat);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _client.PostAsync("RiwayatgApi", content);
+                var response = await _client.PostAsync("RiwayatApi", content);
                 response.EnsureSuccessStatusCode();
             }
             catch (Exception e)

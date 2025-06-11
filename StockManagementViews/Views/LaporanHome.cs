@@ -17,5 +17,10 @@ namespace StockManagementViews.Views
         {
             InitializeComponent();
         }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
