@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            button1 = new Button();
             panel2 = new Panel();
             searchBar = new TextBox();
             pictureBox3 = new PictureBox();
@@ -51,7 +52,6 @@
             label2 = new Label();
             pictureBox6 = new PictureBox();
             pictureBox5 = new PictureBox();
-            button1 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -80,6 +80,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(592, 77);
             panel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(381, 4);
+            button1.Margin = new Padding(0);
+            button1.Name = "button1";
+            button1.Size = new Size(20, 20);
+            button1.TabIndex = 19;
+            button1.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -112,7 +123,6 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = Properties.Resources.search;
             pictureBox3.Location = new Point(6, 6);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(20, 20);
@@ -137,7 +147,6 @@
             // pictureBox1
             // 
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Image = Properties.Resources.avatar;
             pictureBox1.Location = new Point(409, -2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(32, 32);
@@ -179,6 +188,7 @@
             buttonAdd.TabIndex = 12;
             buttonAdd.Text = "REFRESH";
             buttonAdd.UseVisualStyleBackColor = false;
+            buttonAdd.Click += buttonAdd_Click;
             // 
             // label1
             // 
@@ -226,14 +236,14 @@
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.NullValue = "-";
-            dataGridViewCellStyle1.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.NullValue = "-";
+            dataGridViewCellStyle2.SelectionBackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Nama_Barang, Stok, Harga, Tanggal_Kadaluarsa });
             dataGridView1.Dock = DockStyle.Fill;
@@ -317,7 +327,6 @@
             // pictureBox6
             // 
             pictureBox6.Dock = DockStyle.Left;
-            pictureBox6.Image = Properties.Resources.arrow_left;
             pictureBox6.Location = new Point(0, 16);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(40, 339);
@@ -328,26 +337,12 @@
             // pictureBox5
             // 
             pictureBox5.Dock = DockStyle.Right;
-            pictureBox5.Image = Properties.Resources.arrow_right;
             pictureBox5.Location = new Point(552, 16);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(40, 339);
             pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox5.TabIndex = 19;
             pictureBox5.TabStop = false;
-            // 
-            // button1
-            // 
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = Properties.Resources.Notif;
-            button1.Location = new Point(381, 4);
-            button1.Margin = new Padding(0);
-            button1.Name = "button1";
-            button1.Size = new Size(20, 20);
-            button1.TabIndex = 19;
-            button1.UseVisualStyleBackColor = true;
-            //button1.Click += button1_Click;
             // 
             // LaporanHome
             // 
