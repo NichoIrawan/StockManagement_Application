@@ -23,7 +23,7 @@ namespace StockManagementViews.Views
         {
             InitializeComponent();
         }
-        
+
         //Looad GUI GudangHome
         private async void GudangHome_Load(object sender, EventArgs e)
         {
@@ -31,7 +31,7 @@ namespace StockManagementViews.Views
         }
 
         //Load DataGudang pada DataGrid 
-        
+
 
         //Tampilkan PopUp untuk AddGudang
         private void _btnAddGudangClick(object sender, EventArgs e)
@@ -46,7 +46,8 @@ namespace StockManagementViews.Views
             Refresh();
         }
 
-        private async void Refresh() {
+        private async void Refresh()
+        {
             _listGudang.Clear();
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
@@ -62,6 +63,68 @@ namespace StockManagementViews.Views
 
         //Mencari Gudang dalam DataGrid berdasarkan kodeGudang
         private async void _btnSearchClick(object sender, EventArgs e)
+        {
+
+        }
+
+        //Menghapus 1 baris data Gudang dalam DataGrid 
+        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[3])
+                {
+                    var result = MessageBox.Show("Yakin mau hapus gudang ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        string idToDelete = _listGudang[e.RowIndex].kodeGudang; // Pastikan Id property bener
+
+                        await _gudangController.DeleteGudangAsync(idToDelete);
+                        _listGudang.RemoveAt(e.RowIndex);
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = _listGudang;
+                        MessageBox.Show("Gudang berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void tableUser_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                e.Cancel = true;
+            }
+
+        }
+
+        private async void tableUser_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow newRow = dataGridView1.Rows[e.RowIndex];
+            string kodeGudang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+
+            var res = await _gudangController.GetGudangByIdAsync(kodeGudang);
+
+            Gudang gdg = new Gudang(
+                kodeGudang: res.kodeGudang,
+                namaGudang: newRow.Cells[1].Value.ToString(),
+                lokasi: newRow.Cells[2].Value.ToString()
+            );
+            MessageBox.Show("Kolom berhasil dirubah");
+
+            await _gudangController.UpdateGudangAsync(kodeGudang, gdg);
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void searchButton_Click(object sender, EventArgs e)
         {
             var search = txtSearch.Text;
             dataGridView1.DataSource = null;
@@ -82,56 +145,15 @@ namespace StockManagementViews.Views
             }
         }
 
-        //Menghapus 1 baris data Gudang dalam DataGrid 
-        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[3])
-                {
-                    var result = MessageBox.Show("Yakin mau hapus gudang ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        string idToDelete = _listGudang[e.RowIndex].kodeGudang; // Pastikan Id property bener
-
-                        await _gudangController.DeleteGudangAsync(idToDelete);
-                        _listGudang.RemoveAt(e.RowIndex);
-                        dataGridView1.DataSource = null;
-                        dataGridView1.DataSource = _listGudang;
-                        MessageBox.Show("Gudang berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);  
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            Refresh();
         }
 
-        private void tableUser_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void btnAddGudang_Click(object sender, EventArgs e)
         {
-            if (e.ColumnIndex == 0)
-            {
-                e.Cancel = true;
-            }
-            
-        }
-
-        private async void tableUser_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            DataGridViewRow newRow = dataGridView1.Rows[e.RowIndex];
-            string kodeGudang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-
-            var res = await _gudangController.GetGudangByIdAsync(kodeGudang);
-
-            Gudang gdg = new Gudang(
-                kodeGudang: res.kodeGudang,
-                namaGudang: newRow.Cells[1].Value.ToString(),
-                lokasi: newRow.Cells[2].Value.ToString()
-            ) ;
-            MessageBox.Show("Kolom berhasil dirubah");
-
-            await _gudangController.UpdateGudangAsync(kodeGudang, gdg);
+            AddGudangForm addGudangForm = new AddGudangForm();
+            addGudangForm.Show();
         }
     }
 }

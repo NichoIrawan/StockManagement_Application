@@ -23,18 +23,18 @@ namespace ApiStockManagement.Controllers
             return _listRiwayat is null ? NotFound() : Ok(_listRiwayat);
         }
 
-        // API to get "Riwayat" by tanggal.
-        [HttpGet("{tanggal}")]
-        public Riwayat Get(DateTime tanggal)
-        {
-            _listRiwayat = _jsonHandlerList.ReadJsonFromFile(_filePath);
-            if (_listRiwayat is null)
-            {
-                return null;
-            }
-            var gudang = _listRiwayat.FirstOrDefault(item => item.tanggal == tanggal);
-            return gudang is null ? null : gudang;
-        }
+        //// API to get "Riwayat" by tanggal.
+        //[HttpGet("{tanggal}")]
+        //public Riwayat Get(DateTime tanggal)
+        //{
+        //    _listRiwayat = _jsonHandlerList.ReadJsonFromFile(_filePath);
+        //    if (_listRiwayat is null)
+        //    {
+        //        return null;
+        //    }
+        //    var resultList = _listRiwayat.Where(item => item.tanggal == tanggal);
+        //    return resultList is null ? null : resultList;
+        //}
 
         // API to add a new "Riwayat".
         [HttpPost]

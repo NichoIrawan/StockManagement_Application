@@ -15,7 +15,7 @@ namespace StockManagementViews
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new AdminMenu());
+            Application.Run(new RiwayatHome());
         }
     }
 }
