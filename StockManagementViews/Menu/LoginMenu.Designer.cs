@@ -1,4 +1,6 @@
-﻿namespace StockManagementViews.Views
+﻿using System.Text.RegularExpressions;
+
+namespace StockManagementViews.Views
 {
     partial class LoginMenu
     {
@@ -19,6 +21,40 @@
             }
             base.Dispose(disposing);
         }
+
+        private bool ValidateInput(string username, string pass)
+        {
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(pass))
+            {
+                ShowWarning("Semua data harus diisi!", "Peringatan");
+                return false;
+            }
+
+            if (username.Length > 10 || pass.Length > 50)
+            {
+                ShowWarning("Panjang input melebihi batas maksimal.", "Peringatan");
+                return false;
+            }
+
+            if (!IsValidText(username) || !IsValidText(pass))
+            {
+                ShowWarning("Input mengandung karakter tidak diizinkan.", "Peringatan");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ShowWarning(string message, string title, MessageBoxIcon icon = MessageBoxIcon.Warning)
+        {
+            MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
+        }
+
+        private bool IsValidText(string input)
+        {
+            return Regex.IsMatch(input, @"^[a-zA-Z0-9 .,/-]+$");
+        }
+
 
         #region Windows Form Designer generated code
 

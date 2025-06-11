@@ -16,5 +16,6 @@ namespace StockManagementViews.Views
         {
             InitializeComponent();
         }
+
     }
 }

@@ -14,7 +14,7 @@ namespace ApiStockManagement.Controllers
         private readonly string _filePath = "Data/ListUser.json";
         private static List<User>? _listUser;
 
-        private JsonHandler<List<User>> _jsonHandlerList = new();
+        private readonly JsonHandler<List<User>> _jsonHandlerList = JsonHandler<List<User>>.GetInstance();
 
         // API to get "User" as List.
         [HttpGet]

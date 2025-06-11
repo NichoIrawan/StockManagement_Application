@@ -168,7 +168,7 @@
             Controls.Add(textBoxSearchBar);
             Controls.Add(buttonAdd);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             Name = "RiwayatHome";
             Text = "       ";

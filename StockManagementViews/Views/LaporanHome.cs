@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StockManagementViews.Menu;
 
 namespace StockManagementViews.Views
 {
-    public partial class LaporanHome: Form
+    public partial class LaporanHome : Form
     {
         public LaporanHome()
         {

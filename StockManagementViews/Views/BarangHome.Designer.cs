@@ -184,6 +184,7 @@
             Controls.Add(label2);
             Controls.Add(txtSearch);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "BarangHome";
             Text = "BarangHome";
             Load += BarangHome_Load;

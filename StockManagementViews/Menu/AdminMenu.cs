@@ -15,23 +15,25 @@ namespace StockManagementViews.Menu
     {
         GudangHome? gudang;
         UserManagement? user;
+        BarangHome? barang;
 
         public AdminMenu()
         {
             InitializeComponent();
         }
 
-        private void resetForms()
+        private void ResetForms()
         {
             gudang = null;
             user = null;
+            barang = null;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (gudang == null)
             {
-                resetForms();
+                ResetForms();
 
                 gudang = new();
                 gudang.MdiParent = this;
@@ -48,7 +50,7 @@ namespace StockManagementViews.Menu
         {
             if (user == null)
             {
-                resetForms();
+                ResetForms();
 
                 user = new();
                 user.MdiParent = this;
@@ -57,6 +59,22 @@ namespace StockManagementViews.Menu
 
                 button1.BackColor = Color.Lavender;
                 button2.BackColor = Color.Transparent;
+                button3.BackColor = Color.Transparent;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (barang == null)
+            {
+                ResetForms();
+                barang = new();
+                barang.MdiParent = this;
+                barang.Dock = DockStyle.Fill;
+                barang.Show();
+
+                button1.BackColor = Color.Transparent;
+                button2.BackColor = Color.Lavender;
                 button3.BackColor = Color.Transparent;
             }
         }

@@ -113,6 +113,7 @@
             button2.Text = "            Barang Dashboard";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel4
             // 
@@ -140,6 +141,7 @@
             button3.Text = "            Gudang Dashboard";
             button3.TextAlign = ContentAlignment.MiddleLeft;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panel2
             // 
@@ -167,6 +169,7 @@
             button1.Text = "            Laporan Dashboard";
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // panel5
             // 
@@ -194,6 +197,7 @@
             button4.Text = "            Riwayat";
             button4.TextAlign = ContentAlignment.MiddleLeft;
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // ManagerMenu
             // 

@@ -104,6 +104,7 @@
             button2.Text = "            Barang Dashboard";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel3
             // 
@@ -132,6 +133,7 @@
             button1.Text = "            Riwayat";
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // StaffMenu
             // 

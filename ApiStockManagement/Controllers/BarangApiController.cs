@@ -11,7 +11,7 @@ namespace ApiStockManagement.Controllers
     [ApiController]
     public class BarangApiController : ControllerBase
     {
-        JsonHandler<List<Barang>> _jsonHandlerList = new ();
+        private readonly JsonHandler<List<Barang>> _jsonHandlerList = JsonHandler<List<Barang>>.GetInstance();
 
         private readonly string _filePath = "Data/ListBarang.json";
         private List<Barang>? _listBarang;

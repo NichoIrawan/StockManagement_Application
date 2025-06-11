@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel1 = new Panel();
             panel2 = new Panel();
             searchBar = new TextBox();
             pictureBox3 = new PictureBox();
-            pictureBox2 = new PictureBox();
             searchButton = new Button();
             pictureBox1 = new PictureBox();
             lblRole = new Label();
@@ -52,10 +51,10 @@
             label2 = new Label();
             pictureBox6 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button1 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
@@ -67,8 +66,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(panel2);
-            panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(searchButton);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(lblRole);
@@ -120,16 +119,6 @@
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 11;
             pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.Notif;
-            pictureBox2.Location = new Point(381, 4);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(20, 20);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 17;
-            pictureBox2.TabStop = false;
             // 
             // searchButton
             // 
@@ -237,14 +226,14 @@
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.NullValue = "-";
-            dataGridViewCellStyle2.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.NullValue = "-";
+            dataGridViewCellStyle1.SelectionBackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Nama_Barang, Stok, Harga, Tanggal_Kadaluarsa });
             dataGridView1.Dock = DockStyle.Fill;
@@ -347,6 +336,19 @@
             pictureBox5.TabIndex = 19;
             pictureBox5.TabStop = false;
             // 
+            // button1
+            // 
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Image = Properties.Resources.Notif;
+            button1.Location = new Point(381, 4);
+            button1.Margin = new Padding(0);
+            button1.Name = "button1";
+            button1.Size = new Size(20, 20);
+            button1.TabIndex = 19;
+            button1.UseVisualStyleBackColor = true;
+            //button1.Click += button1_Click;
+            // 
             // LaporanHome
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -364,7 +366,6 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -381,7 +382,6 @@
         private Panel panel2;
         private TextBox searchBar;
         private PictureBox pictureBox3;
-        private PictureBox pictureBox2;
         private Button searchButton;
         private PictureBox pictureBox1;
         private Label lblRole;
@@ -400,5 +400,6 @@
         private DataGridViewTextBoxColumn Tanggal_Kadaluarsa;
         private Label label3;
         private Label label2;
+        private Button button1;
     }
 }
