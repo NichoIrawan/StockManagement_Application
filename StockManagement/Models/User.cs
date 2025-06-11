@@ -11,12 +11,15 @@ namespace StockManagement.Models
     {
         public string? username { get; set; }
         public string? name { get; set; }
-        public Roles? role { get; set; }
+        public Roles role { get; set; }
         public string? password { get; set; }
 
-        public User() { }
+        public User()
+        {
+            this.role = Roles.USER;
+        }
    
-        public User(string username, string name, Roles? role, string password)
+        public User(string username, string name, Roles role, string password)
         {
             this.username = username;
             this.name = name;

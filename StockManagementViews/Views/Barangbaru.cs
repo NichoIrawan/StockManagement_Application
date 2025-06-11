@@ -1,5 +1,4 @@
-﻿using StockManagement.Controller;
-using StockManagement.Controllers.Api;
+﻿using StockManagement.Controllers.Api;
 using StockManagement.Models;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,19 @@
     {
         "username": "admin",
         "name": "Budi Santoso",
-        "role": 1,
+        "role": 2,
         "password": "admin"
+    },
+    {
+        "username": "stephanie",
+        "name": "Stephanie Renata",
+        "role": 3,
+        "password": "staff"
+    },
+    {
+        "username": "mike",
+        "name": "Michael Aja",
+        "role": 1,
+        "password": "manager"
     }
 ]

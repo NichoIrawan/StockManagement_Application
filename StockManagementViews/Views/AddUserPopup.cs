@@ -1,4 +1,4 @@
-﻿using StockManagement.Controller.UserController;
+﻿using StockManagement.Controllers.Api;
 using StockManagement.Models;
 using StockManagementLibrary;
 using System;
@@ -15,7 +15,8 @@ namespace StockManagementViews.Views
 {
     public partial class AddUserPopup : Form
     {
-        AdminController adminController = new AdminController();
+        //AdminController adminController = new AdminController();
+        private UserController _userController = new();
         String[] comboBoxOption = { "Staff", "Manager" };
 
         public AddUserPopup()
@@ -45,7 +46,7 @@ namespace StockManagementViews.Views
                     role: (comboBoxRole.SelectedValue.Equals("Staff")) ? Roles.STAFF : Roles.MANAGER,
                     password: txtBoxPassword.Text
                     );
-                await adminController.addUser(user);
+                await _userController.PostUserAsync(user);
                 MessageBox.Show("Success", "Berhasil menambahkan user");
                 txtBoxName.Clear();
                 txtBoxUsername.Clear();

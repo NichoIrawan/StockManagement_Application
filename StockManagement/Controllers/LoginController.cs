@@ -1,5 +1,6 @@
 ﻿using StockManagement.Controllers.Api;
 using StockManagement.Models;
+using StockManagementLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,21 +13,28 @@ namespace StockManagement.Controllers
     {
         private readonly UserController _apiController = new();
 
-        public bool Login(string username, string password)
+        public async Task<Roles> Login(string username, string password)
         {
-            User? user = _apiController.GetUserByUsernameAsync(username).Result;
-
-            if (user==null)
+            try
             {
-                return false;
-            }
+                User? user = await _apiController.GetUserByUsernameAsync(username);
 
-            if (!user.password.Equals(password))
+                if (user==null)
+                {
+                    return Roles.USER;
+                }
+
+                if (!user.password.Equals(password))
+                {
+                    return Roles.USER;
+                }
+
+                return user.role;
+            }
+            catch
             {
-                return false;
+                return Roles.USER;
             }
-
-            return true;
         }
     }
 }

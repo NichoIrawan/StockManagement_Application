@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using StockManagement.Controllers;
+using StockManagementLibrary;
+using StockManagementViews.Menu;
 
 namespace StockManagementViews.Views
 {
     public partial class LoginMenu : Form
     {
+        Form? form;
+
         private LoginController _controller = new();
 
         public LoginMenu()
@@ -20,9 +24,41 @@ namespace StockManagementViews.Views
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            _controller.Login(textBox1.Text, textBox2.Text);
+            try
+            {
+                // Disable button to prevent multiple clicks
+                button1.Enabled = false;
+
+                Roles role = await _controller.Login(textBox2.Text, textBox1.Text);
+
+                switch (role)
+                {
+                    case Roles.STAFF:
+                        form = new StaffMenu();
+                        break;
+                    case Roles.MANAGER:
+                        form = new ManagerMenu();
+                        break;
+                    case Roles.ADMIN:
+                        form = new AdminMenu();
+                        break;
+                    default:
+                        MessageBox.Show("Login gagal, silakan coba lagi.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                }
+                this.Hide();
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                button1.Enabled = true;
+            }
         }
     }
 }

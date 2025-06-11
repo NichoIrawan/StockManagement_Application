@@ -1,4 +1,4 @@
-﻿using StockManagement.Controller.UserController;
+﻿using StockManagement.Controllers.Api;
 using StockManagement.Models;
 using StockManagementLibrary;
 using System;
@@ -18,7 +18,7 @@ namespace StockManagementViews.Views
     {
         List<User> userList = new List<User>();
         List<User> searchList = new List<User>();
-        AdminController adminCont = new AdminController();
+        UserController _userController = new();
         Form addPopup = new AddUserPopup();
         
         public UserManagement()
@@ -39,7 +39,7 @@ namespace StockManagementViews.Views
             userList.Clear();
             tableUser.DataSource = null;
             tableUser.Rows.Clear();
-            userList = await adminCont.GetUserList();
+            userList = await _userController.GetUsersAsync();
             for (int i = 0; i < userList.Count; i++)
             {
                 int rownum = tableUser.Rows.Add();
@@ -77,7 +77,7 @@ namespace StockManagementViews.Views
                 tableUser.DataSource = null;
                 tableUser.Rows.Clear();
                 searchList.Clear();
-                var res = await adminCont.GetUserbyUsername(searchResult);
+                var res = await _userController.GetUserByUsernameAsync(searchResult);
                 if (res == null)
                 {
                     MessageBox.Show("User tidak ditemukan");
@@ -105,7 +105,7 @@ namespace StockManagementViews.Views
             string username = tableUser.CurrentRow.Cells[0].Value.ToString();
             if (tableUser.CurrentCell == tableUser.CurrentRow.Cells[3] )
             {
-                await adminCont.deleteUser(username);
+                await _userController.DeleteUserAsync(username);
                 tableUser.Rows.RemoveAt(e.RowIndex);
             }
             
@@ -128,7 +128,7 @@ namespace StockManagementViews.Views
             DataGridViewRow newRow = tableUser.Rows[e.RowIndex];
             string username = tableUser.CurrentRow.Cells[0].Value.ToString();
 
-            var res = await adminCont.GetUserbyUsername(username);
+            var res = await _userController.GetUserByUsernameAsync(username);
 
             User usr = new User(
                 username: newRow.Cells[0].Value.ToString(),
@@ -137,7 +137,7 @@ namespace StockManagementViews.Views
                 password: res.password
             );
 
-            await adminCont.updateDataBarang(username, usr);
+            await _userController.UpdateUserDataAsync(username, usr);
         }
 
     }

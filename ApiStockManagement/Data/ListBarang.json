@@ -15,10 +15,10 @@
   },
   {
     "kodeBarang": "MS001",
-    "namaBarang": "Microsoft",
-    "kategori": 3,
+    "namaBarang": "Dodol",
+    "kategori": null,
     "stok": 10,
-    "harga": 100000,
+    "harga": 4000,
     "tanggalKadaluarsa": "2025-05-05",
     "kodeGudang": "G01",
     "gudang": {
@@ -26,5 +26,15 @@
       "namaGudang": "Gudang Garam",
       "lokasi": "Pejaten"
     }
+  },
+  {
+    "kodeBarang": "MK002",
+    "namaBarang": "Keripik",
+    "kategori": null,
+    "stok": 20,
+    "harga": 15000,
+    "tanggalKadaluarsa": "2026-07-17",
+    "kodeGudang": "G01",
+    "gudang": null
   }
 ]
