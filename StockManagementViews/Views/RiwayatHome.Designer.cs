@@ -62,7 +62,7 @@
             TableRiwayat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TableRiwayat.Columns.AddRange(new DataGridViewColumn[] { TanngalRiwayat, TransaksiRiwayat, BarangRiwayat, LokasiRiwayat, PicRiwayat, Deletebtn });
             TableRiwayat.Location = new Point(12, 118);
-            TableRiwayat.Name = "TableRiwayat";
+            TableRiwayat.Name = "tableBarang";
             TableRiwayat.Size = new Size(597, 311);
             TableRiwayat.TabIndex = 9;
             // 
