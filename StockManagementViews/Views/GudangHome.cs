@@ -117,6 +117,7 @@ namespace StockManagementViews.Views
             
         }
 
+
         private async void tableUser_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow newRow = dataGridView1.Rows[e.RowIndex];

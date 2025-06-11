@@ -14,7 +14,7 @@ namespace StockManagementViews.Menu
     public partial class AdminMenu : Form
     {
         GudangHome? gudang;
-        UserManagement? user;
+        NotifikasiHome? user;
 
         public AdminMenu()
         {
@@ -55,7 +55,7 @@ namespace StockManagementViews.Menu
                 user.Dock = DockStyle.Fill;
                 user.Show();
 
-                button1.BackColor = Color.Lavender;
+                button1.BackColor = Color.Transparent;
                 button2.BackColor = Color.Transparent;
                 button3.BackColor = Color.Transparent;
             }
