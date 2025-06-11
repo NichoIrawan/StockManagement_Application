@@ -113,6 +113,7 @@
             button2.Text = "            Barang Dashboard";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel4
             // 
@@ -140,6 +141,7 @@
             button3.Text = "            Gudang Dashboard";
             button3.TextAlign = ContentAlignment.MiddleLeft;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panel2
             // 

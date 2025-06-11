@@ -17,13 +17,10 @@ namespace StockManagementViews.Menu
         BarangHome? barang;
         LaporanHome? laporan;
         RiwayatHome? riwayat;
-        static RiwayatHome _riwayat;
-        ManagerMenu _menu;
 
         public ManagerMenu()
         {
             InitializeComponent();
-            _menu = this;
         }
 
         private void ResetForms()
@@ -65,6 +62,40 @@ namespace StockManagementViews.Menu
                 button2.BackColor = Color.Transparent;
                 button3.BackColor = Color.Transparent;
                 button4.BackColor = Color.Lavender;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (barang == null)
+            {
+                ResetForms();
+                barang = new();
+                barang.MdiParent = this;
+                barang.Dock = DockStyle.Fill;
+                barang.Show();
+
+                button1.BackColor = Color.Transparent;
+                button2.BackColor = Color.Lavender;
+                button3.BackColor = Color.Transparent;
+                button4.BackColor = Color.Transparent;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (gudang == null)
+            {
+                ResetForms();
+                gudang = new();
+                gudang.MdiParent = this;
+                gudang.Dock = DockStyle.Fill;
+                gudang.Show();
+
+                button1.BackColor = Color.Transparent;
+                button2.BackColor = Color.Transparent;
+                button3.BackColor = Color.Lavender;
+                button4.BackColor = Color.Transparent;
             }
         }
     }
