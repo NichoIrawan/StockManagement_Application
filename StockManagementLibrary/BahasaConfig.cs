@@ -12,7 +12,7 @@ namespace StockManagementLibrary
         public Config config;
         public const string filePath = @"Config.json";
 
-        private JsonHandler<Config> _jsonHandler = new JsonHandler<Config>();
+        private JsonHandler<Config> _jsonHandler = JsonHandler<Config>.GetInstance();
 
         public BahasaConfig()
         {

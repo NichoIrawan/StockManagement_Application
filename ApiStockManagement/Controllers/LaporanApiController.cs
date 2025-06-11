@@ -14,7 +14,7 @@ namespace ApiStockManagement.Controllers
         private static readonly string _filePath = "Data/ListLaporan.json";
         private static List<Laporan> _listLaporan;
 
-        private JsonHandler<List<Laporan>> _jsonHandlerList = new();
+        private readonly JsonHandler<List<Laporan>> _jsonHandlerList = JsonHandler<List<Laporan>>.GetInstance();
 
         // API to get "Laporan" as List.
         [HttpGet]

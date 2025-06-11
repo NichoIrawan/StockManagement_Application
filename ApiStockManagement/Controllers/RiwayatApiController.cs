@@ -13,7 +13,7 @@ namespace ApiStockManagement.Controllers
         private static readonly string _filePath = "Data/ListRiwayat.json";
         private static List<Riwayat>? _listRiwayat;
 
-        private JsonHandler<List<Riwayat>> _jsonHandlerList = new();
+        private readonly JsonHandler<List<Riwayat>> _jsonHandlerList = JsonHandler<List<Riwayat>>.GetInstance();
 
         // API to get "Riwayat" as List.
         [HttpGet]

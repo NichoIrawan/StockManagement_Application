@@ -14,8 +14,8 @@ namespace ApiStockManagement.Controllers
         private static readonly string _filePath = "Data/ListGudang.json";
         private static List<Gudang> _listGudang;
         
-        private JsonHandler<List<Gudang>> _jsonHandlerList = new();
-        private JsonHandler<List<Barang>> _jsonHandlerListBarang = new();
+        private readonly JsonHandler<List<Gudang>> _jsonHandlerList = JsonHandler<List<Gudang>>.GetInstance();
+        private readonly JsonHandler<List<Barang>> _jsonHandlerListBarang = JsonHandler<List<Barang>>.GetInstance();
 
         // API to get "Gudang" as List.
         [HttpGet]
