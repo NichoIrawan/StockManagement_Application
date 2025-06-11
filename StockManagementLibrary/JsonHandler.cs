@@ -7,24 +7,40 @@ using System.Threading.Tasks;
 
 namespace StockManagementLibrary
 {
-    public static class JsonHandler<T>
+    public class JsonHandler<T>
     {
-        public static T? readJsonFromFile(string filepath)
-        {
-            string json = File.ReadAllText(filepath);
-            T data = JsonSerializer.Deserialize<T>(json);
+        private static JsonHandler<T>? _instance;
+        private readonly JsonSerializerOptions _options;
 
-            return data;
+        // Private constructor agar kelas tidak dibuat berkali-kali
+        private JsonHandler()
+        {
+            _options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = true
+            };
         }
 
-        public static void writeJsonToFile(string filepath, T data)
+        // Singleton instance untuk mengakses JsonHandler
+        public static JsonHandler<T> GetInstance()
         {
-            JsonSerializerOptions options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
+            _instance ??= new ();
 
-            string json = JsonSerializer.Serialize(data, options);
+            return _instance;
+        }
+
+        // Metode untuk membaca objek dari JSON string
+        public T? ReadJsonFromFile(string filepath)
+        {
+            string json = File.ReadAllText(filepath);
+            return JsonSerializer.Deserialize<T>(json, _options);
+        }
+
+        // Metode untuk menulis objek ke JSON string
+        public void WriteJsonToFile(string filepath, T data)
+        {
+            string json = JsonSerializer.Serialize(data, _options);
             File.WriteAllText(filepath, json);
         }
     }

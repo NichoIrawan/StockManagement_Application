@@ -1,12 +1,12 @@
 [
   {
     "kodeGudang": "G001",
-    "namaGudang": "Gudang Yudha",
+    "namaGudang": "Gudang A",
     "lokasi": "Jakarta"
   },
   {
     "kodeGudang": "G002",
-    "namaGudang": "Gudang Cabang",
-    "lokasi": "Bandung"
+    "namaGudang": "Gudang B",
+    "lokasi": "Surabaya"
   }
 ]

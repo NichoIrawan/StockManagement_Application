@@ -6,8 +6,7 @@ class main
 {
     public static async Task Main()
     {
-        StartupView startupView = new StartupView();
-        startupView.selectLanguage();
-        startupView.callMenu();
+        
+      
     }
 }
