@@ -1,4 +1,4 @@
-using StockManagement.Controller;
+using StockManagement.Controllers.Api;
 using StockManagement.Models;
 using System.Text.Json;
 

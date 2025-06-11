@@ -1,5 +1,4 @@
-﻿using StockManagement.Controllers;
-using StockManagement.Models;
+﻿using StockManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace StockManagement.Controllers
+namespace StockManagement.Controllers.Api
 {
     public class RiwayatController
     {

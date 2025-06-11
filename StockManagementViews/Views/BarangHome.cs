@@ -1,5 +1,5 @@
 ﻿using StockManagement.Controller.UserController;
-using StockManagement.Controllers;
+using StockManagement.Controllers.Api;
 using StockManagement.Models;
 using System;
 using System.Collections.Generic;

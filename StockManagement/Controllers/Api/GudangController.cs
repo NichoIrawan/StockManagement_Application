@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace StockManagement.Controller
+namespace StockManagement.Controllers.Api
 {
     public class GudangController
     {

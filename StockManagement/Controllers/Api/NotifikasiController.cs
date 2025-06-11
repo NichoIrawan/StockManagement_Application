@@ -5,7 +5,7 @@ using StockManagement.Models;
 using System.Collections.Generic;
 using System;
 
-namespace StockManagement.Controller
+namespace StockManagement.Controllers.Api
 {
     public class NotifikasiController
     {

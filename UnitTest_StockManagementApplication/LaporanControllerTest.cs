@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Moq.Protected;
 using StockManagement.Controller;
+using StockManagement.Controllers.Api;
 using StockManagement.Models;
 using Xunit;
 

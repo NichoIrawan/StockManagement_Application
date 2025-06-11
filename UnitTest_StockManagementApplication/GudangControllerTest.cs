@@ -6,10 +6,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Threading;
 using StockManagement.Models;
-using StockManagement.Controller;
 using System.Collections.Generic;
 using System.Text.Json;
 using System;
+using StockManagement.Controllers.Api;
 
 namespace UnitTest_StockManagementApplication
 {
