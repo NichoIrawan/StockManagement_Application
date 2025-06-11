@@ -24,7 +24,7 @@ namespace StockManagementViews.Views
             barangCont = new BarangController();
         }
 
-        private async void btnTambah_Click(object sender, EventArgs e)
+        private async void BtnTambah_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtKode.Text) ||
                 string.IsNullOrWhiteSpace(txtNama.Text) ||

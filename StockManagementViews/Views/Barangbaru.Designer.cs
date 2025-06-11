@@ -158,7 +158,7 @@
             btnTambah.TabIndex = 13;
             btnTambah.Text = "Tambah";
             btnTambah.UseVisualStyleBackColor = true;
-            btnTambah.Click += btnTambah_Click;
+            btnTambah.Click += BtnTambah_Click;
             // 
             // Barangbaru
             // 
