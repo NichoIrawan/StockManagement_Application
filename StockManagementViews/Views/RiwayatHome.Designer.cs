@@ -67,6 +67,7 @@
             tableRiwayat.Size = new Size(597, 311);
             tableRiwayat.TabIndex = 9;
             tableRiwayat.CellContentClick += TableRiwayat_CellContentClick;
+
             // 
             // TanngalRiwayat
             // 

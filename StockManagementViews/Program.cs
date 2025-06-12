@@ -15,7 +15,7 @@ namespace StockManagementViews
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new LoginMenu());
+            Application.Run(new AdminMenu());
         }
     }
 }
