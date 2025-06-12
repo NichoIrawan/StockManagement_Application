@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            TableRiwayat = new DataGridView();
-            TanngalRiwayat = new DataGridViewTextBoxColumn();
-            TransaksiRiwayat = new DataGridViewTextBoxColumn();
-            BarangRiwayat = new DataGridViewTextBoxColumn();
-            LokasiRiwayat = new DataGridViewTextBoxColumn();
-            PicRiwayat = new DataGridViewTextBoxColumn();
-            Deletebtn = new DataGridViewButtonColumn();
+            tableRiwayat = new DataGridView();
+            tanngalRiwayat = new DataGridViewTextBoxColumn();
+            transaksiRiwayat = new DataGridViewTextBoxColumn();
+            jumlahRiwayat = new DataGridViewTextBoxColumn();
+            barangRiwayat = new DataGridViewTextBoxColumn();
+            lokasiRiwayat = new DataGridViewTextBoxColumn();
+            picRiwayat = new DataGridViewTextBoxColumn();
+            deletebtn = new DataGridViewButtonColumn();
             panel1 = new Panel();
             button1 = new Button();
             panel2 = new Panel();
@@ -46,68 +47,75 @@
             pictureBox1 = new PictureBox();
             lblRole = new Label();
             lblName = new Label();
-            buttonAdd = new Button();
+            buttonRefresh = new Button();
             label2 = new Label();
-            ((System.ComponentModel.ISupportInitialize)TableRiwayat).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tableRiwayat).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // TableRiwayat
+            // tableRiwayat
             // 
-            TableRiwayat.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            TableRiwayat.BorderStyle = BorderStyle.None;
-            TableRiwayat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            TableRiwayat.Columns.AddRange(new DataGridViewColumn[] { TanngalRiwayat, TransaksiRiwayat, BarangRiwayat, LokasiRiwayat, PicRiwayat, Deletebtn });
-            TableRiwayat.Location = new Point(12, 118);
-            TableRiwayat.Name = "tableBarang";
-            TableRiwayat.Size = new Size(597, 311);
-            TableRiwayat.TabIndex = 9;
+            tableRiwayat.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            tableRiwayat.BorderStyle = BorderStyle.None;
+            tableRiwayat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tableRiwayat.Columns.AddRange(new DataGridViewColumn[] { tanngalRiwayat, transaksiRiwayat, jumlahRiwayat, barangRiwayat, lokasiRiwayat, picRiwayat, deletebtn });
+            tableRiwayat.Location = new Point(12, 118);
+            tableRiwayat.Name = "tableRiwayat";
+            tableRiwayat.Size = new Size(597, 311);
+            tableRiwayat.TabIndex = 9;
+            tableRiwayat.CellContentClick += TableRiwayat_CellContentClick;
+
             // 
             // TanngalRiwayat
             // 
-            TanngalRiwayat.FillWeight = 108.892921F;
-            TanngalRiwayat.HeaderText = "Tanggal";
-            TanngalRiwayat.Name = "TanngalRiwayat";
+            tanngalRiwayat.FillWeight = 108.892921F;
+            tanngalRiwayat.HeaderText = "Tanggal";
+            tanngalRiwayat.Name = "TanngalRiwayat";
             // 
             // TransaksiRiwayat
             // 
-            TransaksiRiwayat.FillWeight = 104.382378F;
-            TransaksiRiwayat.HeaderText = "Jenis Transaksi";
-            TransaksiRiwayat.Name = "TransaksiRiwayat";
+            transaksiRiwayat.FillWeight = 104.382378F;
+            transaksiRiwayat.HeaderText = "Jenis Transaksi";
+            transaksiRiwayat.Name = "TransaksiRiwayat";
+            // 
+            // JumlahRiwayat
+            // 
+            jumlahRiwayat.HeaderText = "Jumlah Barang";
+            jumlahRiwayat.Name = "JumlahRiwayat";
             // 
             // BarangRiwayat
             // 
-            BarangRiwayat.FillWeight = 100.690453F;
-            BarangRiwayat.HeaderText = "Barang";
-            BarangRiwayat.Name = "BarangRiwayat";
+            barangRiwayat.FillWeight = 100.690453F;
+            barangRiwayat.HeaderText = "Barang";
+            barangRiwayat.Name = "BarangRiwayat";
             // 
             // LokasiRiwayat
             // 
-            LokasiRiwayat.FillWeight = 97.66856F;
-            LokasiRiwayat.HeaderText = "Lokasi Penyimpanan";
-            LokasiRiwayat.Name = "LokasiRiwayat";
+            lokasiRiwayat.FillWeight = 97.66856F;
+            lokasiRiwayat.HeaderText = "Lokasi Penyimpanan";
+            lokasiRiwayat.Name = "LokasiRiwayat";
             // 
             // PicRiwayat
             // 
-            PicRiwayat.FillWeight = 95.1951141F;
-            PicRiwayat.HeaderText = "PIC";
-            PicRiwayat.Name = "PicRiwayat";
+            picRiwayat.FillWeight = 95.1951141F;
+            picRiwayat.HeaderText = "PIC";
+            picRiwayat.Name = "PicRiwayat";
             // 
             // Deletebtn
             // 
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 192, 255);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            Deletebtn.DefaultCellStyle = dataGridViewCellStyle1;
-            Deletebtn.FillWeight = 93.17056F;
-            Deletebtn.FlatStyle = FlatStyle.Popup;
-            Deletebtn.HeaderText = "Delete";
-            Deletebtn.Name = "Deletebtn";
-            Deletebtn.Text = "Delete";
-            Deletebtn.UseColumnTextForButtonValue = true;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 192, 255);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            deletebtn.DefaultCellStyle = dataGridViewCellStyle2;
+            deletebtn.FillWeight = 93.17056F;
+            deletebtn.FlatStyle = FlatStyle.Popup;
+            deletebtn.HeaderText = "Delete";
+            deletebtn.Name = "Deletebtn";
+            deletebtn.Text = "Delete";
+            deletebtn.UseColumnTextForButtonValue = true;
             // 
             // panel1
             // 
@@ -117,7 +125,7 @@
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(lblRole);
             panel1.Controls.Add(lblName);
-            panel1.Controls.Add(buttonAdd);
+            panel1.Controls.Add(buttonRefresh);
             panel1.Controls.Add(label2);
             panel1.Location = new Point(24, 24);
             panel1.Margin = new Padding(0);
@@ -220,20 +228,20 @@
             lblName.TabIndex = 13;
             lblName.Text = "Name";
             // 
-            // buttonAdd
+            // buttonRefresh
             // 
-            buttonAdd.BackColor = Color.MediumSlateBlue;
-            buttonAdd.FlatStyle = FlatStyle.Flat;
-            buttonAdd.Font = new Font("Verdana", 9.88F, FontStyle.Bold);
-            buttonAdd.ForeColor = SystemColors.ButtonFace;
-            buttonAdd.Location = new Point(457, 42);
-            buttonAdd.Margin = new Padding(0);
-            buttonAdd.Name = "buttonAdd";
-            buttonAdd.Size = new Size(135, 32);
-            buttonAdd.TabIndex = 12;
-            buttonAdd.Text = "REFRESH";
-            buttonAdd.UseVisualStyleBackColor = false;
-            buttonAdd.Click += buttonAdd_Click;
+            buttonRefresh.BackColor = Color.MediumSlateBlue;
+            buttonRefresh.FlatStyle = FlatStyle.Flat;
+            buttonRefresh.Font = new Font("Verdana", 9.88F, FontStyle.Bold);
+            buttonRefresh.ForeColor = SystemColors.ButtonFace;
+            buttonRefresh.Location = new Point(457, 42);
+            buttonRefresh.Margin = new Padding(0);
+            buttonRefresh.Name = "buttonRefresh";
+            buttonRefresh.Size = new Size(135, 32);
+            buttonRefresh.TabIndex = 12;
+            buttonRefresh.Text = "REFRESH";
+            buttonRefresh.UseVisualStyleBackColor = false;
+            buttonRefresh.Click += buttonRefresh_Click;
             // 
             // label2
             // 
@@ -251,13 +259,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(624, 441);
             Controls.Add(panel1);
-            Controls.Add(TableRiwayat);
+            Controls.Add(tableRiwayat);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             Name = "RiwayatHome";
             Text = "       ";
             Load += Riwayat_Load;
-            ((System.ComponentModel.ISupportInitialize)TableRiwayat).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tableRiwayat).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -271,13 +279,7 @@
 
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Panel panel2;
-        private DataGridView TableRiwayat;
-        private DataGridViewTextBoxColumn TanngalRiwayat;
-        private DataGridViewTextBoxColumn TransaksiRiwayat;
-        private DataGridViewTextBoxColumn BarangRiwayat;
-        private DataGridViewTextBoxColumn LokasiRiwayat;
-        private DataGridViewTextBoxColumn PicRiwayat;
-        private DataGridViewButtonColumn Deletebtn;
+        private DataGridView tableRiwayat;
         private Panel panel1;
         private Button button1;
         private TextBox searchBar;
@@ -286,7 +288,14 @@
         private PictureBox pictureBox1;
         private Label lblRole;
         private Label lblName;
-        private Button buttonAdd;
+        private Button buttonRefresh;
         private Label label2;
+        private DataGridViewTextBoxColumn tanngalRiwayat;
+        private DataGridViewTextBoxColumn transaksiRiwayat;
+        private DataGridViewTextBoxColumn jumlahRiwayat;
+        private DataGridViewTextBoxColumn barangRiwayat;
+        private DataGridViewTextBoxColumn lokasiRiwayat;
+        private DataGridViewTextBoxColumn picRiwayat;
+        private DataGridViewButtonColumn deletebtn;
     }
 }

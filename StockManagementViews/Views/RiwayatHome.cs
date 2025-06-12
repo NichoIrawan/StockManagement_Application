@@ -1,4 +1,5 @@
-﻿using StockManagement.Controllers;
+﻿using StockManagement.Controller;
+using StockManagement.Controllers;
 using StockManagement.Models;
 using StockManagementLibrary;
 using System;
@@ -13,40 +14,43 @@ using System.Windows.Forms;
 
 namespace StockManagementViews.Views
 {
-    // 
     public partial class RiwayatHome : Form
     {
         private List<Riwayat> _listRiwayat = new List<Riwayat>();
-        RiwayatController riwayatController = new RiwayatController();
+        RiwayatController _riwayatController = new RiwayatController();
         public RiwayatHome()
         {
             InitializeComponent();
         }
 
+        // Memuat data riwayat dari controller.
         private async void LoadRiwayat()
         {
-            _listRiwayat = await riwayatController.GetListRiwayatAsync();
+            _listRiwayat = await _riwayatController.GetListRiwayatAsync();
         }
+
+        // Menampilkan data riwayat dalam table.
         private async Task LoadTableRiwayatAsync()
         {
             try
             {
                 if (_listRiwayat.Count <= 0)
                 {
-                    _listRiwayat = await riwayatController.GetListRiwayatAsync();
+                    _listRiwayat = await _riwayatController.GetListRiwayatAsync();
                 }
 
                 //_listRiwayat.Clear();
-                TableRiwayat.DataSource = null;
-                TableRiwayat.Rows.Clear();
+                tableRiwayat.DataSource = null;
+                tableRiwayat.Rows.Clear();
                 for (int i = 0; i < _listRiwayat.Count; i++)
                 {
-                    TableRiwayat.Rows.Add();
-                    TableRiwayat.Rows[i].Cells[0].Value = _listRiwayat[i].tanggal;
-                    TableRiwayat.Rows[i].Cells[1].Value = _listRiwayat[i].barang.namaBarang;
-                    TableRiwayat.Rows[i].Cells[2].Value = _listRiwayat[i].barang.kodeBarang;
-                    TableRiwayat.Rows[i].Cells[3].Value = _listRiwayat[i].lokasi_penyimpanan.kodeGudang;
-                    TableRiwayat.Rows[i].Cells[4].Value = _listRiwayat[i].pic.username;
+                    tableRiwayat.Rows.Add();
+                    tableRiwayat.Rows[i].Cells[0].Value = _listRiwayat[i].tanggal;
+                    tableRiwayat.Rows[i].Cells[1].Value = _listRiwayat[i].barang.namaBarang;
+                    tableRiwayat.Rows[i].Cells[2].Value = _listRiwayat[i].jumlah_barang;
+                    tableRiwayat.Rows[i].Cells[3].Value = _listRiwayat[i].barang.kodeBarang;
+                    tableRiwayat.Rows[i].Cells[4].Value = _listRiwayat[i].lokasi_penyimpanan.kodeGudang;
+                    tableRiwayat.Rows[i].Cells[5].Value = _listRiwayat[i].pic.username;
                 }
             }
             catch (Exception ex)
@@ -55,6 +59,7 @@ namespace StockManagementViews.Views
             }
         }
 
+        // Menambah data riwayat pada saat ada barang masuk.
         private async Task BarangMasuk(Barang barang, int stok, Gudang lokasi, User pic)
         {
             Riwayat riwayat = new Riwayat(
@@ -66,9 +71,9 @@ namespace StockManagementViews.Views
                 pic: pic
                 );
 
-            await riwayatController.InputRiwayatAsync(riwayat);
+            await _riwayatController.InputRiwayatAsync(riwayat);
         }
-
+        // Menambah data riwayat pada saat ada barang keluar.
         private async Task BarangKeluar(Barang barang, int stok, Gudang lokasi, User pic)
         {
             Riwayat riwayat = new Riwayat(
@@ -80,84 +85,83 @@ namespace StockManagementViews.Views
                 pic: pic
                 );
 
-            await riwayatController.InputRiwayatAsync(riwayat);
+            await _riwayatController.InputRiwayatAsync(riwayat);
         }
 
+        // Load data ke dalam table.
         private void Riwayat_Load(object sender, EventArgs e)
         {
             //LoadRiwayat();
             LoadTableRiwayatAsync();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private async void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ButtonAdd(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void textBox1_TextChanged(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void ButtonRefresh(object sender, EventArgs e)
-        {
-            LoadTableRiwayatAsync();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void buttonAdd_Click(object sender, EventArgs e)
+        // Tombol refresh untuk memuat ulang table.
+        private async void buttonRefresh_Click(object sender, EventArgs e)
         {
             _listRiwayat.Clear();
             await LoadTableRiwayatAsync();
+            searchBar.Clear();
 
         }
 
+        // Fungsi untuk melakukan pencarian.
         private async void searchButton_Click(object sender, EventArgs e)
         {
-            string searchResult = searchBar.Text;
-            TableRiwayat.DataSource = null;
-            
-            if (string.IsNullOrWhiteSpace(searchResult))
+            try
             {
-                _listRiwayat.Clear();
-                await LoadTableRiwayatAsync();
-                return;
-            }
+                string searchResult = searchBar.Text;
+                tableRiwayat.DataSource = null;
 
-            var riwayatByTanggal = await riwayatController.GetRiwayatByTanggalAsync(DateOnly.Parse(searchResult));
-            
-            if (riwayatByTanggal.Count <= 0)
-            {
-                MessageBox.Show("Riwayat tidak ditemukan");
+                if (string.IsNullOrWhiteSpace(searchResult))
+                {
+                    _listRiwayat.Clear();
+                    await LoadTableRiwayatAsync();
+                    return;
+                }
+
+                var riwayatByTanggal = await _riwayatController.GetRiwayatByTanggalAsync(DateOnly.Parse(searchResult));
+
+                if (riwayatByTanggal.Count <= 0)
+                {
+                    MessageBox.Show("Riwayat tidak ditemukan");
+                }
+                else
+                {
+                    _listRiwayat = riwayatByTanggal;
+                    await LoadTableRiwayatAsync();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _listRiwayat = riwayatByTanggal;
-                await LoadTableRiwayatAsync();
+                MessageBox.Show("Ada kesalahan dalam pencarian");
+            }
+        }
+
+        // Fungsi untuk menghapus data dalam table.
+        private async void TableRiwayat_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            {
+                try
+                {
+                    if (tableRiwayat.CurrentCell == tableRiwayat.CurrentRow.Cells[5])
+                    {
+                        var result = MessageBox.Show("Yakin mau hapus riwayat ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            DateTime riwayatByTanggal = _listRiwayat[e.RowIndex].tanggal; 
+
+                            await _riwayatController.DeleteRiwayatAsync(riwayatByTanggal);
+                            _listRiwayat.RemoveAt(e.RowIndex);
+                            tableRiwayat.DataSource = null;
+                            tableRiwayat.DataSource = _listRiwayat;
+                            MessageBox.Show("Riwayat berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
