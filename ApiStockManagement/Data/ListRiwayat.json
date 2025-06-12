@@ -1,31 +1,6 @@
 [
   {
-    "tanggal": "2023-11-01T00:00:00",
-    "jenis_transaksi": "Masuk",
-    "barang": {
-      "kodeBarang": null,
-      "namaBarang": null,
-      "kategori": null,
-      "stok": 0,
-      "harga": 0,
-      "tanggalKadaluarsa": null,
-      "kodeGudang": null,
-      "gudang": null
-    },
-    "jumlah_barang": 10,
-    "lokasi_penyimpanan": {
-      "kodeGudang": null,
-      "namaGudang": null,
-      "lokasi": "Jakarta"
-    },
-    "pic": {
-      "username": "jdoe",
-      "name": null,
-      "role": null,
-      "password": "secret"
-    }
-  },
-  {
+    "IdRiwayat": null,
     "tanggal": "2025-07-10T14:46:24.106Z",
     "jenis_transaksi": "string",
     "barang": {
