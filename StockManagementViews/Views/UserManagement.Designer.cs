@@ -38,6 +38,7 @@ namespace StockManagementViews.Views
             Role = new DataGridViewTextBoxColumn();
             deleteButton = new DataGridViewButtonColumn();
             panel1 = new Panel();
+            btnRefresh = new Button();
             button1 = new Button();
             panel2 = new Panel();
             searchBar = new TextBox();
@@ -48,7 +49,6 @@ namespace StockManagementViews.Views
             lblName = new Label();
             buttonAdd = new Button();
             label2 = new Label();
-            btnRefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)tableUser).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -64,7 +64,7 @@ namespace StockManagementViews.Views
             tableUser.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             tableUser.Columns.AddRange(new DataGridViewColumn[] { Username, Name, Role, deleteButton });
             tableUser.Location = new Point(12, 118);
-            tableUser.Name = "tableBarang";
+            tableUser.Name = "tableUser";
             tableUser.Size = new Size(597, 311);
             tableUser.TabIndex = 4;
             tableUser.CellBeginEdit += tableUser_CellBeginEdit;
@@ -114,6 +114,17 @@ namespace StockManagementViews.Views
             panel1.Name = "panel1";
             panel1.Size = new Size(592, 77);
             panel1.TabIndex = 10;
+            panel1.Paint += panel1_Paint;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.Location = new Point(367, 41);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(87, 32);
+            btnRefresh.TabIndex = 20;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += BtnRefresh_Click;
             // 
             // button1
             // 
@@ -235,16 +246,6 @@ namespace StockManagementViews.Views
             label2.TabIndex = 11;
             label2.Text = "User Management";
             // 
-            // btnRefresh
-            // 
-            btnRefresh.Location = new Point(367, 41);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(87, 32);
-            btnRefresh.TabIndex = 20;
-            btnRefresh.Text = "Refresh";
-            btnRefresh.UseVisualStyleBackColor = true;
-
-            // 
             // UserManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -254,7 +255,7 @@ namespace StockManagementViews.Views
             Controls.Add(tableUser);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
-            
+           
             Text = "       ";
             Load += UserManagement_Load;
             ((System.ComponentModel.ISupportInitialize)tableUser).EndInit();
@@ -266,6 +267,8 @@ namespace StockManagementViews.Views
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
+
+       
 
         #endregion
 
