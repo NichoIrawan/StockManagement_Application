@@ -57,7 +57,7 @@ namespace StockManagementViews.Menu
             {
                 ResetForms();
 
-                user = new();
+                user = new(_user);
                 user.MdiParent = this;
                 user.Dock = DockStyle.Fill;
                 user.Show();

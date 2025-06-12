@@ -18,7 +18,7 @@ namespace StockManagementViews.Views
     {
         Form? form;
 
-        private LoginController _controller = new();
+        private readonly LoginController _controller = new();
 
         public LoginMenu()
         {
@@ -29,7 +29,6 @@ namespace StockManagementViews.Views
         {
             try
             {
-                // Disable button to prevent multiple clicks
                 button1.Enabled = false;
 
                 User user = await _controller.Login(textBox2.Text, textBox1.Text);

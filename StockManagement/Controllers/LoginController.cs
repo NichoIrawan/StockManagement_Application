@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace StockManagement.Controllers
@@ -17,9 +18,14 @@ namespace StockManagement.Controllers
         {
             try
             {
+                if (!ValidateInput(username) && !ValidateInput(password))
+                {
+                    return new();
+                }
+
                 User? user = await _apiController.GetUserByUsernameAsync(username);
 
-                if (user==null)
+                if (user == null)
                 {
                     return new();
                 }
@@ -31,10 +37,30 @@ namespace StockManagement.Controllers
 
                 return user;
             }
-            catch
+            catch (Exception e)
             {
-                return new();
+                throw new Exception($"Login failed: {e.Message}");
             }
+        }
+
+        private static bool ValidateInput(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                throw new Exception("Semua data harus diisi!");
+            }
+
+            if (!IsValidText(input))
+            {
+                throw new Exception("Input mengandung karakter tidak diizinkan.");
+            }
+
+            return true;
+        }
+
+        private static bool IsValidText(string input)
+        {
+            return Regex.IsMatch(input, @"^[a-zA-Z0-9]+$");
         }
     }
 }
