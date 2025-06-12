@@ -57,9 +57,9 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { kodeGudang, namaGudang, lokasi, btnDelete });
-            dataGridView1.Location = new Point(12, 157);
+            dataGridView1.Location = new Point(24, 123);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(616, 311);
+            dataGridView1.Size = new Size(589, 330);
             dataGridView1.TabIndex = 2;
             dataGridView1.CellBeginEdit += tableUser_CellBeginEdit;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
@@ -148,6 +148,7 @@
             button1.Size = new Size(20, 20);
             button1.TabIndex = 19;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // panel2
             // 
@@ -226,10 +227,10 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Font = new Font("Segoe UI", 9.88F);
+            lblName.Font = new Font("Segoe UI", 9.88F, FontStyle.Bold);
             lblName.Location = new Point(457, -2);
             lblName.Name = "lblName";
-            lblName.Size = new Size(45, 19);
+            lblName.Size = new Size(49, 19);
             lblName.TabIndex = 13;
             lblName.Text = "Name";
             // 

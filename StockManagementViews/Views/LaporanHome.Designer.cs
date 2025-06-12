@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel3 = new Panel();
             panel4 = new Panel();
             dataGridView1 = new DataGridView();
@@ -102,14 +102,14 @@
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.NullValue = "-";
-            dataGridViewCellStyle2.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.NullValue = "-";
+            dataGridViewCellStyle1.SelectionBackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Nama_Barang, Stok, Harga, Tanggal_Kadaluarsa });
             dataGridView1.Dock = DockStyle.Fill;
@@ -329,10 +329,10 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Font = new Font("Segoe UI", 9.88F);
+            lblName.Font = new Font("Segoe UI", 9.88F, FontStyle.Bold);
             lblName.Location = new Point(457, -2);
             lblName.Name = "lblName";
-            lblName.Size = new Size(45, 19);
+            lblName.Size = new Size(49, 19);
             lblName.TabIndex = 13;
             lblName.Text = "Name";
             // 

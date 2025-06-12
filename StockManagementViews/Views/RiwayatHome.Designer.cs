@@ -119,7 +119,7 @@
             panel1.Controls.Add(lblName);
             panel1.Controls.Add(buttonAdd);
             panel1.Controls.Add(label2);
-            panel1.Location = new Point(24, 24);
+            panel1.Location = new Point(12, 24);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Size = new Size(592, 77);
@@ -135,6 +135,7 @@
             button1.Size = new Size(20, 20);
             button1.TabIndex = 19;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // panel2
             // 
@@ -213,10 +214,10 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Font = new Font("Segoe UI", 9.88F);
+            lblName.Font = new Font("Segoe UI", 9.88F, FontStyle.Bold);
             lblName.Location = new Point(457, -2);
             lblName.Name = "lblName";
-            lblName.Size = new Size(45, 19);
+            lblName.Size = new Size(49, 19);
             lblName.TabIndex = 13;
             lblName.Text = "Name";
             // 

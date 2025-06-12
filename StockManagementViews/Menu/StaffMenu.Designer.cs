@@ -35,11 +35,14 @@
             button2 = new Button();
             panel3 = new Panel();
             button1 = new Button();
+            panel7 = new Panel();
+            button7 = new Button();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            panel7.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -48,6 +51,7 @@
             flowLayoutPanel1.Controls.Add(panel1);
             flowLayoutPanel1.Controls.Add(panel2);
             flowLayoutPanel1.Controls.Add(panel3);
+            flowLayoutPanel1.Controls.Add(panel7);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
@@ -70,7 +74,6 @@
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.Logo;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Margin = new Padding(0);
             pictureBox1.Name = "pictureBox1";
@@ -94,7 +97,6 @@
             button2.Dock = DockStyle.Fill;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Image = Properties.Resources.Barang;
             button2.ImageAlign = ContentAlignment.MiddleLeft;
             button2.Location = new Point(0, 0);
             button2.Name = "button2";
@@ -122,7 +124,6 @@
             button1.Dock = DockStyle.Top;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = Properties.Resources.Riwayat;
             button1.ImageAlign = ContentAlignment.MiddleLeft;
             button1.Location = new Point(0, 0);
             button1.Margin = new Padding(0);
@@ -134,6 +135,33 @@
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(button7);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(0, 206);
+            panel7.Margin = new Padding(0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(213, 59);
+            panel7.TabIndex = 6;
+            // 
+            // button7
+            // 
+            button7.Dock = DockStyle.Fill;
+            button7.FlatAppearance.BorderSize = 0;
+            button7.FlatStyle = FlatStyle.Flat;
+            button7.ImageAlign = ContentAlignment.MiddleLeft;
+            button7.Location = new Point(0, 0);
+            button7.Margin = new Padding(0);
+            button7.Name = "button7";
+            button7.Padding = new Padding(24, 0, 24, 0);
+            button7.Size = new Size(213, 59);
+            button7.TabIndex = 1;
+            button7.Text = "            Logout";
+            button7.TextAlign = ContentAlignment.MiddleLeft;
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // StaffMenu
             // 
@@ -151,6 +179,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            panel7.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -163,5 +192,7 @@
         private Panel panel3;
         private Button button2;
         private Button button1;
+        private Panel panel7;
+        private Button button7;
     }
 }

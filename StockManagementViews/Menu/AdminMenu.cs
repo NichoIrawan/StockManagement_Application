@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StockManagement.Models;
 using StockManagementViews.Views;
 
 namespace StockManagementViews.Menu
@@ -16,9 +17,13 @@ namespace StockManagementViews.Menu
         GudangHome? gudang;
         UserManagement? user;
         BarangHome? barang;
+        LoginMenu login = new();
 
-        public AdminMenu()
+        User _user;
+
+        public AdminMenu(User user)
         {
+            this._user = user;
             InitializeComponent();
         }
 
@@ -35,7 +40,7 @@ namespace StockManagementViews.Menu
             {
                 ResetForms();
 
-                gudang = new();
+                gudang = new(_user);
                 gudang.MdiParent = this;
                 gudang.Dock = DockStyle.Fill;
                 gudang.Show();
@@ -68,7 +73,7 @@ namespace StockManagementViews.Menu
             if (barang == null)
             {
                 ResetForms();
-                barang = new();
+                barang = new(_user);
                 barang.MdiParent = this;
                 barang.Dock = DockStyle.Fill;
                 barang.Show();
@@ -77,6 +82,12 @@ namespace StockManagementViews.Menu
                 button2.BackColor = Color.Lavender;
                 button3.BackColor = Color.Transparent;
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            login.Show();
         }
     }
 }

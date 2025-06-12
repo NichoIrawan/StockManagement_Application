@@ -14,12 +14,18 @@ namespace StockManagementViews.Views
 {
     public partial class BarangHome : Form
     {
+        private User _user;
+
         List<Barang> barangList = new List<Barang>();
         List<Barang> searchList = new List<Barang>();
         BarangController barangCont = new BarangController();
         Form addBarangbaru = new Barangbaru();
-        public BarangHome()
+
+        Form notifikasi = new NotifikasiHome();
+
+        public BarangHome(User user)
         {
+            _user = user;
             InitializeComponent();
         }
 
@@ -27,6 +33,8 @@ namespace StockManagementViews.Views
         {
             try
             {
+                lblName.Text = _user.name;
+                lblRole.Text = _user.role.ToString();
                 RefreshList();
             }
             catch (Exception ex)
@@ -56,9 +64,6 @@ namespace StockManagementViews.Views
                 dataGridView1.Rows[rownum].Cells[4].Value = barangList[i].tanggalKadaluarsa;
                 dataGridView1.Rows[rownum].Cells[5].Value = barangList[i].kodeGudang;
             }
-
-
-
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -145,6 +150,11 @@ namespace StockManagementViews.Views
 
 
             await barangCont.updateDataBarang(kodeBarang, newBarang);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            notifikasi.Show();
         }
     }
 }

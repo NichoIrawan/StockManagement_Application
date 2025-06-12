@@ -15,18 +15,25 @@ namespace StockManagementViews.Views
 {
     public partial class GudangHome : Form
     {
+        private readonly User _user;
+
         private GudangController _gudangController = new();
         private List<Gudang> _listGudang = new List<Gudang>();
         private List<Gudang> _searchResult = new List<Gudang>();
 
-        public GudangHome()
+        private NotifikasiHome notifikasiHome = new NotifikasiHome();
+
+        public GudangHome(User user)
         {
+            _user = user;
             InitializeComponent();
         }
 
         //Looad GUI GudangHome
         private async void GudangHome_Load(object sender, EventArgs e)
         {
+            lblName.Text = _user.name;
+            lblRole.Text = _user.role.ToString();
             Refresh();
         }
 
@@ -154,6 +161,11 @@ namespace StockManagementViews.Views
         {
             AddGudangForm addGudangForm = new AddGudangForm();
             addGudangForm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            notifikasiHome.Show();
         }
     }
 }

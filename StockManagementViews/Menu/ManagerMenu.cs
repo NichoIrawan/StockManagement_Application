@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StockManagement.Models;
 using StockManagementViews.Views;
 
 namespace StockManagementViews.Menu
@@ -18,8 +19,14 @@ namespace StockManagementViews.Menu
         LaporanHome? laporan;
         RiwayatHome? riwayat;
 
-        public ManagerMenu()
+        User user;
+
+        readonly NotifikasiHome notifikasi = new();
+        readonly LoginMenu login = new();
+
+        public ManagerMenu(User user)
         {
+            this.user = user;
             InitializeComponent();
         }
 
@@ -36,7 +43,7 @@ namespace StockManagementViews.Menu
             if (laporan == null)
             {
                 ResetForms();
-                laporan = new();
+                laporan = new(user);
                 laporan.MdiParent = this;
                 laporan.Dock = DockStyle.Fill;
                 laporan.Show();
@@ -53,7 +60,7 @@ namespace StockManagementViews.Menu
             if (riwayat == null)
             {
                 ResetForms();
-                riwayat = new();
+                riwayat = new RiwayatHome(user);
                 riwayat.MdiParent = this;
                 riwayat.Dock = DockStyle.Fill;
                 riwayat.Show();
@@ -70,7 +77,7 @@ namespace StockManagementViews.Menu
             if (barang == null)
             {
                 ResetForms();
-                barang = new();
+                barang = new(user);
                 barang.MdiParent = this;
                 barang.Dock = DockStyle.Fill;
                 barang.Show();
@@ -87,7 +94,7 @@ namespace StockManagementViews.Menu
             if (gudang == null)
             {
                 ResetForms();
-                gudang = new();
+                gudang = new(user);
                 gudang.MdiParent = this;
                 gudang.Dock = DockStyle.Fill;
                 gudang.Show();
@@ -97,6 +104,17 @@ namespace StockManagementViews.Menu
                 button3.BackColor = Color.Lavender;
                 button4.BackColor = Color.Transparent;
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            login.Show();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            notifikasi.Show();
         }
     }
 }

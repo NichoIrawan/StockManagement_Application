@@ -1,4 +1,5 @@
-﻿using StockManagementViews.Views;
+﻿using StockManagement.Models;
+using StockManagementViews.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +14,15 @@ namespace StockManagementViews.Menu
 {
     public partial class StaffMenu : Form
     {
-        BarangHome? barang;
-        RiwayatHome? riwayat;
+        private readonly User _user;
+        private BarangHome? barang;
+        private RiwayatHome? riwayat;
 
-        public StaffMenu()
+        private LoginMenu login = new();
+
+        public StaffMenu(User user)
         {
+            _user = user;
             InitializeComponent();
         }
 
@@ -32,7 +37,7 @@ namespace StockManagementViews.Menu
             if (barang == null)
             {
                 ResetForms();
-                barang = new ();
+                barang = new(_user);
                 barang.MdiParent = this;
                 barang.Dock = DockStyle.Fill;
                 barang.Show();
@@ -47,7 +52,7 @@ namespace StockManagementViews.Menu
             if (riwayat == null)
             {
                 ResetForms();
-                riwayat = new ();
+                riwayat = new(_user);
                 riwayat.MdiParent = this;
                 riwayat.Dock = DockStyle.Fill;
                 riwayat.Show();
@@ -55,6 +60,12 @@ namespace StockManagementViews.Menu
                 button1.BackColor = Color.Lavender;
                 button2.BackColor = Color.Transparent;
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            login.Show();
         }
     }
 }

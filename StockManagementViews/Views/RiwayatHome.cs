@@ -16,11 +16,17 @@ namespace StockManagementViews.Views
     // 
     public partial class RiwayatHome : Form
     {
+        private User _user;
+
         private List<Riwayat> _listRiwayat = new List<Riwayat>();
         RiwayatController riwayatController = new RiwayatController();
-        public RiwayatHome()
+
+        private NotifikasiHome notif = new();
+
+        public RiwayatHome(User user)
         {
             InitializeComponent();
+            this._user = user;
         }
 
         private async void LoadRiwayat()
@@ -36,7 +42,6 @@ namespace StockManagementViews.Views
                     _listRiwayat = await riwayatController.GetListRiwayatAsync();
                 }
 
-                //_listRiwayat.Clear();
                 TableRiwayat.DataSource = null;
                 TableRiwayat.Rows.Clear();
                 for (int i = 0; i < _listRiwayat.Count; i++)
@@ -85,7 +90,9 @@ namespace StockManagementViews.Views
 
         private void Riwayat_Load(object sender, EventArgs e)
         {
-            //LoadRiwayat();
+            lblName.Text = _user.name;
+            lblRole.Text = _user.role.ToString();
+
             LoadTableRiwayatAsync();
         }
 
@@ -111,7 +118,7 @@ namespace StockManagementViews.Views
 
         private async void textBox1_TextChanged(object sender, EventArgs e)
         {
-          
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -140,7 +147,7 @@ namespace StockManagementViews.Views
         {
             string searchResult = searchBar.Text;
             TableRiwayat.DataSource = null;
-            
+
             if (string.IsNullOrWhiteSpace(searchResult))
             {
                 _listRiwayat.Clear();
@@ -149,7 +156,7 @@ namespace StockManagementViews.Views
             }
 
             var riwayatByTanggal = await riwayatController.GetRiwayatByTanggalAsync(DateOnly.Parse(searchResult));
-            
+
             if (riwayatByTanggal.Count <= 0)
             {
                 MessageBox.Show("Riwayat tidak ditemukan");
@@ -159,6 +166,11 @@ namespace StockManagementViews.Views
                 _listRiwayat = riwayatByTanggal;
                 await LoadTableRiwayatAsync();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            notif.Show();
         }
     }
 }

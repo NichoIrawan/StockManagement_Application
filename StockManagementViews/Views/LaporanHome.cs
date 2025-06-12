@@ -15,6 +15,8 @@ namespace StockManagementViews.Views
 {
     public partial class LaporanHome : Form
     {
+        private User _user;
+
         private List<Laporan> _listLaporan;
         private Laporan _laporan;
         private Gudang _gudang;
@@ -26,8 +28,9 @@ namespace StockManagementViews.Views
         private readonly LaporanController _controller = new();
         private readonly GudangController _gudangController = new();
 
-        public LaporanHome()
+        public LaporanHome(User user)
         {
+            _user = user;
             InitializeComponent();
         }
 
@@ -38,6 +41,8 @@ namespace StockManagementViews.Views
 
         private async void LaporanHome_Load(object sender, EventArgs e)
         {
+            lblName.Text = _user.name;
+            lblRole.Text = _user.role.ToString();
             await LoadLaporanData();
         }
 

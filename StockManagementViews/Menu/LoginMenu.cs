@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using StockManagement.Controllers;
+using StockManagement.Models;
 using StockManagementLibrary;
 using StockManagementViews.Menu;
 
@@ -31,18 +32,18 @@ namespace StockManagementViews.Views
                 // Disable button to prevent multiple clicks
                 button1.Enabled = false;
 
-                Roles role = await _controller.Login(textBox2.Text, textBox1.Text);
+                User user = await _controller.Login(textBox2.Text, textBox1.Text);
 
-                switch (role)
+                switch (user.role)
                 {
                     case Roles.STAFF:
-                        form = new StaffMenu();
+                        form = new StaffMenu(user);
                         break;
                     case Roles.MANAGER:
-                        form = new ManagerMenu();
+                        form = new ManagerMenu(user);
                         break;
                     case Roles.ADMIN:
-                        form = new AdminMenu();
+                        form = new AdminMenu(user);
                         break;
                     default:
                         MessageBox.Show("Login gagal, silakan coba lagi.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -37,12 +37,15 @@
             button2 = new Button();
             panel4 = new Panel();
             button3 = new Button();
+            panel7 = new Panel();
+            button7 = new Button();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
+            panel7.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -52,6 +55,7 @@
             flowLayoutPanel1.Controls.Add(panel2);
             flowLayoutPanel1.Controls.Add(panel3);
             flowLayoutPanel1.Controls.Add(panel4);
+            flowLayoutPanel1.Controls.Add(panel7);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
@@ -74,7 +78,6 @@
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.Logo;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Margin = new Padding(0);
             pictureBox1.Name = "pictureBox1";
@@ -98,7 +101,6 @@
             button1.Dock = DockStyle.Top;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = Properties.Resources.user1;
             button1.ImageAlign = ContentAlignment.MiddleLeft;
             button1.Location = new Point(0, 0);
             button1.Margin = new Padding(0);
@@ -127,7 +129,6 @@
             button2.Dock = DockStyle.Fill;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Image = Properties.Resources.Barang;
             button2.ImageAlign = ContentAlignment.MiddleLeft;
             button2.Location = new Point(0, 0);
             button2.Name = "button2";
@@ -155,7 +156,6 @@
             button3.Dock = DockStyle.Fill;
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
-            button3.Image = Properties.Resources.Gudang;
             button3.ImageAlign = ContentAlignment.MiddleLeft;
             button3.Location = new Point(0, 0);
             button3.Name = "button3";
@@ -166,6 +166,33 @@
             button3.TextAlign = ContentAlignment.MiddleLeft;
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(button7);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(0, 265);
+            panel7.Margin = new Padding(0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(213, 59);
+            panel7.TabIndex = 6;
+            // 
+            // button7
+            // 
+            button7.Dock = DockStyle.Fill;
+            button7.FlatAppearance.BorderSize = 0;
+            button7.FlatStyle = FlatStyle.Flat;
+            button7.ImageAlign = ContentAlignment.MiddleLeft;
+            button7.Location = new Point(0, 0);
+            button7.Margin = new Padding(0);
+            button7.Name = "button7";
+            button7.Padding = new Padding(24, 0, 24, 0);
+            button7.Size = new Size(213, 59);
+            button7.TabIndex = 1;
+            button7.Text = "            Logout";
+            button7.TextAlign = ContentAlignment.MiddleLeft;
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // AdminMenu
             // 
@@ -184,6 +211,7 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
+            panel7.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -198,5 +226,17 @@
         private Button button2;
         private Panel panel4;
         private Button button3;
+        private Panel headbar;
+        private PictureBox pictureBox4;
+        private Button button4;
+        private Panel panel6;
+        private TextBox textBox1;
+        private PictureBox pictureBox2;
+        private Button button5;
+        private PictureBox pictureBox3;
+        private Label labelRole;
+        private Label labelName;
+        private Panel panel7;
+        private Button button7;
     }
 }

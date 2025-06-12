@@ -16,13 +16,17 @@ namespace StockManagementViews.Views
 {
     public partial class UserManagement : Form
     {
+        User _user;
+
         List<User> userList = new List<User>();
         List<User> searchList = new List<User>();
         UserController _userController = new();
         Form addPopup = new AddUserPopup();
-        
-        public UserManagement()
+        Form notif = new NotifikasiHome();
+
+        public UserManagement(User user)
         {
+            _user = user;
             InitializeComponent();
         }
 
@@ -31,8 +35,6 @@ namespace StockManagementViews.Views
             addPopup.Show();
 
         }
-
-
 
         private async void RefreshList()
         {
@@ -51,9 +53,11 @@ namespace StockManagementViews.Views
 
         private async void UserManagement_Load(object sender, EventArgs e)
         {
-            
+
             try
             {
+                lblName.Text = _user.name;
+                lblRole.Text = _user.role.ToString();
                 RefreshList();
 
             }
@@ -103,12 +107,12 @@ namespace StockManagementViews.Views
         private async void tableUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             string username = tableUser.CurrentRow.Cells[0].Value.ToString();
-            if (tableUser.CurrentCell == tableUser.CurrentRow.Cells[3] )
+            if (tableUser.CurrentCell == tableUser.CurrentRow.Cells[3])
             {
                 await _userController.DeleteUserAsync(username);
                 tableUser.Rows.RemoveAt(e.RowIndex);
             }
-            
+
         }
 
         private void tableUser_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -140,5 +144,9 @@ namespace StockManagementViews.Views
             await _userController.UpdateUserDataAsync(username, usr);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            notif.Show();
+        }
     }
 }
