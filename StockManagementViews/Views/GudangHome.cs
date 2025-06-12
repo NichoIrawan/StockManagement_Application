@@ -82,7 +82,14 @@ namespace StockManagementViews.Views
                         await _gudangController.DeleteGudangAsync(idToDelete);
                         _listGudang.RemoveAt(e.RowIndex);
                         dataGridView1.DataSource = null;
-                        dataGridView1.DataSource = _listGudang;
+                        dataGridView1.Rows.Clear();
+                        for (int i = 0; i < _listGudang.Count; i++)
+                        {
+                            int rownum = dataGridView1.Rows.Add();
+                            dataGridView1.Rows[rownum].Cells[0].Value = _listGudang[i].kodeGudang;
+                            dataGridView1.Rows[rownum].Cells[1].Value = _listGudang[i].namaGudang;
+                            dataGridView1.Rows[rownum].Cells[2].Value = _listGudang[i].lokasi;
+                        }
                         MessageBox.Show("Gudang berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }

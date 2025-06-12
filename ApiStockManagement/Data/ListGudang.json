@@ -3,15 +3,5 @@
     "kodeGudang": "G001",
     "namaGudang": "Gudang A",
     "lokasi": "Jakarta"
-  },
-  {
-    "kodeGudang": "G002",
-    "namaGudang": "Gudang B",
-    "lokasi": "Surabaya"
-  },
-  {
-    "kodeGudang": "G003",
-    "namaGudang": "Gudang C",
-    "lokasi": "Bandung"
   }
 ]

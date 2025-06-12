@@ -114,7 +114,7 @@ namespace StockManagementViews.Views
             {
                 try
                 {
-                    if (tableRiwayat.CurrentCell == tableRiwayat.CurrentRow.Cells[5])
+                    if (tableRiwayat.CurrentCell == tableRiwayat.CurrentRow.Cells[6])
                     {
                         var result = MessageBox.Show("Yakin mau hapus riwayat ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (result == DialogResult.Yes)
@@ -124,7 +124,17 @@ namespace StockManagementViews.Views
                             await _riwayatController.DeleteRiwayatAsync(riwayatByTanggal);
                             _listRiwayat.RemoveAt(e.RowIndex);
                             tableRiwayat.DataSource = null;
-                            tableRiwayat.DataSource = _listRiwayat;
+                            tableRiwayat.Rows.Clear();
+                            for (int i = 0; i < _listRiwayat.Count; i++)
+                            {
+                                tableRiwayat.Rows.Add();
+                                tableRiwayat.Rows[i].Cells[0].Value = _listRiwayat[i].tanggal;
+                                tableRiwayat.Rows[i].Cells[1].Value = _listRiwayat[i].barang.namaBarang;
+                                tableRiwayat.Rows[i].Cells[2].Value = _listRiwayat[i].jumlah_barang;
+                                tableRiwayat.Rows[i].Cells[3].Value = _listRiwayat[i].barang.kodeBarang;
+                                tableRiwayat.Rows[i].Cells[4].Value = _listRiwayat[i].lokasi_penyimpanan.kodeGudang;
+                                tableRiwayat.Rows[i].Cells[5].Value = _listRiwayat[i].pic.username;
+                            }
                             MessageBox.Show("Riwayat berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }

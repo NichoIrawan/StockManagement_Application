@@ -79,11 +79,5 @@ namespace StockManagementViews.Views
             await riwayatController.InputRiwayatAsync(riwayat);
         }
 
-        
-
-        private void Barangbaru_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

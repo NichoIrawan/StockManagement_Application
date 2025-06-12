@@ -120,12 +120,12 @@ namespace StockManagementViews.Views
 
         private async void TableBarang_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string kodeBarang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            string namaBarang = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-            string stok = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-            string harga = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-            string tanggalKedaluwarsa = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            string kodeGudang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            string kodeBarang = tableBarang.CurrentRow.Cells[0].Value.ToString();
+            string namaBarang = tableBarang.CurrentRow.Cells[1].Value.ToString();
+            string stok = tableBarang.CurrentRow.Cells[2].Value.ToString();
+            string harga = tableBarang.CurrentRow.Cells[3].Value.ToString();
+            string tanggalKedaluwarsa = tableBarang.CurrentRow.Cells[0].Value.ToString();
+            string kodeGudang = tableBarang.CurrentRow.Cells[0].Value.ToString();
             Gudang newGUdang = await gudangController.GetGudangByIdAsync(kodeGudang);
             User dummyUser = new User("Dummy Username", "Dummy", StockManagementLibrary.Roles.MANAGER, "123");
 
@@ -138,12 +138,12 @@ namespace StockManagementViews.Views
                 tanggalKadaluarsa = DateOnly.MaxValue,
                 kodeGudang = kodeGudang
             };
-            if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[6])
+            if (tableBarang.CurrentCell == tableBarang.CurrentRow.Cells[6])
             {
                 BarangKeluar(newBarang, int.Parse(stok),newGUdang,dummyUser);
                 
                 await barangCont.jualBarang(kodeBarang);
-                dataGridView1.Rows.RemoveAt(e.RowIndex);
+                tableBarang.Rows.RemoveAt(e.RowIndex);
 
             }
         }

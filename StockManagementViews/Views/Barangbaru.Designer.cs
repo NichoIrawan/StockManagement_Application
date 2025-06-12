@@ -181,7 +181,7 @@
             Controls.Add(label1);
             Name = "Barangbaru";
             Text = "Barangbaru";
-            Load += Barangbaru_Load;
+            
             ResumeLayout(false);
             PerformLayout();
         }
