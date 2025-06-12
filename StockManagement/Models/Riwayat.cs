@@ -9,18 +9,17 @@ namespace StockManagement.Models
 {
     public class Riwayat
     {
+
+        public string IdRiwayat { get; set; }
         public DateTime tanggal { get; set; }
-        public String jenis_transaksi { get; set; }
+        public string jenis_transaksi { get; set; }
         public Barang barang { get; set; }
         public int jumlah_barang { get; set; }
         public Gudang lokasi_penyimpanan { get; set; }
         public User pic { get; set; }
         public Riwayat() { }
-
-       
-
-
         public Riwayat(DateTime tanggal, string jenis_transaksi, Barang barang, int jumlah_barang, Gudang lokasi_penyimpanan, User pic) {
+            this.IdRiwayat = $"R{tanggal.DayOfYear + tanggal.Minute + jenis_transaksi + barang.namaBarang}";
             this.tanggal = tanggal;
             this.jenis_transaksi = jenis_transaksi;
             this.barang = barang;

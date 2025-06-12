@@ -14,11 +14,13 @@ namespace ApiStockManagement.Controllers
         private readonly string _filePath = "Data/ListUser.json";
         private static List<User>? _listUser;
 
+        private readonly JsonHandler<List<User>> _jsonHandlerList = JsonHandler<List<User>>.GetInstance();
+
         // API to get "User" as List.
         [HttpGet]
         public ActionResult<IEnumerable<User>> Get()
         {
-            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
+            _listUser = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             return Ok(_listUser);
         }
@@ -27,7 +29,7 @@ namespace ApiStockManagement.Controllers
         [HttpGet("{username}")]
         public ActionResult<User> Get(string username)
         {
-            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
+            _listUser = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (_listUser == null) return NotFound();
 
@@ -40,7 +42,7 @@ namespace ApiStockManagement.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]User userBaru)
         {
-            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
+            _listUser = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             foreach (User user in _listUser)
             {
@@ -51,7 +53,7 @@ namespace ApiStockManagement.Controllers
             }
             
             _listUser.Add(userBaru);
-            JsonHandler<List<User>>.writeJsonToFile(_filePath, _listUser);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listUser);
             return CreatedAtAction(nameof(Get), new { id = userBaru.username }, userBaru);
         }
 
@@ -59,7 +61,7 @@ namespace ApiStockManagement.Controllers
         [HttpPut("{username}")]
         public void Put(string username, [FromBody]User userBaru)
         {
-            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
+            _listUser = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (_listUser == null) return;
 
@@ -70,20 +72,20 @@ namespace ApiStockManagement.Controllers
             user.role = userBaru.role;
             user.password = userBaru.password;
 
-            JsonHandler<List<User>>.writeJsonToFile(_filePath, _listUser);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listUser);
         }
 
         // API to delete an existing "User" by username.
         [HttpDelete("{username}")]
         public void Delete(string username)
         {
-            _listUser = JsonHandler<List<User>>.readJsonFromFile(_filePath);
+            _listUser = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
             if (_listUser == null) return;
 
             _listUser.RemoveAll(u => u.username == username);
 
-            JsonHandler<List<User>>.writeJsonToFile(_filePath, _listUser);
+            _jsonHandlerList.WriteJsonToFile(_filePath, _listUser);
         }
     }
 }

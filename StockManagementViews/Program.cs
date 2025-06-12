@@ -1,3 +1,4 @@
+using StockManagementViews.Menu;
 using StockManagementViews.Views;
 
 namespace StockManagementViews
@@ -13,7 +14,8 @@ namespace StockManagementViews
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new RiwayatHome());
+            Application.Run(new AdminMenu());
+          
         }
     }
 }

@@ -48,18 +48,18 @@ namespace StockManagementViews.Views
         private async void RefreshList()
         {
             barangList.Clear();
-            dataGridView1.DataSource = null;
-            dataGridView1.Rows.Clear();
+            tableBarang.DataSource = null;
+            tableBarang.Rows.Clear();
             barangList = await barangCont.tampilkanBarang();
             for (int i = 0; i < barangList.Count; i++)
             {
-                int rownum = dataGridView1.Rows.Add();
-                dataGridView1.Rows[rownum].Cells[0].Value = barangList[i].kodeBarang;
-                dataGridView1.Rows[rownum].Cells[1].Value = barangList[i].namaBarang;
-                dataGridView1.Rows[rownum].Cells[2].Value = barangList[i].stok;
-                dataGridView1.Rows[rownum].Cells[3].Value = barangList[i].harga;
-                dataGridView1.Rows[rownum].Cells[4].Value = barangList[i].tanggalKadaluarsa;
-                dataGridView1.Rows[rownum].Cells[5].Value = barangList[i].kodeGudang;
+                int rownum = tableBarang.Rows.Add();
+                tableBarang.Rows[rownum].Cells[0].Value = barangList[i].kodeBarang;
+                tableBarang.Rows[rownum].Cells[1].Value = barangList[i].namaBarang;
+                tableBarang.Rows[rownum].Cells[2].Value = barangList[i].stok;
+                tableBarang.Rows[rownum].Cells[3].Value = barangList[i].harga;
+                tableBarang.Rows[rownum].Cells[4].Value = barangList[i].tanggalKadaluarsa;
+                tableBarang.Rows[rownum].Cells[5].Value = barangList[i].kodeGudang;
             }
 
 
@@ -89,9 +89,9 @@ namespace StockManagementViews.Views
         {
             try
             {
-                String searchResult = txtSearch.Text;
-                dataGridView1.DataSource = null;
-                dataGridView1.Rows.Clear();
+                String searchResult = searchBar.Text;
+                tableBarang.DataSource = null;
+                tableBarang.Rows.Clear();
                 searchList.Clear();
                 var res = await barangCont.cariBarangDenganId(searchResult);
                 if (res == null)
@@ -103,13 +103,13 @@ namespace StockManagementViews.Views
                 searchList.Add(res);
                 for (int i = 0; i < searchList.Count; i++)
                 {
-                    int rownum = dataGridView1.Rows.Add();
-                    dataGridView1.Rows[rownum].Cells[0].Value = barangList[i].kodeBarang;
-                    dataGridView1.Rows[rownum].Cells[1].Value = barangList[i].namaBarang;
-                    dataGridView1.Rows[rownum].Cells[2].Value = barangList[i].stok;
-                    dataGridView1.Rows[rownum].Cells[3].Value = barangList[i].harga;
-                    dataGridView1.Rows[rownum].Cells[4].Value = barangList[i].tanggalKadaluarsa;
-                    dataGridView1.Rows[rownum].Cells[5].Value = barangList[i].kodeGudang;
+                    int rownum = tableBarang.Rows.Add();
+                    tableBarang.Rows[rownum].Cells[0].Value = barangList[i].kodeBarang;
+                    tableBarang.Rows[rownum].Cells[1].Value = barangList[i].namaBarang;
+                    tableBarang.Rows[rownum].Cells[2].Value = barangList[i].stok;
+                    tableBarang.Rows[rownum].Cells[3].Value = barangList[i].harga;
+                    tableBarang.Rows[rownum].Cells[4].Value = barangList[i].tanggalKadaluarsa;
+                    tableBarang.Rows[rownum].Cells[5].Value = barangList[i].kodeGudang;
                 }
             }
             catch (Exception ex)
@@ -118,7 +118,7 @@ namespace StockManagementViews.Views
             }
         }
 
-        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void TableBarang_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             string kodeBarang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             string namaBarang = dataGridView1.CurrentRow.Cells[1].Value.ToString();
@@ -144,10 +144,11 @@ namespace StockManagementViews.Views
                 
                 await barangCont.jualBarang(kodeBarang);
                 dataGridView1.Rows.RemoveAt(e.RowIndex);
+
             }
         }
 
-        private void tableBarang_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void TableBarang_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
@@ -163,10 +164,10 @@ namespace StockManagementViews.Views
             }
         }
 
-        private async void tableBarang_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private async void TableBarang_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow newRow = dataGridView1.Rows[e.RowIndex];
-            string kodeBarang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            DataGridViewRow newRow = tableBarang.Rows[e.RowIndex];
+            string kodeBarang = tableBarang.CurrentRow.Cells[0].Value.ToString();
 
             var res = await barangCont.cariBarangDenganId(kodeBarang);
 

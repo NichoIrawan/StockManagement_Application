@@ -117,7 +117,7 @@ namespace StockManagement.Controller
             var json = JsonSerializer.Serialize(gudang);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _client.PutAsync($"BarangApi/{kodeGudang}", content);
+            var response = await _client.PutAsync($"GudangApi/{kodeGudang}", content);
             response.EnsureSuccessStatusCode();
         }
 

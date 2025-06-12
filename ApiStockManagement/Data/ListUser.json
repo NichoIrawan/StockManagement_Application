@@ -1,8 +1,20 @@
 [
-    {
-        "username": "admin",
-        "name": "Budi Santoso",
-        "role": 1,
-        "password": "admin"
-    }
+  {
+    "username": "Sidqi",
+    "name": "s",
+    "role": 2,
+    "password": "1"
+  },
+  {
+    "username": "Ilham",
+    "name": "ilgam",
+    "role": 2,
+    "password": "123"
+  },
+  {
+    "username": "ASd",
+    "name": "dsd",
+    "role": 2,
+    "password": "3123"
+  }
 ]

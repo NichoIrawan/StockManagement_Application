@@ -47,6 +47,7 @@ namespace StockManagementViews.Views
                 {
 
                 };
+
                 await adminController.addUser(user);
                 MessageBox.Show("Success", "Berhasil menambahkan user");
                 txtBoxName.Clear();
