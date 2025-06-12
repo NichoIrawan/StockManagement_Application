@@ -21,7 +21,7 @@
     "pic": {
       "username": "jdoe",
       "name": null,
-      "role": null,
+      "role": 1,
       "password": "secret"
     }
   },

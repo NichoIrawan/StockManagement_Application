@@ -25,8 +25,8 @@ namespace ApiStockManagement.Controllers
         }
 
         // API to get "Laporan" by tanggalPembuatan.
-        [HttpGet("{tanggalPembuatan}")]
-        public Laporan Get(DateTime tanggalPembuatan)
+        [HttpGet("tanggal/{tanggalPembuatan}")]
+        public Laporan Get(DateOnly tanggalPembuatan)
         {
             _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
 
@@ -35,10 +35,24 @@ namespace ApiStockManagement.Controllers
                 return null;
 
             }
-            var laporan = _listLaporan.FirstOrDefault(item => item.tanggalPembuatan == tanggalPembuatan);
+            var laporan = _listLaporan.FirstOrDefault(item => item.TanggalPembuatan == tanggalPembuatan);
             return laporan is null ? null : laporan;
         }
 
+        // API to get "Laporan" by tanggalPembuatan.
+        [HttpGet("gudang/{kodeGudang}")]
+        public List<Laporan> GetByGudang(string kodeGudang)
+        {
+            _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
+
+            if (_listLaporan is null)
+            {
+                return null;
+
+            }
+            var listLaporan = _listLaporan.Where(item => item.TempatPenyimpanan == kodeGudang).ToList();
+            return listLaporan is null ? null : listLaporan;
+        }
 
         // API to add a new "Laporan".
         [HttpPost]
@@ -53,7 +67,7 @@ namespace ApiStockManagement.Controllers
 
             foreach (Laporan laporan in _listLaporan)
             {
-                if (laporan.tanggalPembuatan == newLaporan.tanggalPembuatan)
+                if (laporan.TanggalPembuatan == newLaporan.TanggalPembuatan)
                 {
                     return NotFound("Laporan ");
                 }
@@ -62,37 +76,37 @@ namespace ApiStockManagement.Controllers
             _listLaporan.Add(newLaporan);
             _jsonHandlerList.WriteJsonToFile(_filePath, _listLaporan);
 
-            return CreatedAtAction(nameof(Get), new { id = newLaporan.tanggalPembuatan }, newLaporan);
+            return CreatedAtAction(nameof(Get), new { id = newLaporan.TanggalPembuatan }, newLaporan);
         }
 
         // API to update an existing "Laporan".
         [HttpPut("{tanggalPembuatan}")]
-        public ActionResult Put(DateTime tanggalPembuatan, [FromBody] Laporan newLaporan)
+        public ActionResult Put(DateOnly tanggalPembuatan, [FromBody] Laporan newLaporan)
         {
             _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
-            var laporan = _listLaporan.FirstOrDefault(item => item.tanggalPembuatan == tanggalPembuatan);
+            var laporan = _listLaporan.FirstOrDefault(item => item.TanggalPembuatan == tanggalPembuatan);
 
             if (newLaporan == null)
             {
                 return BadRequest("Laporan cannot be null");
             }
 
-            laporan.tanggalPembuatan = newLaporan.tanggalPembuatan;
-            laporan.tempatPenyimpanan = newLaporan.tempatPenyimpanan;
-            laporan.daftarBarang = newLaporan.daftarBarang;
+            laporan.TanggalPembuatan = newLaporan.TanggalPembuatan;
+            laporan.TempatPenyimpanan = newLaporan.TempatPenyimpanan;
+            laporan.DaftarBarang = newLaporan.DaftarBarang;
 
             _jsonHandlerList.WriteJsonToFile(_filePath, _listLaporan);
 
-            return CreatedAtAction(nameof(Get), new { id = newLaporan.tanggalPembuatan }, newLaporan);
+            return CreatedAtAction(nameof(Get), new { id = newLaporan.TanggalPembuatan }, newLaporan);
         }
 
         // API to delete an existing "Laporan" by tanggalPembuatan.
         [HttpDelete("{tanggalPembuatan}")]
-        public void Delete(DateTime tanggalPembuatan)
+        public void Delete(DateOnly tanggalPembuatan)
         {
 
             _listLaporan = _jsonHandlerList.ReadJsonFromFile(_filePath);
-            _listLaporan.RemoveAll(item => item.tanggalPembuatan == tanggalPembuatan);
+            _listLaporan.RemoveAll(item => item.TanggalPembuatan == tanggalPembuatan);
             _jsonHandlerList.WriteJsonToFile(_filePath, _listLaporan);
         }
     }

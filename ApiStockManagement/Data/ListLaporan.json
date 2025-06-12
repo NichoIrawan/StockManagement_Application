@@ -1,17 +1,19 @@
 [
     {
         "tanggalPembuatan": "2023-10-01",
-        "tempatPenyimpanan": "Gudang A",
+        "tempatPenyimpanan": "G001",
         "daftarBarang": [
             {
                 "namaBarang": "Laptop",
-                "jumlah": 10,
-                "kondisi": "Baik"
+                "stok": 10,
+                "harga": 10000000,
+                "kodeGudang": "G001"
             },
             {
                 "namaBarang": "Printer",
-                "jumlah": 5,
-                "kondisi": "Rusak"
+                "stok": 5,
+                "harga": 5000000,
+                "kodeGudang": "G001"
             }
         ]
     }

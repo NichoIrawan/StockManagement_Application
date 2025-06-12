@@ -45,39 +45,63 @@ namespace StockManagement.Controllers.Api
         }
 
         // GET /api/LaporanApi/{tanggalPembuatan}
-        public async Task<Laporan> GetLaporanByIdAsync(DateTime tanggalPembuatan)
+        public async Task<List<Laporan>> GetLaporanByIdAsync(string kodeGudang)
         {
             try
             {
-                var response = await _client.GetAsync($"LaporanApi/{tanggalPembuatan}");
+                _client.Timeout = TimeSpan.FromSeconds(30);
+
+                var response = await _client.GetAsync($"LaporanApi/gudang/{kodeGudang}").ConfigureAwait(false);
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Laporan();
+                    return new List<Laporan>();
+                }
+
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var result = JsonSerializer.Deserialize<List<Laporan>>(json);
+                return result ?? new List<Laporan>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                return new List<Laporan>();
+            }
+        }
+
+        public async Task<Laporan> GetLaporanByTanggalAsync(DateOnly tanggalPembuatan)
+        {
+            try
+            {
+                var response = await _client.GetAsync($"LaporanApi/tanggal/{tanggalPembuatan}");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new();
                 }
 
                 var json = await response.Content.ReadAsStringAsync();
 
                 var result = JsonSerializer.Deserialize<Laporan>(json);
 
-                return result ?? new Laporan();
+                return result ?? new();
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Error: {e.Message}");
-                return new Laporan();
+                return new();
             }
         }
 
         // POST /api/LaporanApi
-        public async Task InputLaporanAsync(Gudang gudang)
+        public async Task InputLaporanAsync(Laporan laporan)
         {
             try
             {
-                var json = JsonSerializer.Serialize(gudang);
+                var json = JsonSerializer.Serialize(laporan);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _client.PostAsync("GudangApi", content);
+                var response = await _client.PostAsync("LaporanApi", content);
                 response.EnsureSuccessStatusCode();
             }
             catch (Exception e)
@@ -101,7 +125,7 @@ namespace StockManagement.Controllers.Api
         {
             try
             {
-                var response = await _client.DeleteAsync($"LaporanApi/ {tanggalPembuatan}");
+                var response = await _client.DeleteAsync($"LaporanApi/{tanggalPembuatan}");
                 response.EnsureSuccessStatusCode();
             }
             catch (Exception e)
@@ -109,6 +133,5 @@ namespace StockManagement.Controllers.Api
                 Console.WriteLine($"Error: {e.Message}");
             }
         }
-
     }
 }

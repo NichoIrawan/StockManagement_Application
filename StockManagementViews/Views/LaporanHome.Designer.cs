@@ -29,17 +29,6 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            panel1 = new Panel();
-            button1 = new Button();
-            panel2 = new Panel();
-            searchBar = new TextBox();
-            pictureBox3 = new PictureBox();
-            searchButton = new Button();
-            pictureBox1 = new PictureBox();
-            lblRole = new Label();
-            lblName = new Label();
-            buttonAdd = new Button();
-            label1 = new Label();
             panel3 = new Panel();
             panel4 = new Panel();
             dataGridView1 = new DataGridView();
@@ -48,38 +37,209 @@
             Harga = new DataGridViewTextBoxColumn();
             Tanggal_Kadaluarsa = new DataGridViewTextBoxColumn();
             panel5 = new Panel();
-            label3 = new Label();
-            label2 = new Label();
+            labelTanggal = new Label();
+            labelGudang = new Label();
             pictureBox6 = new PictureBox();
             pictureBox5 = new PictureBox();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            button1 = new Button();
+            panel6 = new Panel();
+            searchBar = new TextBox();
+            pictureBox3 = new PictureBox();
+            searchButton = new Button();
+            pictureBox1 = new PictureBox();
+            lblRole = new Label();
+            lblName = new Label();
+            buttonAdd = new Button();
+            label2 = new Label();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(panel4);
+            panel3.Controls.Add(pictureBox6);
+            panel3.Controls.Add(pictureBox5);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(24, 101);
+            panel3.Margin = new Padding(0);
+            panel3.Name = "panel3";
+            panel3.Padding = new Padding(0, 16, 0, 0);
+            panel3.Size = new Size(592, 283);
+            panel3.TabIndex = 1;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.White;
+            panel4.Controls.Add(dataGridView1);
+            panel4.Controls.Add(panel5);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(40, 16);
+            panel4.Margin = new Padding(0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(512, 267);
+            panel4.TabIndex = 21;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.NullValue = "-";
+            dataGridViewCellStyle2.SelectionBackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Nama_Barang, Stok, Harga, Tanggal_Kadaluarsa });
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(0, 80);
+            dataGridView1.Margin = new Padding(0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowTemplate.ReadOnly = true;
+            dataGridView1.ScrollBars = ScrollBars.Vertical;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(512, 187);
+            dataGridView1.TabIndex = 1;
+            // 
+            // Nama_Barang
+            // 
+            Nama_Barang.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nama_Barang.HeaderText = "Nama Barang";
+            Nama_Barang.Name = "Nama_Barang";
+            Nama_Barang.ReadOnly = true;
+            // 
+            // Stok
+            // 
+            Stok.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Stok.HeaderText = "Stok";
+            Stok.Name = "Stok";
+            Stok.ReadOnly = true;
+            Stok.Width = 55;
+            // 
+            // Harga
+            // 
+            Harga.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Harga.HeaderText = "Harga";
+            Harga.Name = "Harga";
+            Harga.ReadOnly = true;
+            Harga.Width = 64;
+            // 
+            // Tanggal_Kadaluarsa
+            // 
+            Tanggal_Kadaluarsa.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Tanggal_Kadaluarsa.HeaderText = "Tanggal Kadaluarsa";
+            Tanggal_Kadaluarsa.Name = "Tanggal_Kadaluarsa";
+            Tanggal_Kadaluarsa.ReadOnly = true;
+            Tanggal_Kadaluarsa.Width = 134;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(labelTanggal);
+            panel5.Controls.Add(labelGudang);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(0, 0);
+            panel5.Margin = new Padding(0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(512, 80);
+            panel5.TabIndex = 0;
+            // 
+            // labelTanggal
+            // 
+            labelTanggal.Dock = DockStyle.Fill;
+            labelTanggal.Font = new Font("Verdana", 9.55F);
+            labelTanggal.Location = new Point(0, 45);
+            labelTanggal.Name = "labelTanggal";
+            labelTanggal.Padding = new Padding(0, 4, 0, 0);
+            labelTanggal.Size = new Size(512, 35);
+            labelTanggal.TabIndex = 1;
+            labelTanggal.Text = "per <Tanggal>";
+            labelTanggal.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // labelGudang
+            // 
+            labelGudang.Dock = DockStyle.Top;
+            labelGudang.Font = new Font("Verdana", 12.58F, FontStyle.Bold);
+            labelGudang.Location = new Point(0, 0);
+            labelGudang.Margin = new Padding(0);
+            labelGudang.Name = "labelGudang";
+            labelGudang.Padding = new Padding(0, 16, 0, 0);
+            labelGudang.Size = new Size(512, 45);
+            labelGudang.TabIndex = 0;
+            labelGudang.Text = "Gudang Jaya";
+            labelGudang.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Dock = DockStyle.Left;
+            pictureBox6.Location = new Point(0, 16);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(40, 267);
+            pictureBox6.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox6.TabIndex = 20;
+            pictureBox6.TabStop = false;
+            pictureBox6.Click += pictureBox6_Click;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Dock = DockStyle.Right;
+            pictureBox5.Location = new Point(552, 16);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(40, 267);
+            pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox5.TabIndex = 19;
+            pictureBox5.TabStop = false;
+            pictureBox5.Click += pictureBox5_Click;
             // 
             // panel1
             // 
-            panel1.Controls.Add(button1);
+            panel1.AutoSize = true;
             panel1.Controls.Add(panel2);
-            panel1.Controls.Add(searchButton);
-            panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(lblRole);
-            panel1.Controls.Add(lblName);
-            panel1.Controls.Add(buttonAdd);
-            panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(24, 24);
+            panel1.Location = new Point(24, 0);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(592, 77);
+            panel1.Padding = new Padding(0, 24, 0, 0);
+            panel1.Size = new Size(592, 101);
             panel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(button1);
+            panel2.Controls.Add(panel6);
+            panel2.Controls.Add(searchButton);
+            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(lblRole);
+            panel2.Controls.Add(lblName);
+            panel2.Controls.Add(buttonAdd);
+            panel2.Controls.Add(label2);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 24);
+            panel2.Margin = new Padding(0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(592, 77);
+            panel2.TabIndex = 11;
             // 
             // button1
             // 
@@ -91,18 +251,19 @@
             button1.Size = new Size(20, 20);
             button1.TabIndex = 19;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // panel2
+            // panel6
             // 
-            panel2.BackColor = Color.White;
-            panel2.Controls.Add(searchBar);
-            panel2.Controls.Add(pictureBox3);
-            panel2.Location = new Point(1, -2);
-            panel2.Margin = new Padding(0);
-            panel2.Name = "panel2";
-            panel2.Padding = new Padding(34, 7, 0, 7);
-            panel2.Size = new Size(288, 32);
-            panel2.TabIndex = 18;
+            panel6.BackColor = Color.White;
+            panel6.Controls.Add(searchBar);
+            panel6.Controls.Add(pictureBox3);
+            panel6.Location = new Point(1, -2);
+            panel6.Margin = new Padding(0);
+            panel6.Name = "panel6";
+            panel6.Padding = new Padding(34, 7, 0, 7);
+            panel6.Size = new Size(288, 32);
+            panel6.TabIndex = 18;
             // 
             // searchBar
             // 
@@ -188,201 +349,49 @@
             buttonAdd.TabIndex = 12;
             buttonAdd.Text = "REFRESH";
             buttonAdd.UseVisualStyleBackColor = false;
-            buttonAdd.Click += buttonAdd_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Verdana", 20.35F, FontStyle.Bold);
-            label1.Location = new Point(1, 44);
-            label1.Name = "label1";
-            label1.Size = new Size(144, 34);
-            label1.TabIndex = 11;
-            label1.Text = "Laporan";
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(panel4);
-            panel3.Controls.Add(pictureBox6);
-            panel3.Controls.Add(pictureBox5);
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(24, 101);
-            panel3.Margin = new Padding(0);
-            panel3.Name = "panel3";
-            panel3.Padding = new Padding(0, 16, 0, 0);
-            panel3.Size = new Size(592, 355);
-            panel3.TabIndex = 1;
-            // 
-            // panel4
-            // 
-            panel4.BackColor = Color.White;
-            panel4.Controls.Add(dataGridView1);
-            panel4.Controls.Add(panel5);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(40, 16);
-            panel4.Margin = new Padding(0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(512, 339);
-            panel4.TabIndex = 21;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AllowUserToResizeColumns = false;
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.NullValue = "-";
-            dataGridViewCellStyle2.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Nama_Barang, Stok, Harga, Tanggal_Kadaluarsa });
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 80);
-            dataGridView1.Margin = new Padding(0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowTemplate.ReadOnly = true;
-            dataGridView1.ScrollBars = ScrollBars.Vertical;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(512, 259);
-            dataGridView1.TabIndex = 1;
-            // 
-            // Nama_Barang
-            // 
-            Nama_Barang.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nama_Barang.HeaderText = "Nama Barang";
-            Nama_Barang.Name = "Nama_Barang";
-            Nama_Barang.ReadOnly = true;
-            // 
-            // Stok
-            // 
-            Stok.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Stok.HeaderText = "Stok";
-            Stok.Name = "Stok";
-            Stok.ReadOnly = true;
-            Stok.Width = 55;
-            // 
-            // Harga
-            // 
-            Harga.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Harga.HeaderText = "Harga";
-            Harga.Name = "Harga";
-            Harga.ReadOnly = true;
-            Harga.Width = 64;
-            // 
-            // Tanggal_Kadaluarsa
-            // 
-            Tanggal_Kadaluarsa.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Tanggal_Kadaluarsa.HeaderText = "Tanggal Kadaluarsa";
-            Tanggal_Kadaluarsa.Name = "Tanggal_Kadaluarsa";
-            Tanggal_Kadaluarsa.ReadOnly = true;
-            Tanggal_Kadaluarsa.Width = 134;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(label3);
-            panel5.Controls.Add(label2);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 0);
-            panel5.Margin = new Padding(0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(512, 80);
-            panel5.TabIndex = 0;
-            // 
-            // label3
-            // 
-            label3.Dock = DockStyle.Fill;
-            label3.Font = new Font("Verdana", 9.55F);
-            label3.Location = new Point(0, 45);
-            label3.Name = "label3";
-            label3.Padding = new Padding(0, 4, 0, 0);
-            label3.Size = new Size(512, 35);
-            label3.TabIndex = 1;
-            label3.Text = "per <Tanggal>";
-            label3.TextAlign = ContentAlignment.TopCenter;
             // 
             // label2
             // 
-            label2.Dock = DockStyle.Top;
-            label2.Font = new Font("Verdana", 12.58F, FontStyle.Bold);
-            label2.Location = new Point(0, 0);
-            label2.Margin = new Padding(0);
+            label2.AutoSize = true;
+            label2.Font = new Font("Verdana", 20.35F, FontStyle.Bold);
+            label2.Location = new Point(0, 42);
             label2.Name = "label2";
-            label2.Padding = new Padding(0, 16, 0, 0);
-            label2.Size = new Size(512, 45);
-            label2.TabIndex = 0;
-            label2.Text = "Gudang Jaya";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox6
-            // 
-            pictureBox6.Dock = DockStyle.Left;
-            pictureBox6.Location = new Point(0, 16);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(40, 339);
-            pictureBox6.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox6.TabIndex = 20;
-            pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.Dock = DockStyle.Right;
-            pictureBox5.Location = new Point(552, 16);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(40, 339);
-            pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox5.TabIndex = 19;
-            pictureBox5.TabStop = false;
+            label2.Size = new Size(144, 34);
+            label2.TabIndex = 11;
+            label2.Text = "Laporan";
             // 
             // LaporanHome
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(640, 480);
+            ClientSize = new Size(640, 408);
             Controls.Add(panel3);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(5, 15, 5, 15);
             Name = "LaporanHome";
-            Padding = new Padding(24);
+            Padding = new Padding(24, 0, 24, 24);
             Text = "User Management";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Load += LaporanHome_Load;
             panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private DataGridView tableUser;
-        private Panel panel1;
-        private Panel panel2;
-        private TextBox searchBar;
-        private PictureBox pictureBox3;
-        private Button searchButton;
-        private PictureBox pictureBox1;
-        private Label lblRole;
-        private Label lblName;
-        private Button buttonAdd;
-        private Label label1;
         private Panel panel3;
         private Panel panel4;
         private PictureBox pictureBox6;
@@ -393,8 +402,19 @@
         private DataGridViewTextBoxColumn Stok;
         private DataGridViewTextBoxColumn Harga;
         private DataGridViewTextBoxColumn Tanggal_Kadaluarsa;
-        private Label label3;
-        private Label label2;
+        private Label labelTanggal;
+        private Label labelGudang;
+        private Panel panel1;
+        private Panel panel2;
         private Button button1;
+        private Panel panel6;
+        private TextBox searchBar;
+        private PictureBox pictureBox3;
+        private Button searchButton;
+        private PictureBox pictureBox1;
+        private Label lblRole;
+        private Label lblName;
+        private Button buttonAdd;
+        private Label label2;
     }
 }

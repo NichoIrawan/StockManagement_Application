@@ -13,7 +13,7 @@ namespace StockManagement.Controllers
     {
         private readonly UserController _apiController = new();
 
-        public async Task<Roles> Login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
             try
             {
@@ -21,19 +21,19 @@ namespace StockManagement.Controllers
 
                 if (user==null)
                 {
-                    return Roles.USER;
+                    return new();
                 }
 
                 if (!user.password.Equals(password))
                 {
-                    return Roles.USER;
+                    return new();
                 }
 
-                return user.role;
+                return user;
             }
             catch
             {
-                return Roles.USER;
+                return new();
             }
         }
     }

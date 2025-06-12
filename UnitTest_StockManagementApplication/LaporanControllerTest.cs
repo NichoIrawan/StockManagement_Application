@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Moq.Protected;
 using StockManagement.Controller;
-using StockManagement.Controllers.Api;
 using StockManagement.Models;
 using Xunit;
 
@@ -26,7 +25,7 @@ namespace UnitTest_StockManagementApplication
 
             var expectedLaporan = new List<Laporan>
         {
-            new Laporan { tanggalPembuatan = DateTime.Today, tempatPenyimpanan = gudangBaru, daftarBarang = new List<Barang>() }
+            new Laporan { TanggalPembuatan = DateTime.Today, TempatPenyimpanan = gudangBaru, DaftarBarang = new List<Barang>() }
         };
 
             var mockHandler = new Mock<HttpMessageHandler>();
