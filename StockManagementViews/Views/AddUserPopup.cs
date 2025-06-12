@@ -29,7 +29,7 @@ namespace StockManagementViews.Views
             
         }
 
-        private async void btnAdd_Click(object sender, EventArgs e)
+        private async void BtnAdd_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtBoxUsername.Text) || 
                 string.IsNullOrWhiteSpace(txtBoxName.Text) ||
@@ -43,8 +43,11 @@ namespace StockManagementViews.Views
                     username: txtBoxUsername.Text,
                     name: txtBoxName.Text,
                     role: (comboBoxRole.SelectedValue.Equals("Staff")) ? Roles.STAFF : Roles.MANAGER,
-                    password: txtBoxPassword.Text
-                    );
+                    password: txtBoxPassword.Text)
+                {
+
+                };
+
                 await adminController.addUser(user);
                 MessageBox.Show("Success", "Berhasil menambahkan user");
                 txtBoxName.Clear();
@@ -59,7 +62,7 @@ namespace StockManagementViews.Views
             
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
         }

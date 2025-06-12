@@ -1,4 +1,5 @@
-﻿using StockManagement.Controller.UserController;
+﻿using StockManagement.Controller;
+using StockManagement.Controller.UserController;
 using StockManagement.Controllers;
 using StockManagement.Models;
 using System;
@@ -13,12 +14,15 @@ using System.Windows.Forms;
 
 namespace StockManagementViews.Views
 {
+  
     public partial class BarangHome : Form
     {
         List<Barang> barangList = new List<Barang>();
         List<Barang> searchList = new List<Barang>();
         BarangController barangCont = new BarangController();
         Form addBarangbaru = new Barangbaru();
+        RiwayatController riwayatController = new RiwayatController();
+        GudangController gudangController = new GudangController();
         public BarangHome()
         {
             InitializeComponent();
@@ -62,6 +66,20 @@ namespace StockManagementViews.Views
 
         }
 
+        private async Task BarangKeluar(Barang barang, int stok, Gudang lokasi, User pic)
+        {
+            Riwayat riwayat = new Riwayat(
+                tanggal: DateTime.Now,
+                jenis_transaksi: "Keluar ",
+                barang: barang,
+                jumlah_barang: stok,
+                lokasi_penyimpanan: lokasi,
+                pic: pic
+                );
+
+            await riwayatController.InputRiwayatAsync(riwayat);
+        }
+
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             RefreshList();
@@ -102,11 +120,31 @@ namespace StockManagementViews.Views
 
         private async void TableBarang_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string username = tableBarang.CurrentRow.Cells[0].Value.ToString();
-            if (tableBarang.CurrentCell == tableBarang.CurrentRow.Cells[6])
+            string kodeBarang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            string namaBarang = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            string stok = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            string harga = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            string tanggalKedaluwarsa = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            string kodeGudang = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            Gudang newGUdang = await gudangController.GetGudangByIdAsync(kodeGudang);
+            User dummyUser = new User("Dummy Username", "Dummy", StockManagementLibrary.Roles.MANAGER, "123");
+
+            Barang newBarang = new Barang
             {
-                await barangCont.jualBarang(username);
-                tableBarang.Rows.RemoveAt(e.RowIndex);
+                kodeBarang = kodeBarang,
+                namaBarang = namaBarang,
+                stok = int.Parse(stok),
+                harga = double.Parse(harga),
+                tanggalKadaluarsa = DateOnly.MaxValue,
+                kodeGudang = kodeGudang
+            };
+            if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[6])
+            {
+                BarangKeluar(newBarang, int.Parse(stok),newGUdang,dummyUser);
+                
+                await barangCont.jualBarang(kodeBarang);
+                dataGridView1.Rows.RemoveAt(e.RowIndex);
+
             }
         }
 

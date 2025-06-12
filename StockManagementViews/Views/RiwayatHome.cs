@@ -59,35 +59,6 @@ namespace StockManagementViews.Views
             }
         }
 
-        // Menambah data riwayat pada saat ada barang masuk.
-        private async Task BarangMasuk(Barang barang, int stok, Gudang lokasi, User pic)
-        {
-            Riwayat riwayat = new Riwayat(
-                tanggal: DateTime.Now,
-                jenis_transaksi: "Masuk",
-                barang: barang,
-                jumlah_barang: stok,
-                lokasi_penyimpanan: lokasi,
-                pic: pic
-                );
-
-            await _riwayatController.InputRiwayatAsync(riwayat);
-        }
-        // Menambah data riwayat pada saat ada barang keluar.
-        private async Task BarangKeluar(Barang barang, int stok, Gudang lokasi, User pic)
-        {
-            Riwayat riwayat = new Riwayat(
-                tanggal: DateTime.Now,
-                jenis_transaksi: "Keluar ",
-                barang: barang,
-                jumlah_barang: stok,
-                lokasi_penyimpanan: lokasi,
-                pic: pic
-                );
-
-            await _riwayatController.InputRiwayatAsync(riwayat);
-        }
-
         // Load data ke dalam table.
         private void Riwayat_Load(object sender, EventArgs e)
         {
